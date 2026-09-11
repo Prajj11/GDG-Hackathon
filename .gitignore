@@ -23,3 +23,13 @@ yarn-error.log*
 Thumbs.db
 .vscode/
 .idea/
+
+# Python / private runtime data
+.venv/
+__pycache__/
+.pytest_cache/
+*.db
+*.db-*
+backend/artifacts/
+.sites-runtime/
+*.tsbuildinfo

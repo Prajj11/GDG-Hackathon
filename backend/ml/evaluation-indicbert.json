@@ -1,0 +1,100 @@
+{
+  "model": "IndicBERTv2 · trained head",
+  "scope": "30 held-out synthetic scenarios; not a production benchmark",
+  "classification_report": {
+    "bullying-harassment": {
+      "precision": 0.7142857142857143,
+      "recall": 1.0,
+      "f1-score": 0.8333333333333334,
+      "support": 5.0
+    },
+    "grooming-coercive-language": {
+      "precision": 0.8333333333333334,
+      "recall": 1.0,
+      "f1-score": 0.9090909090909091,
+      "support": 5.0
+    },
+    "grooming-isolation-request": {
+      "precision": 0.5714285714285714,
+      "recall": 0.8,
+      "f1-score": 0.6666666666666666,
+      "support": 5.0
+    },
+    "grooming-trust-building": {
+      "precision": 0.8333333333333334,
+      "recall": 1.0,
+      "f1-score": 0.9090909090909091,
+      "support": 5.0
+    },
+    "neutral": {
+      "precision": 1.0,
+      "recall": 0.4,
+      "f1-score": 0.5714285714285714,
+      "support": 10.0
+    },
+    "accuracy": 0.7666666666666667,
+    "macro avg": {
+      "precision": 0.7904761904761906,
+      "recall": 0.8400000000000001,
+      "f1-score": 0.7779220779220779,
+      "support": 30.0
+    },
+    "weighted avg": {
+      "precision": 0.8253968253968255,
+      "recall": 0.7666666666666667,
+      "f1-score": 0.7435064935064933,
+      "support": 30.0
+    }
+  },
+  "per_language": {
+    "English": 0.625,
+    "Hindi": 0.8333333333333334,
+    "Hinglish": 0.5,
+    "Malayalam": 1.0,
+    "Manglish": 1.0
+  },
+  "errors": [
+    {
+      "language": "Hinglish",
+      "text": "Mummy se permission le lena, hum sab library mein padhenge.",
+      "expected": "neutral",
+      "predicted": "grooming-coercive-language"
+    },
+    {
+      "language": "Hinglish",
+      "text": "Apne gharwalon se chhupao, hum chupke private app par baat karenge.",
+      "expected": "grooming-isolation-request",
+      "predicted": "bullying-harassment"
+    },
+    {
+      "language": "English",
+      "text": "A stranger told me to hide the chat. I told my mum and blocked them.",
+      "expected": "neutral",
+      "predicted": "grooming-isolation-request"
+    },
+    {
+      "language": "English",
+      "text": "Never threaten someone or share private photos without their permission.",
+      "expected": "neutral",
+      "predicted": "grooming-isolation-request"
+    },
+    {
+      "language": "Hinglish",
+      "text": "Teacher ne bola koi photo maange toh mat bhejna aur parents ko batana.",
+      "expected": "neutral",
+      "predicted": "grooming-isolation-request"
+    },
+    {
+      "language": "English",
+      "text": "That game was killer. You destroyed me in that match!",
+      "expected": "neutral",
+      "predicted": "bullying-harassment"
+    },
+    {
+      "language": "Hindi",
+      "text": "मेरे दोस्त ने मुझे जन्मदिन पर गिफ्ट दिया।",
+      "expected": "neutral",
+      "predicted": "grooming-trust-building"
+    }
+  ]
+}

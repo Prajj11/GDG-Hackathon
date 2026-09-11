@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: digital-guardrails-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    # IndicBERTv2 needs more memory than a free instance. Review hosting costs.
+    plan: pro
+    disk:
+      name: guardrails-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:////var/data/digital_guardrails.db
+      - key: DETECTOR
+        value: indicbert
+      - key: DEMO_ACCESS_TOKEN
+        generateValue: true
+      - key: CORS_ORIGINS
+        sync: false

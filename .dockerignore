@@ -1,0 +1,12 @@
+.git
+.venv
+node_modules
+dist
+*.db
+*.db-*
+.env
+**/.env
+backend/artifacts
+**/__pycache__
+.pytest_cache
+cursorrules
