@@ -1,0 +1,23 @@
+{
+  "indicbert": {
+    "model": "IndicBERTv2 \u00b7 trained head",
+    "mode": "indicbert",
+    "runs": 50,
+    "mean_ms": 34.6,
+    "median_p50_ms": 32.73,
+    "p95_ms": 44.11,
+    "throughput_msg_per_sec": 28.91
+  },
+  "baseline": {
+    "model": "TF-IDF \u00b7 fallback classifier",
+    "mode": "baseline",
+    "runs": 100,
+    "mean_ms": 0.45,
+    "median_p50_ms": 0.43,
+    "p95_ms": 0.66,
+    "throughput_msg_per_sec": 2218.52
+  },
+  "timestamp": "2026-09-12T05:42:00Z",
+  "device": "CPU",
+  "cpu_threads": 4
+}

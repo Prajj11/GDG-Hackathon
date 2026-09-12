@@ -1,0 +1,2811 @@
+[
+  {
+    "conversation_id": "real_bullyexplain_hinglish_0170",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "🌊Lead author Anna Gauthier (), who is co-mentored by Drs. Jonathan Kagan () and Randi Rotjan (), cultured deep-sea microbes and found that ImmuneReceptors are unable to detect most bacteria from a different ecosystem."
+      }
+    ],
+    "window_text": "A: 🌊Lead author Anna Gauthier (), who is co-mentored by Drs. Jonathan Kagan () and Randi Rotjan (), cultured deep-sea microbes and found that ImmuneReceptors are unable to detect most bacteria from a different ecosystem.",
+    "target_text": "🌊Lead author Anna Gauthier (), who is co-mentored by Drs. Jonathan Kagan () and Randi Rotjan (), cultured deep-sea microbes and found that ImmuneReceptors are unable to detect most bacteria from a different ecosystem.",
+    "source_dataset": "BullyExplain-Hinglish",
+    "origin": "real",
+    "rationale": "Real public research sample from BullyExplain-Hinglish."
+  },
+  {
+    "conversation_id": "real_comi_lingua_hinglish_0340",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Former Indian captain Rahul Dravid has reapplied for the post of Head of Cricket at the National Cricket Academy (NCA)."
+      }
+    ],
+    "window_text": "A: Former Indian captain Rahul Dravid has reapplied for the post of Head of Cricket at the National Cricket Academy (NCA).",
+    "target_text": "Former Indian captain Rahul Dravid has reapplied for the post of Head of Cricket at the National Cricket Academy (NCA).",
+    "source_dataset": "COMI-LINGUA-Hinglish",
+    "origin": "real",
+    "rationale": "Real public research sample from COMI-LINGUA-Hinglish."
+  },
+  {
+    "conversation_id": "synth_0218",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "grooming_trust_building",
+    "pattern_type_canonical": "grooming-trust-building",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "तुम मेरे लिए बहुत खास हो, बाकी सब से अलग।"
+      },
+      {
+        "speaker": "B",
+        "text": "शुक्रिया भैया।"
+      },
+      {
+        "speaker": "A",
+        "text": "मैं तुम्हें गेम के डायमंड्स और पैसे दूंगा, बस मुझसे रोज बात किया करो।"
+      }
+    ],
+    "window_text": "A: तुम मेरे लिए बहुत खास हो, बाकी सब से अलग। \n B: शुक्रिया भैया। \n A: मैं तुम्हें गेम के डायमंड्स और पैसे दूंगा, बस मुझसे रोज बात किया करो।",
+    "target_text": "मैं तुम्हें गेम के डायमंड्स और पैसे दूंगा, बस मुझसे रोज बात किया करो।",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "game credits bond"
+  },
+  {
+    "conversation_id": "synth_0024",
+    "language": "English",
+    "script": "roman",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "He totally wrecked our squad with that grenade."
+      },
+      {
+        "speaker": "B",
+        "text": "Next time stay spread out."
+      },
+      {
+        "speaker": "A",
+        "text": "Yeah lesson learned."
+      }
+    ],
+    "window_text": "A: He totally wrecked our squad with that grenade. \n B: Next time stay spread out. \n A: Yeah lesson learned.",
+    "target_text": "Yeah lesson learned.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "squad loss review"
+  },
+  {
+    "conversation_id": "real_hasoc_2020_hindi_0080",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "RT : BJP_भगाओ_देश_बचाओ स्वामी स्वरूपानंद महाराज जी स्वयं कह रहे हैं बीजेपी और आरएसएस से देश को ही नहीं हिंदुत्व को भी खत…"
+      }
+    ],
+    "window_text": "A: RT : BJP_भगाओ_देश_बचाओ स्वामी स्वरूपानंद महाराज जी स्वयं कह रहे हैं बीजेपी और आरएसएस से देश को ही नहीं हिंदुत्व को भी खत…",
+    "target_text": "RT : BJP_भगाओ_देश_बचाओ स्वामी स्वरूपानंद महाराज जी स्वयं कह रहे हैं बीजेपी और आरएसएस से देश को ही नहीं हिंदुत्व को भी खत…",
+    "source_dataset": "HASOC-2020-Hindi",
+    "origin": "real",
+    "rationale": "Hostile or offensive public comment identified in HASOC FIRE dataset."
+  },
+  {
+    "conversation_id": "synth_0094",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Main kal class nahi aa paunga, fever hai."
+      },
+      {
+        "speaker": "B",
+        "text": "Get well soon bhai!"
+      },
+      {
+        "speaker": "A",
+        "text": "Notes ki photo bhej dena sham ko."
+      },
+      {
+        "speaker": "B",
+        "text": "Haan pakka bhej dunga, aaram kar."
+      }
+    ],
+    "window_text": "A: Main kal class nahi aa paunga, fever hai. \n B: Get well soon bhai! \n A: Notes ki photo bhej dena sham ko. \n B: Haan pakka bhej dunga, aaram kar.",
+    "target_text": "Haan pakka bhej dunga, aaram kar.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "illness notes"
+  },
+  {
+    "conversation_id": "real_bullyexplain_hinglish_0143",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Maybe some funny edits from frenemies? Like everytine they stare at eachother, or when they parody eachother or Trish says something silly and Ethan is in disbelief"
+      }
+    ],
+    "window_text": "A: Maybe some funny edits from frenemies? Like everytine they stare at eachother, or when they parody eachother or Trish says something silly and Ethan is in disbelief",
+    "target_text": "Maybe some funny edits from frenemies? Like everytine they stare at eachother, or when they parody eachother or Trish says something silly and Ethan is in disbelief",
+    "source_dataset": "BullyExplain-Hinglish",
+    "origin": "real",
+    "rationale": "Real public research sample from BullyExplain-Hinglish."
+  },
+  {
+    "conversation_id": "real_dravidianlangtech_malayalam_0177",
+    "language": "Malayalam",
+    "script": "native",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "ഈ ഓണം ഏട്ടനും പിള്ളേർക്ക് ഉള്ളതാണ് എന്ന് ഉള്ളവർ ലൈക്‌ അടി"
+      }
+    ],
+    "window_text": "A: ഈ ഓണം ഏട്ടനും പിള്ളേർക്ക് ഉള്ളതാണ് എന്ന് ഉള്ളവർ ലൈക്‌ അടി",
+    "target_text": "ഈ ഓണം ഏട്ടനും പിള്ളേർക്ക് ഉള്ളതാണ് എന്ന് ഉള്ളവർ ലൈക്‌ അടി",
+    "source_dataset": "DravidianLangTech-Malayalam",
+    "origin": "real",
+    "rationale": "Real public research sample from DravidianLangTech-Malayalam."
+  },
+  {
+    "conversation_id": "synth_0195",
+    "language": "Manglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "School kalolsavam dance practice thudangiyo?"
+      },
+      {
+        "speaker": "B",
+        "text": "Oppana dance practice auditorium il undu."
+      },
+      {
+        "speaker": "A",
+        "text": "Kosthyum order cheythu kazhinju."
+      }
+    ],
+    "window_text": "A: School kalolsavam dance practice thudangiyo? \n B: Oppana dance practice auditorium il undu. \n A: Kosthyum order cheythu kazhinju.",
+    "target_text": "Kosthyum order cheythu kazhinju.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "oppana dance"
+  },
+  {
+    "conversation_id": "synth_0020",
+    "language": "English",
+    "script": "roman",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Noob move dropping the flag there!"
+      },
+      {
+        "speaker": "B",
+        "text": "My ping was 300ms, total lag."
+      },
+      {
+        "speaker": "A",
+        "text": "All good, next round we crush them."
+      }
+    ],
+    "window_text": "A: Noob move dropping the flag there! \n B: My ping was 300ms, total lag. \n A: All good, next round we crush them.",
+    "target_text": "All good, next round we crush them.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "friendly gamer teasing"
+  },
+  {
+    "conversation_id": "synth_0249",
+    "language": "Malayalam",
+    "script": "mixed",
+    "pattern_label": "grooming_trust_building",
+    "pattern_type_canonical": "grooming-trust-building",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "നിന്നെപ്പോലെ ഒരു സുഹൃത്തിനെ കിട്ടിയത് എന്റെ ഭാഗ്യമാണ്."
+      },
+      {
+        "speaker": "B",
+        "text": "നമ്മൾ ഓൺലൈനിൽ മാത്രമല്ലേ കണ്ടിട്ടുള്ളൂ."
+      },
+      {
+        "speaker": "A",
+        "text": "മനസ്സുകൾ തമ്മിലാണ് അടുക്കേണ്ടത്. നീ എനിക്ക് ജീവനാണ്."
+      }
+    ],
+    "window_text": "A: നിന്നെപ്പോലെ ഒരു സുഹൃത്തിനെ കിട്ടിയത് എന്റെ ഭാഗ്യമാണ്. \n B: നമ്മൾ ഓൺലൈനിൽ മാത്രമല്ലേ കണ്ടിട്ടുള്ളൂ. \n A: മനസ്സുകൾ തമ്മിലാണ് അടുക്കേണ്ടത്. നീ എനിക്ക് ജീവനാണ്.",
+    "target_text": "മനസ്സുകൾ തമ്മിലാണ് അടുക്കേണ്ടത്. നീ എനിക്ക് ജീവനാണ്.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "rushing bond"
+  },
+  {
+    "conversation_id": "real_dravidianlangtech_malayalam_0203",
+    "language": "Manglish",
+    "script": "roman",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Kalkikku malayalathinte dhathuputhran alluarjun fansite vijayaashamsakal"
+      }
+    ],
+    "window_text": "A: Kalkikku malayalathinte dhathuputhran alluarjun fansite vijayaashamsakal",
+    "target_text": "Kalkikku malayalathinte dhathuputhran alluarjun fansite vijayaashamsakal",
+    "source_dataset": "DravidianLangTech-Malayalam",
+    "origin": "real",
+    "rationale": "Real public research sample from DravidianLangTech-Malayalam."
+  },
+  {
+    "conversation_id": "synth_0171",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Social science exhibition ke liye model banaya?"
+      },
+      {
+        "speaker": "B",
+        "text": "Indus valley civilization ka town planning model hai."
+      },
+      {
+        "speaker": "A",
+        "text": "The Great Bath include kiya kya? Bohot mast lagega."
+      }
+    ],
+    "window_text": "A: Social science exhibition ke liye model banaya? \n B: Indus valley civilization ka town planning model hai. \n A: The Great Bath include kiya kya? Bohot mast lagega.",
+    "target_text": "The Great Bath include kiya kya? Bohot mast lagega.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "history model"
+  },
+  {
+    "conversation_id": "real_hasoc_2020_hindi_0020",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "धोनी को गलत आउट दिया इस आईपीएल में अंपायर मजे ले रहे थे क्या ??? भो.....VIVOIPLFinal"
+      }
+    ],
+    "window_text": "A: धोनी को गलत आउट दिया इस आईपीएल में अंपायर मजे ले रहे थे क्या ??? भो.....VIVOIPLFinal",
+    "target_text": "धोनी को गलत आउट दिया इस आईपीएल में अंपायर मजे ले रहे थे क्या ??? भो.....VIVOIPLFinal",
+    "source_dataset": "HASOC-2020-Hindi",
+    "origin": "real",
+    "rationale": "Real public research sample from HASOC-2020-Hindi."
+  },
+  {
+    "conversation_id": "synth_0057",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "किसी अनजान व्यक्ति को अपनी तस्वीर या पता कभी मत भेजना।"
+      },
+      {
+        "speaker": "B",
+        "text": "हाँ, मेरी दीदी ने भी यही समझाया है।"
+      },
+      {
+        "speaker": "A",
+        "text": "सुरक्षित रहना सबसे ज्यादा जरूरी है।"
+      }
+    ],
+    "window_text": "A: किसी अनजान व्यक्ति को अपनी तस्वीर या पता कभी मत भेजना। \n B: हाँ, मेरी दीदी ने भी यही समझाया है। \n A: सुरक्षित रहना सबसे ज्यादा जरूरी है।",
+    "target_text": "सुरक्षित रहना सबसे ज्यादा जरूरी है।",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "stranger warning"
+  },
+  {
+    "conversation_id": "synth_0087",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Kisi unknown site pe apna number mat daalna."
+      },
+      {
+        "speaker": "B",
+        "text": "Haan phishing scam ho sakta hai."
+      },
+      {
+        "speaker": "A",
+        "text": "Teacher ne cyber security week mein bataya tha."
+      }
+    ],
+    "window_text": "A: Kisi unknown site pe apna number mat daalna. \n B: Haan phishing scam ho sakta hai. \n A: Teacher ne cyber security week mein bataya tha.",
+    "target_text": "Teacher ne cyber security week mein bataya tha.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "phishing warning"
+  },
+  {
+    "conversation_id": "synth_0041",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "आज स्कूल कैसा था?"
+      },
+      {
+        "speaker": "B",
+        "text": "बहुत अच्छा, विज्ञान में नया प्रयोग किया।"
+      },
+      {
+        "speaker": "A",
+        "text": "चलो शाम को मिलकर होमवर्क करते हैं।"
+      }
+    ],
+    "window_text": "A: आज स्कूल कैसा था? \n B: बहुत अच्छा, विज्ञान में नया प्रयोग किया। \n A: चलो शाम को मिलकर होमवर्क करते हैं।",
+    "target_text": "चलो शाम को मिलकर होमवर्क करते हैं।",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "homework"
+  },
+  {
+    "conversation_id": "real_hasoc_2020_hindi_0069",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "RT : शहीद हेमंत करकरे का अपमान करने वाली साध्वी प्रज्ञा को टिकट देकर भाजपा ने अपने असली चेहरे को बेनकाब कर दिया है, इस वीडियो में देखिए…"
+      }
+    ],
+    "window_text": "A: RT : शहीद हेमंत करकरे का अपमान करने वाली साध्वी प्रज्ञा को टिकट देकर भाजपा ने अपने असली चेहरे को बेनकाब कर दिया है, इस वीडियो में देखिए…",
+    "target_text": "RT : शहीद हेमंत करकरे का अपमान करने वाली साध्वी प्रज्ञा को टिकट देकर भाजपा ने अपने असली चेहरे को बेनकाब कर दिया है, इस वीडियो में देखिए…",
+    "source_dataset": "HASOC-2020-Hindi",
+    "origin": "real",
+    "rationale": "Hostile or offensive public comment identified in HASOC FIRE dataset."
+  },
+  {
+    "conversation_id": "synth_0411",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "तुम्हारा मजाक उड़ाना हमारा रोज का काम है।"
+      },
+      {
+        "speaker": "B",
+        "text": "तुम लोग बहुत बुरे हो।"
+      },
+      {
+        "speaker": "A",
+        "text": "हम बुरे हैं तो स्कूल छोड़ दे ना भिखारी।"
+      }
+    ],
+    "window_text": "A: तुम्हारा मजाक उड़ाना हमारा रोज का काम है। \n B: तुम लोग बहुत बुरे हो। \n A: हम बुरे हैं तो स्कूल छोड़ दे ना भिखारी।",
+    "target_text": "हम बुरे हैं तो स्कूल छोड़ दे ना भिखारी।",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "persistent harassment"
+  },
+  {
+    "conversation_id": "synth_0277",
+    "language": "English",
+    "script": "roman",
+    "pattern_label": "grooming_isolation_request",
+    "pattern_type_canonical": "grooming-isolation-request",
+    "risk_level": "High",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Let's use code words when talking so nobody suspects anything."
+      },
+      {
+        "speaker": "B",
+        "text": "Code words for what?"
+      },
+      {
+        "speaker": "A",
+        "text": "For our private meetings and special secrets. Only you and I know the code."
+      }
+    ],
+    "window_text": "A: Let's use code words when talking so nobody suspects anything. \n B: Code words for what? \n A: For our private meetings and special secrets. Only you and I know the code.",
+    "target_text": "For our private meetings and special secrets. Only you and I know the code.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "coded language secrecy"
+  },
+  {
+    "conversation_id": "real_comi_lingua_hinglish_0319",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Madhav National Park is a national park located in Shivpuri district of Madhya Pradesh state in India."
+      }
+    ],
+    "window_text": "A: Madhav National Park is a national park located in Shivpuri district of Madhya Pradesh state in India.",
+    "target_text": "Madhav National Park is a national park located in Shivpuri district of Madhya Pradesh state in India.",
+    "source_dataset": "COMI-LINGUA-Hinglish",
+    "origin": "real",
+    "rationale": "Real public research sample from COMI-LINGUA-Hinglish."
+  },
+  {
+    "conversation_id": "real_hasoc_2020_hindi_0010",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "RT : आतंकी मसूद अजहर के ग्लोबल आतंकी घोषित होने के बाद पत्रकार \"आशुतोष\" की हालत😂😂😂😂😂😂😂👇👇👇 MasoodAzhar"
+      }
+    ],
+    "window_text": "A: RT : आतंकी मसूद अजहर के ग्लोबल आतंकी घोषित होने के बाद पत्रकार \"आशुतोष\" की हालत😂😂😂😂😂😂😂👇👇👇 MasoodAzhar",
+    "target_text": "RT : आतंकी मसूद अजहर के ग्लोबल आतंकी घोषित होने के बाद पत्रकार \"आशुतोष\" की हालत😂😂😂😂😂😂😂👇👇👇 MasoodAzhar",
+    "source_dataset": "HASOC-2020-Hindi",
+    "origin": "real",
+    "rationale": "Hostile or offensive public comment identified in HASOC FIRE dataset."
+  },
+  {
+    "conversation_id": "synth_0149",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "आज संस्कृत वाले सर ने बहुत सुंदर श्लोक सिखाया।"
+      },
+      {
+        "speaker": "B",
+        "text": "हाँ, गुरु की महिमा पर था।"
+      },
+      {
+        "speaker": "A",
+        "text": "अर्थ भी बहुत गहरा था, डायरी में लिख लिया मैंने।"
+      }
+    ],
+    "window_text": "A: आज संस्कृत वाले सर ने बहुत सुंदर श्लोक सिखाया। \n B: हाँ, गुरु की महिमा पर था। \n A: अर्थ भी बहुत गहरा था, डायरी में लिख लिया मैंने।",
+    "target_text": "अर्थ भी बहुत गहरा था, डायरी में लिख लिया मैंने।",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "sanskrit shloka"
+  },
+  {
+    "conversation_id": "synth_0200",
+    "language": "Manglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Busil vannekkan varumbo mazha vannu."
+      },
+      {
+        "speaker": "B",
+        "text": "Kuda undaayirunno kaiyyil?"
+      },
+      {
+        "speaker": "A",
+        "text": "Athe bagil folded umbrella undaayirunnu, nanjilla."
+      }
+    ],
+    "window_text": "A: Busil vannekkan varumbo mazha vannu. \n B: Kuda undaayirunno kaiyyil? \n A: Athe bagil folded umbrella undaayirunnu, nanjilla.",
+    "target_text": "Athe bagil folded umbrella undaayirunnu, nanjilla.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "umbrella in rain"
+  },
+  {
+    "conversation_id": "real_comi_lingua_hinglish_0317",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Symptoms of pneumonia.. As soon as the news of DP Tripathi's death came, a wave of mourning spread among NCP and his supporters."
+      }
+    ],
+    "window_text": "A: Symptoms of pneumonia.. As soon as the news of DP Tripathi's death came, a wave of mourning spread among NCP and his supporters.",
+    "target_text": "Symptoms of pneumonia.. As soon as the news of DP Tripathi's death came, a wave of mourning spread among NCP and his supporters.",
+    "source_dataset": "COMI-LINGUA-Hinglish",
+    "origin": "real",
+    "rationale": "Real public research sample from COMI-LINGUA-Hinglish."
+  },
+  {
+    "conversation_id": "synth_0063",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "हम ऑनलाइन गेम में टीम बनाकर खेल रहे थे।"
+      },
+      {
+        "speaker": "B",
+        "text": "अपोजिट टीम बहुत अच्छी थी।"
+      },
+      {
+        "speaker": "A",
+        "text": "हाँ, उन्होंने हमें मैच में हरा दिया लेकिन मजा आया।"
+      }
+    ],
+    "window_text": "A: हम ऑनलाइन गेम में टीम बनाकर खेल रहे थे। \n B: अपोजिट टीम बहुत अच्छी थी। \n A: हाँ, उन्होंने हमें मैच में हरा दिया लेकिन मजा आया।",
+    "target_text": "हाँ, उन्होंने हमें मैच में हरा दिया लेकिन मजा आया।",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "game loss"
+  },
+  {
+    "conversation_id": "real_comi_lingua_hinglish_0316",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "The World Health Organization (WHO) and the Government of India have also declared high alert, taking the Nipah virus seriously."
+      }
+    ],
+    "window_text": "A: The World Health Organization (WHO) and the Government of India have also declared high alert, taking the Nipah virus seriously.",
+    "target_text": "The World Health Organization (WHO) and the Government of India have also declared high alert, taking the Nipah virus seriously.",
+    "source_dataset": "COMI-LINGUA-Hinglish",
+    "origin": "real",
+    "rationale": "Real public research sample from COMI-LINGUA-Hinglish."
+  },
+  {
+    "conversation_id": "synth_0126",
+    "language": "Manglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Cyber helpline 1930 note cheytho."
+      },
+      {
+        "speaker": "B",
+        "text": "Phone il save cheythu vechirikkunnu."
+      },
+      {
+        "speaker": "A",
+        "text": "Eppozhum ready aayi irikkanam."
+      }
+    ],
+    "window_text": "A: Cyber helpline 1930 note cheytho. \n B: Phone il save cheythu vechirikkunnu. \n A: Eppozhum ready aayi irikkanam.",
+    "target_text": "Eppozhum ready aayi irikkanam.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "helpline info"
+  },
+  {
+    "conversation_id": "synth_0012",
+    "language": "English",
+    "script": "roman",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Where are we meeting for the group project?"
+      },
+      {
+        "speaker": "B",
+        "text": "At the school cafeteria after classes."
+      },
+      {
+        "speaker": "A",
+        "text": "Perfect, please tell your parents where we are meeting."
+      }
+    ],
+    "window_text": "A: Where are we meeting for the group project? \n B: At the school cafeteria after classes. \n A: Perfect, please tell your parents where we are meeting.",
+    "target_text": "Perfect, please tell your parents where we are meeting.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "parent notice for meeting"
+  },
+  {
+    "conversation_id": "real_comi_lingua_hinglish_0271",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "The Indian Air Force has released the results for the recruitment of Meteorological Scientists."
+      }
+    ],
+    "window_text": "A: The Indian Air Force has released the results for the recruitment of Meteorological Scientists.",
+    "target_text": "The Indian Air Force has released the results for the recruitment of Meteorological Scientists.",
+    "source_dataset": "COMI-LINGUA-Hinglish",
+    "origin": "real",
+    "rationale": "Real public research sample from COMI-LINGUA-Hinglish."
+  },
+  {
+    "conversation_id": "real_dravidianlangtech_malayalam_0244",
+    "language": "Manglish",
+    "script": "roman",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "2.7k unlike adicha pengalepanni makkalkku ente naduviral namaskaram"
+      }
+    ],
+    "window_text": "A: 2.7k unlike adicha pengalepanni makkalkku ente naduviral namaskaram",
+    "target_text": "2.7k unlike adicha pengalepanni makkalkku ente naduviral namaskaram",
+    "source_dataset": "DravidianLangTech-Malayalam",
+    "origin": "real",
+    "rationale": "Offensive social comment identified in DravidianLangTech corpus."
+  },
+  {
+    "conversation_id": "synth_0251",
+    "language": "Malayalam",
+    "script": "mixed",
+    "pattern_label": "grooming_trust_building",
+    "pattern_type_canonical": "grooming-trust-building",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "വീട്ടുകാരെക്കാൾ ഞാൻ നിന്നെ സംരക്ഷിക്കും."
+      },
+      {
+        "speaker": "B",
+        "text": "അച്ഛൻ സ്ട്രിക്റ്റ് ആണ്."
+      },
+      {
+        "speaker": "A",
+        "text": "അച്ഛനെ പേടിക്കേണ്ട, ഞാൻ നിന്റെ കൂടെയുണ്ട് എപ്പോഴും."
+      }
+    ],
+    "window_text": "A: വീട്ടുകാരെക്കാൾ ഞാൻ നിന്നെ സംരക്ഷിക്കും. \n B: അച്ഛൻ സ്ട്രിക്റ്റ് ആണ്. \n A: അച്ഛനെ പേടിക്കേണ്ട, ഞാൻ നിന്റെ കൂടെയുണ്ട് എപ്പോഴും.",
+    "target_text": "അച്ഛനെ പേടിക്കേണ്ട, ഞാൻ നിന്റെ കൂടെയുണ്ട് എപ്പോഴും.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "undermining father"
+  },
+  {
+    "conversation_id": "real_comi_lingua_hinglish_0279",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Mahua Moitra: Mahua Moitra is identified as the sharp-tongued woman MP of Trinamool Congress (TMC)."
+      }
+    ],
+    "window_text": "A: Mahua Moitra: Mahua Moitra is identified as the sharp-tongued woman MP of Trinamool Congress (TMC).",
+    "target_text": "Mahua Moitra: Mahua Moitra is identified as the sharp-tongued woman MP of Trinamool Congress (TMC).",
+    "source_dataset": "COMI-LINGUA-Hinglish",
+    "origin": "real",
+    "rationale": "Real public research sample from COMI-LINGUA-Hinglish."
+  },
+  {
+    "conversation_id": "synth_0433",
+    "language": "Malayalam",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "നിന്റെ വസ്ത്രങ്ങൾ കണ്ടാൽ ഭിക്ഷക്കാരനെപ്പോലെയുണ്ട്."
+      },
+      {
+        "speaker": "B",
+        "text": "ഇത് പുതിയ യൂണിഫോം ആണ്."
+      },
+      {
+        "speaker": "A",
+        "text": "നിന്റെ വീട്ടിലെ ദാരിദ്ര്യം സ്കൂളിൽ കാട്ടരുത്."
+      }
+    ],
+    "window_text": "A: നിന്റെ വസ്ത്രങ്ങൾ കണ്ടാൽ ഭിക്ഷക്കാരനെപ്പോലെയുണ്ട്. \n B: ഇത് പുതിയ യൂണിഫോം ആണ്. \n A: നിന്റെ വീട്ടിലെ ദാരിദ്ര്യം സ്കൂളിൽ കാട്ടരുത്.",
+    "target_text": "നിന്റെ വീട്ടിലെ ദാരിദ്ര്യം സ്കൂളിൽ കാട്ടരുത്.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "poverty shaming"
+  },
+  {
+    "conversation_id": "synth_0271",
+    "language": "English",
+    "script": "roman",
+    "pattern_label": "grooming_isolation_request",
+    "pattern_type_canonical": "grooming-isolation-request",
+    "risk_level": "High",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Why did you tell your sister we were playing together?"
+      },
+      {
+        "speaker": "B",
+        "text": "She asked why I was laughing."
+      },
+      {
+        "speaker": "A",
+        "text": "I told you never to speak my name to your family. This must stay completely private."
+      }
+    ],
+    "window_text": "A: Why did you tell your sister we were playing together? \n B: She asked why I was laughing. \n A: I told you never to speak my name to your family. This must stay completely private.",
+    "target_text": "I told you never to speak my name to your family. This must stay completely private.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "enforcing secrecy breach"
+  },
+  {
+    "conversation_id": "real_hasoc_2020_hindi_0074",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "MasoodAzhar कांग्रेस इसको भी मोदी द्वारा आचार संहिता का उलंघन बोलेगी 😂😂😂"
+      }
+    ],
+    "window_text": "A: MasoodAzhar कांग्रेस इसको भी मोदी द्वारा आचार संहिता का उलंघन बोलेगी 😂😂😂",
+    "target_text": "MasoodAzhar कांग्रेस इसको भी मोदी द्वारा आचार संहिता का उलंघन बोलेगी 😂😂😂",
+    "source_dataset": "HASOC-2020-Hindi",
+    "origin": "real",
+    "rationale": "Real public research sample from HASOC-2020-Hindi."
+  },
+  {
+    "conversation_id": "real_hasoc_2020_hindi_0015",
+    "language": "Hindi",
+    "script": "roman",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Oyyy mene jan bujh k ni kiya sachiii 😥😥😥"
+      }
+    ],
+    "window_text": "A: Oyyy mene jan bujh k ni kiya sachiii 😥😥😥",
+    "target_text": "Oyyy mene jan bujh k ni kiya sachiii 😥😥😥",
+    "source_dataset": "HASOC-2020-Hindi",
+    "origin": "real",
+    "rationale": "Real public research sample from HASOC-2020-Hindi."
+  },
+  {
+    "conversation_id": "synth_0344",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "grooming_coercive_language",
+    "pattern_type_canonical": "grooming-coercive-language",
+    "risk_level": "High",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "अगर तुमने मुझे ब्लॉक किया तो मैं तुम्हारे स्कूल आकर सबको बता दूंगा।"
+      },
+      {
+        "speaker": "B",
+        "text": "मुझे आपसे बात नहीं करनी, मुझे छोड़ दो।"
+      },
+      {
+        "speaker": "A",
+        "text": "कोशिश भी मत करना ब्लॉक करने की, अंजाम बहुत बुरा होगा।"
+      }
+    ],
+    "window_text": "A: अगर तुमने मुझे ब्लॉक किया तो मैं तुम्हारे स्कूल आकर सबको बता दूंगा। \n B: मुझे आपसे बात नहीं करनी, मुझे छोड़ दो। \n A: कोशिश भी मत करना ब्लॉक करने की, अंजाम बहुत बुरा होगा।",
+    "target_text": "कोशिश भी मत करना ब्लॉक करने की, अंजाम बहुत बुरा होगा।",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "school threat"
+  },
+  {
+    "conversation_id": "synth_0111",
+    "language": "Malayalam",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "ചൈൽഡ് ഹെൽപ്പ് ലൈൻ നമ്പർ 1098 ആണെന്ന് ഓർമ്മയുണ്ടോ?"
+      },
+      {
+        "speaker": "B",
+        "text": "ഉണ്ട്, ഏത് ആപത്തിലും കുട്ടികൾക്ക് വിളിക്കാം."
+      },
+      {
+        "speaker": "A",
+        "text": "അതെ, അത് സൗജന്യ നമ്പറാണ്."
+      }
+    ],
+    "window_text": "A: ചൈൽഡ് ഹെൽപ്പ് ലൈൻ നമ്പർ 1098 ആണെന്ന് ഓർമ്മയുണ്ടോ? \n B: ഉണ്ട്, ഏത് ആപത്തിലും കുട്ടികൾക്ക് വിളിക്കാം. \n A: അതെ, അത് സൗജന്യ നമ്പറാണ്.",
+    "target_text": "അതെ, അത് സൗജന്യ നമ്പറാണ്.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "childline 1098"
+  },
+  {
+    "conversation_id": "real_bullyexplain_hinglish_0158",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "lol - yeah, randi, we all know where your \"Dr\" credints came from. Fauci got his in a much more demanding curriculum."
+      }
+    ],
+    "window_text": "A: lol - yeah, randi, we all know where your \"Dr\" credints came from. Fauci got his in a much more demanding curriculum.",
+    "target_text": "lol - yeah, randi, we all know where your \"Dr\" credints came from. Fauci got his in a much more demanding curriculum.",
+    "source_dataset": "BullyExplain-Hinglish",
+    "origin": "real",
+    "rationale": "{lol - yeah {randi we all know where your {\"Dr\" {credints came from {Fauci got his in a much more demanding curriculum"
+  },
+  {
+    "conversation_id": "real_hasoc_2020_hindi_0009",
+    "language": "Hindi",
+    "script": "native",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "56\" का एक और कमाल"
+      }
+    ],
+    "window_text": "A: 56\" का एक और कमाल",
+    "target_text": "56\" का एक और कमाल",
+    "source_dataset": "HASOC-2020-Hindi",
+    "origin": "real",
+    "rationale": "Real public research sample from HASOC-2020-Hindi."
+  },
+  {
+    "conversation_id": "real_bullyexplain_hinglish_0174",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Mallu Hannah Baker is sasti randi of this platform. Jiska mood woh aake iski gand leta h 😭😭😭"
+      }
+    ],
+    "window_text": "A: Mallu Hannah Baker is sasti randi of this platform. Jiska mood woh aake iski gand leta h 😭😭😭",
+    "target_text": "Mallu Hannah Baker is sasti randi of this platform. Jiska mood woh aake iski gand leta h 😭😭😭",
+    "source_dataset": "BullyExplain-Hinglish",
+    "origin": "real",
+    "rationale": "Mallu Hannah Baker is {sasti {randi of this platform Jiska mood woh {aake {iski {gand {leta h"
+  },
+  {
+    "conversation_id": "real_bullyexplain_hinglish_0108",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Isko hipe kon de rha hai pta nhi but surely i m super angry with punjab government who could have moulded the laws and then implemented them in the State to help its people. But after all its a dirty game \" Politics\". Akhir kaar fasenge to log hi iske jaal mei. Aah kuttiya srkara"
+      }
+    ],
+    "window_text": "A: Isko hipe kon de rha hai pta nhi but surely i m super angry with punjab government who could have moulded the laws and then implemented them in the State to help its people. But after all its a dirty game \" Politics\". Akhir kaar fasenge to log hi iske jaal mei. Aah kuttiya srkara",
+    "target_text": "Isko hipe kon de rha hai pta nhi but surely i m super angry with punjab government who could have moulded the laws and then implemented them in the State to help its people. But after all its a dirty game \" Politics\". Akhir kaar fasenge to log hi iske jaal mei. Aah kuttiya srkara",
+    "source_dataset": "BullyExplain-Hinglish",
+    "origin": "real",
+    "rationale": "Isko hipe kon de rha hai pta nhi but surely i m {super {angry with {punjab {government who could have {moulded the {laws and then implemented them in the State to help its people But after all its a {dirty {game \" {Politics\" Akhir kaar {fasenge to log hi iske {jaal {mei Aah {kuttiya {srkara"
+  },
+  {
+    "conversation_id": "synth_0423",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Kal sports period mein tera bat tod denge hum log."
+      },
+      {
+        "speaker": "B",
+        "text": "Naya bat hai mera, mat todo!"
+      },
+      {
+        "speaker": "A",
+        "text": "Toh team se nikal ja khud hi loser."
+      }
+    ],
+    "window_text": "A: Kal sports period mein tera bat tod denge hum log. \n B: Naya bat hai mera, mat todo! \n A: Toh team se nikal ja khud hi loser.",
+    "target_text": "Toh team se nikal ja khud hi loser.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "property threat"
+  },
+  {
+    "conversation_id": "synth_0196",
+    "language": "Manglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Chess tournament il second round ethi njan."
+      },
+      {
+        "speaker": "B",
+        "text": "Super machane, focus cheythu kalikku."
+      },
+      {
+        "speaker": "A",
+        "text": "Opponent strong aanu, defence nokkanam."
+      }
+    ],
+    "window_text": "A: Chess tournament il second round ethi njan. \n B: Super machane, focus cheythu kalikku. \n A: Opponent strong aanu, defence nokkanam.",
+    "target_text": "Opponent strong aanu, defence nokkanam.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "chess tournament"
+  },
+  {
+    "conversation_id": "synth_0391",
+    "language": "English",
+    "script": "roman",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Our whole class thinks you are a pathetic failure. Nobody wants you here."
+      },
+      {
+        "speaker": "B",
+        "text": "Why are you being so mean to me?"
+      },
+      {
+        "speaker": "A",
+        "text": "Because you are ugly and worthless. Do everyone a favor and leave."
+      }
+    ],
+    "window_text": "A: Our whole class thinks you are a pathetic failure. Nobody wants you here. \n B: Why are you being so mean to me? \n A: Because you are ugly and worthless. Do everyone a favor and leave.",
+    "target_text": "Because you are ugly and worthless. Do everyone a favor and leave.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "exclusion humiliation"
+  },
+  {
+    "conversation_id": "real_bullyexplain_hinglish_0173",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "She is a third grade women... have seen it back then when on live session calling someone randi ka baccha .. just becoz he called in between a live online session 😅"
+      }
+    ],
+    "window_text": "A: She is a third grade women... have seen it back then when on live session calling someone randi ka baccha .. just becoz he called in between a live online session 😅",
+    "target_text": "She is a third grade women... have seen it back then when on live session calling someone randi ka baccha .. just becoz he called in between a live online session 😅",
+    "source_dataset": "BullyExplain-Hinglish",
+    "origin": "real",
+    "rationale": "She is a {third {grade {women have seen it back then when on live session calling someone {randi {ka {baccha just becoz he called in between a live online session"
+  },
+  {
+    "conversation_id": "synth_0294",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "grooming_isolation_request",
+    "pattern_type_canonical": "grooming-isolation-request",
+    "risk_level": "High",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Roz chats delete kar diya kar phone se."
+      },
+      {
+        "speaker": "B",
+        "text": "Kyu bhai koi galat baat thodi kar rahe hain?"
+      },
+      {
+        "speaker": "A",
+        "text": "Parents bohot overreact karte hain. Clear history karna safe rehta hai."
+      }
+    ],
+    "window_text": "A: Roz chats delete kar diya kar phone se. \n B: Kyu bhai koi galat baat thodi kar rahe hain? \n A: Parents bohot overreact karte hain. Clear history karna safe rehta hai.",
+    "target_text": "Parents bohot overreact karte hain. Clear history karna safe rehta hai.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "delete history request"
+  },
+  {
+    "conversation_id": "synth_0365",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "grooming_coercive_language",
+    "pattern_type_canonical": "grooming-coercive-language",
+    "risk_level": "High",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Ek aur photo bhej aur purani wali delete kar dunga, promise."
+      },
+      {
+        "speaker": "B",
+        "text": "Pichli baar bhi yehi bola tha tumne."
+      },
+      {
+        "speaker": "A",
+        "text": "Is baar sach keh raha hoon, bhej warna dono leak hongi."
+      }
+    ],
+    "window_text": "A: Ek aur photo bhej aur purani wali delete kar dunga, promise. \n B: Pichli baar bhi yehi bola tha tumne. \n A: Is baar sach keh raha hoon, bhej warna dono leak hongi.",
+    "target_text": "Is baar sach keh raha hoon, bhej warna dono leak hongi.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "escalating extortion cycle"
+  },
+  {
+    "conversation_id": "synth_0409",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "तेरी औकात नहीं है हमारे ग्रुप में रहने की।"
+      },
+      {
+        "speaker": "B",
+        "text": "हम सब क्लासमेट्स हैं।"
+      },
+      {
+        "speaker": "A",
+        "text": "क्लासमेट्स हैं पर तू हमारे जूतों के बराबर भी नहीं है।"
+      }
+    ],
+    "window_text": "A: तेरी औकात नहीं है हमारे ग्रुप में रहने की। \n B: हम सब क्लासमेट्स हैं। \n A: क्लासमेट्स हैं पर तू हमारे जूतों के बराबर भी नहीं है।",
+    "target_text": "क्लासमेट्स हैं पर तू हमारे जूतों के बराबर भी नहीं है।",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "status humiliation"
+  },
+  {
+    "conversation_id": "real_bullyexplain_hinglish_0093",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Yaa u do fake shame no one cares we cant acxept more Kuttiya pela ewaale aur 10 bacche paida krne waale U hv 57 countries send there Waise to bada OIC me complaint kr rahe the ab lee b bolo Waise b ur religion is terrorism 🤔🤔🤔🙄🙄"
+      }
+    ],
+    "window_text": "A: Yaa u do fake shame no one cares we cant acxept more Kuttiya pela ewaale aur 10 bacche paida krne waale U hv 57 countries send there Waise to bada OIC me complaint kr rahe the ab lee b bolo Waise b ur religion is terrorism 🤔🤔🤔🙄🙄",
+    "target_text": "Yaa u do fake shame no one cares we cant acxept more Kuttiya pela ewaale aur 10 bacche paida krne waale U hv 57 countries send there Waise to bada OIC me complaint kr rahe the ab lee b bolo Waise b ur religion is terrorism 🤔🤔🤔🙄🙄",
+    "source_dataset": "BullyExplain-Hinglish",
+    "origin": "real",
+    "rationale": "Yaa u do {fake {shame no one cares we cant acxept more {Kuttiya pela ewaale aur 10 bacche paida krne waaleU hv 57 countries send there Waise to bada OIC me {complaint kr rahe the ab lee b boloWaise b ur {religion is {terrorism"
+  },
+  {
+    "conversation_id": "synth_0049",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "बस स्टॉप पर कितनी देर में पहुंचोगे?"
+      },
+      {
+        "speaker": "B",
+        "text": "पाँच मिनट में निकल रहा हूँ।"
+      },
+      {
+        "speaker": "A",
+        "text": "जल्दी आओ, स्कूल बस आने वाली है।"
+      }
+    ],
+    "window_text": "A: बस स्टॉप पर कितनी देर में पहुंचोगे? \n B: पाँच मिनट में निकल रहा हूँ। \n A: जल्दी आओ, स्कूल बस आने वाली है।",
+    "target_text": "जल्दी आओ, स्कूल बस आने वाली है।",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "bus stop"
+  },
+  {
+    "conversation_id": "real_hasoc_2020_hindi_0050",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "RT : मानसिक और बौद्धिक दिवालियेपन में जी रहे लोग अपनी कुंठाओं को ऐसे ही ढोते हैं"
+      }
+    ],
+    "window_text": "A: RT : मानसिक और बौद्धिक दिवालियेपन में जी रहे लोग अपनी कुंठाओं को ऐसे ही ढोते हैं",
+    "target_text": "RT : मानसिक और बौद्धिक दिवालियेपन में जी रहे लोग अपनी कुंठाओं को ऐसे ही ढोते हैं",
+    "source_dataset": "HASOC-2020-Hindi",
+    "origin": "real",
+    "rationale": "Real public research sample from HASOC-2020-Hindi."
+  },
+  {
+    "conversation_id": "synth_0207",
+    "language": "English",
+    "script": "roman",
+    "pattern_label": "grooming_trust_building",
+    "pattern_type_canonical": "grooming-trust-building",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Tell me all your private problems and worries."
+      },
+      {
+        "speaker": "B",
+        "text": "I usually talk to my parents."
+      },
+      {
+        "speaker": "A",
+        "text": "Parents don't understand modern youth. Only I truly listen to you, trust me completely."
+      }
+    ],
+    "window_text": "A: Tell me all your private problems and worries. \n B: I usually talk to my parents. \n A: Parents don't understand modern youth. Only I truly listen to you, trust me completely.",
+    "target_text": "Parents don't understand modern youth. Only I truly listen to you, trust me completely.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "eroding parental trust"
+  },
+  {
+    "conversation_id": "real_comi_lingua_hinglish_0308",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Channel Hindustan Desk: Justice DN Patel of Jharkhand High Court will be the new Chief Justice of Delhi High Court."
+      }
+    ],
+    "window_text": "A: Channel Hindustan Desk: Justice DN Patel of Jharkhand High Court will be the new Chief Justice of Delhi High Court.",
+    "target_text": "Channel Hindustan Desk: Justice DN Patel of Jharkhand High Court will be the new Chief Justice of Delhi High Court.",
+    "source_dataset": "COMI-LINGUA-Hinglish",
+    "origin": "real",
+    "rationale": "Real public research sample from COMI-LINGUA-Hinglish."
+  },
+  {
+    "conversation_id": "real_dravidianlangtech_malayalam_0256",
+    "language": "Manglish",
+    "script": "roman",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Muriyandi mammunniyude sudappi fansinaanu kuru vallathe pottunnath.."
+      }
+    ],
+    "window_text": "A: Muriyandi mammunniyude sudappi fansinaanu kuru vallathe pottunnath..",
+    "target_text": "Muriyandi mammunniyude sudappi fansinaanu kuru vallathe pottunnath..",
+    "source_dataset": "DravidianLangTech-Malayalam",
+    "origin": "real",
+    "rationale": "Offensive social comment identified in DravidianLangTech corpus."
+  },
+  {
+    "conversation_id": "synth_0232",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "grooming_trust_building",
+    "pattern_type_canonical": "grooming-trust-building",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Main tumhe apni choti behen jaisa manta hoon par tum bohot mature ho."
+      },
+      {
+        "speaker": "B",
+        "text": "Thanks bhaiya."
+      },
+      {
+        "speaker": "A",
+        "text": "Mujhe sab share kiya karo, tumhara aur mera bond sabse strong hona chahiye."
+      }
+    ],
+    "window_text": "A: Main tumhe apni choti behen jaisa manta hoon par tum bohot mature ho. \n B: Thanks bhaiya. \n A: Mujhe sab share kiya karo, tumhara aur mera bond sabse strong hona chahiye.",
+    "target_text": "Mujhe sab share kiya karo, tumhara aur mera bond sabse strong hona chahiye.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "pseudo family bond"
+  },
+  {
+    "conversation_id": "synth_0292",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "grooming_isolation_request",
+    "pattern_type_canonical": "grooming-isolation-request",
+    "risk_level": "High",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "हमारे स्क्रीनशॉट किसी को शेयर मत करना कभी।"
+      },
+      {
+        "speaker": "B",
+        "text": "नहीं किया किसी को।"
+      },
+      {
+        "speaker": "A",
+        "text": "अगर किसी को पता चला तो हम दोनों बहुत बड़ी मुसीबत में पड़ जाएंगे।"
+      }
+    ],
+    "window_text": "A: हमारे स्क्रीनशॉट किसी को शेयर मत करना कभी। \n B: नहीं किया किसी को। \n A: अगर किसी को पता चला तो हम दोनों बहुत बड़ी मुसीबत में पड़ जाएंगे।",
+    "target_text": "अगर किसी को पता चला तो हम दोनों बहुत बड़ी मुसीबत में पड़ जाएंगे।",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "secrecy threat framing"
+  },
+  {
+    "conversation_id": "real_dravidianlangtech_malayalam_0198",
+    "language": "Manglish",
+    "script": "roman",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Jobi jorge padam ano. Potti mone"
+      }
+    ],
+    "window_text": "A: Jobi jorge padam ano. Potti mone",
+    "target_text": "Jobi jorge padam ano. Potti mone",
+    "source_dataset": "DravidianLangTech-Malayalam",
+    "origin": "real",
+    "rationale": "Offensive social comment identified in DravidianLangTech corpus."
+  },
+  {
+    "conversation_id": "synth_0388",
+    "language": "Manglish",
+    "script": "mixed",
+    "pattern_label": "grooming_coercive_language",
+    "pattern_type_canonical": "grooming-coercive-language",
+    "risk_level": "High",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Innu night video call cheyyanam, illenkil naale schoolil naattikkum."
+      },
+      {
+        "speaker": "B",
+        "text": "Enikku bayam aavunnu."
+      },
+      {
+        "speaker": "A",
+        "text": "Bayannu irunnoloo, call edukkan marakkanda."
+      }
+    ],
+    "window_text": "A: Innu night video call cheyyanam, illenkil naale schoolil naattikkum. \n B: Enikku bayam aavunnu. \n A: Bayannu irunnoloo, call edukkan marakkanda.",
+    "target_text": "Bayannu irunnoloo, call edukkan marakkanda.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "night call coercion"
+  },
+  {
+    "conversation_id": "real_bullyexplain_hinglish_0144",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "lmfaooo obviously you think you are 🤡you don’t pick and choose who has “real anxiety” nor is it really your place to speak on it because you lack a PhD in psychology. feel free to re enter the chat when you get one."
+      }
+    ],
+    "window_text": "A: lmfaooo obviously you think you are 🤡you don’t pick and choose who has “real anxiety” nor is it really your place to speak on it because you lack a PhD in psychology. feel free to re enter the chat when you get one.",
+    "target_text": "lmfaooo obviously you think you are 🤡you don’t pick and choose who has “real anxiety” nor is it really your place to speak on it because you lack a PhD in psychology. feel free to re enter the chat when you get one.",
+    "source_dataset": "BullyExplain-Hinglish",
+    "origin": "real",
+    "rationale": "Real public research sample from BullyExplain-Hinglish."
+  },
+  {
+    "conversation_id": "synth_0066",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "घर के बड़ों से कोई भी जरूरी बात छुपानी नहीं चाहिए।"
+      },
+      {
+        "speaker": "B",
+        "text": "हाँ, माँ हमेशा सही सलाह देती हैं।"
+      },
+      {
+        "speaker": "A",
+        "text": "किसी भी संकोच के बिना बात करनी चाहिए।"
+      }
+    ],
+    "window_text": "A: घर के बड़ों से कोई भी जरूरी बात छुपानी नहीं चाहिए। \n B: हाँ, माँ हमेशा सही सलाह देती हैं। \n A: किसी भी संकोच के बिना बात करनी चाहिए।",
+    "target_text": "किसी भी संकोच के बिना बात करनी चाहिए।",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "open communication"
+  },
+  {
+    "conversation_id": "synth_0280",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "grooming_isolation_request",
+    "pattern_type_canonical": "grooming-isolation-request",
+    "risk_level": "High",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "मम्मी पापा को हमारे बारे में बिल्कुल मत बताना।"
+      },
+      {
+        "speaker": "B",
+        "text": "माँ पूछ रही थी फोन पर किससे बात कर रही हो।"
+      },
+      {
+        "speaker": "A",
+        "text": "कह देना स्कूल का प्रोजेक्ट है। यह हमारी सीक्रेट दोस्ती है, किसी को पता नहीं चलना चाहिए।"
+      }
+    ],
+    "window_text": "A: मम्मी पापा को हमारे बारे में बिल्कुल मत बताना। \n B: माँ पूछ रही थी फोन पर किससे बात कर रही हो। \n A: कह देना स्कूल का प्रोजेक्ट है। यह हमारी सीक्रेट दोस्ती है, किसी को पता नहीं चलना चाहिए।",
+    "target_text": "कह देना स्कूल का प्रोजेक्ट है। यह हमारी सीक्रेट दोस्ती है, किसी को पता नहीं चलना चाहिए।",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "hide from parents"
+  },
+  {
+    "conversation_id": "real_hasoc_2020_hindi_0007",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "RT : ➡️IBM 1951 में भारत आयी थी, तब राजीव गांधी 7 वर्ष के थे और अंगूठा चूसते थे, ➡️HCL का गठन 1976 में हुआ था, जब राजीव गांधी…"
+      }
+    ],
+    "window_text": "A: RT : ➡️IBM 1951 में भारत आयी थी, तब राजीव गांधी 7 वर्ष के थे और अंगूठा चूसते थे, ➡️HCL का गठन 1976 में हुआ था, जब राजीव गांधी…",
+    "target_text": "RT : ➡️IBM 1951 में भारत आयी थी, तब राजीव गांधी 7 वर्ष के थे और अंगूठा चूसते थे, ➡️HCL का गठन 1976 में हुआ था, जब राजीव गांधी…",
+    "source_dataset": "HASOC-2020-Hindi",
+    "origin": "real",
+    "rationale": "Hostile or offensive public comment identified in HASOC FIRE dataset."
+  },
+  {
+    "conversation_id": "real_bullyexplain_hinglish_0122",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "1st dose of Moderna: sore arm 2nd dose: flu-like symptoms (nausea, chills, headache, fatigue) for 4-5 hours the day after the vaccination"
+      }
+    ],
+    "window_text": "A: 1st dose of Moderna: sore arm 2nd dose: flu-like symptoms (nausea, chills, headache, fatigue) for 4-5 hours the day after the vaccination",
+    "target_text": "1st dose of Moderna: sore arm 2nd dose: flu-like symptoms (nausea, chills, headache, fatigue) for 4-5 hours the day after the vaccination",
+    "source_dataset": "BullyExplain-Hinglish",
+    "origin": "real",
+    "rationale": "Real public research sample from BullyExplain-Hinglish."
+  },
+  {
+    "conversation_id": "real_comi_lingua_hinglish_0329",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "The Supreme Court is hearing the Ramjanmabhoomi-Babri Masjid dispute."
+      }
+    ],
+    "window_text": "A: The Supreme Court is hearing the Ramjanmabhoomi-Babri Masjid dispute.",
+    "target_text": "The Supreme Court is hearing the Ramjanmabhoomi-Babri Masjid dispute.",
+    "source_dataset": "COMI-LINGUA-Hinglish",
+    "origin": "real",
+    "rationale": "Real public research sample from COMI-LINGUA-Hinglish."
+  },
+  {
+    "conversation_id": "synth_0396",
+    "language": "English",
+    "script": "roman",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Everyone agree: don't sit with them at lunch tomorrow."
+      },
+      {
+        "speaker": "B",
+        "text": "Can you guys please stop isolating me?"
+      },
+      {
+        "speaker": "A",
+        "text": "No, nobody wants to sit next to a weirdo."
+      }
+    ],
+    "window_text": "A: Everyone agree: don't sit with them at lunch tomorrow. \n B: Can you guys please stop isolating me? \n A: No, nobody wants to sit next to a weirdo.",
+    "target_text": "No, nobody wants to sit next to a weirdo.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "lunch exclusion"
+  },
+  {
+    "conversation_id": "real_dravidianlangtech_malayalam_0184",
+    "language": "Manglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "ന്റമ്മോ ഇജ്ജാതി trailor.. Uffftrailor ethegilum.. Padam. Pwoliyo pwoli"
+      }
+    ],
+    "window_text": "A: ന്റമ്മോ ഇജ്ജാതി trailor.. Uffftrailor ethegilum.. Padam. Pwoliyo pwoli",
+    "target_text": "ന്റമ്മോ ഇജ്ജാതി trailor.. Uffftrailor ethegilum.. Padam. Pwoliyo pwoli",
+    "source_dataset": "DravidianLangTech-Malayalam",
+    "origin": "real",
+    "rationale": "Real public research sample from DravidianLangTech-Malayalam."
+  },
+  {
+    "conversation_id": "synth_0025",
+    "language": "English",
+    "script": "roman",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Who wants to trade duplicate Pokemon cards tomorrow?"
+      },
+      {
+        "speaker": "B",
+        "text": "I have Charizard!"
+      },
+      {
+        "speaker": "A",
+        "text": "Bring your binder to lunch recess."
+      }
+    ],
+    "window_text": "A: Who wants to trade duplicate Pokemon cards tomorrow? \n B: I have Charizard! \n A: Bring your binder to lunch recess.",
+    "target_text": "Bring your binder to lunch recess.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "trading cards"
+  },
+  {
+    "conversation_id": "real_dravidianlangtech_malayalam_0263",
+    "language": "Malayalam",
+    "script": "native",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "മഞ്ജു ചേച്ചി ഇസ്സ്തം ... കോവാലൻ കസ്സ്തം ..."
+      }
+    ],
+    "window_text": "A: മഞ്ജു ചേച്ചി ഇസ്സ്തം ... കോവാലൻ കസ്സ്തം ...",
+    "target_text": "മഞ്ജു ചേച്ചി ഇസ്സ്തം ... കോവാലൻ കസ്സ്തം ...",
+    "source_dataset": "DravidianLangTech-Malayalam",
+    "origin": "real",
+    "rationale": "Offensive social comment identified in DravidianLangTech corpus."
+  },
+  {
+    "conversation_id": "synth_0310",
+    "language": "Malayalam",
+    "script": "mixed",
+    "pattern_label": "grooming_isolation_request",
+    "pattern_type_canonical": "grooming-isolation-request",
+    "risk_level": "High",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "ഞാൻ തന്ന സമ്മാനം വീട്ടിൽ ആരും കാണരുത്."
+      },
+      {
+        "speaker": "B",
+        "text": "അമ്മ കണ്ടാൽ ചോദിക്കും എവിടെ നിന്ന് കിട്ടിയെന്ന്."
+      },
+      {
+        "speaker": "A",
+        "text": "സ്കൂളിൽ വെച്ചു സൂക്ഷിക്കൂ, വീട്ടിൽ കൊണ്ടുപോകരുത്."
+      }
+    ],
+    "window_text": "A: ഞാൻ തന്ന സമ്മാനം വീട്ടിൽ ആരും കാണരുത്. \n B: അമ്മ കണ്ടാൽ ചോദിക്കും എവിടെ നിന്ന് കിട്ടിയെന്ന്. \n A: സ്കൂളിൽ വെച്ചു സൂക്ഷിക്കൂ, വീട്ടിൽ കൊണ്ടുപോകരുത്.",
+    "target_text": "സ്കൂളിൽ വെച്ചു സൂക്ഷിക്കൂ, വീട്ടിൽ കൊണ്ടുപോകരുത്.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "hide gift from mother"
+  },
+  {
+    "conversation_id": "synth_0170",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Badminton racket ki gutting toot gayi match mein."
+      },
+      {
+        "speaker": "B",
+        "text": "Market mein repair ho jati hai 100 rupees mein."
+      },
+      {
+        "speaker": "A",
+        "text": "Kal sham ko de aaunga dukan pe."
+      }
+    ],
+    "window_text": "A: Badminton racket ki gutting toot gayi match mein. \n B: Market mein repair ho jati hai 100 rupees mein. \n A: Kal sham ko de aaunga dukan pe.",
+    "target_text": "Kal sham ko de aaunga dukan pe.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "racket repair"
+  },
+  {
+    "conversation_id": "synth_0172",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "English teacher ne new novel recommend ki hai reading ke liye."
+      },
+      {
+        "speaker": "B",
+        "text": "The Blue Umbrella by Ruskin Bond?"
+      },
+      {
+        "speaker": "A",
+        "text": "Haan, bohot short aur beautiful story hai."
+      }
+    ],
+    "window_text": "A: English teacher ne new novel recommend ki hai reading ke liye. \n B: The Blue Umbrella by Ruskin Bond? \n A: Haan, bohot short aur beautiful story hai.",
+    "target_text": "Haan, bohot short aur beautiful story hai.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "reading novel"
+  },
+  {
+    "conversation_id": "real_comi_lingua_hinglish_0286",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "P. S. Ranipise, an IPS officer of Odisha cadre, has been appointed as the Inspector General of the Central Reserve Police Force (CRPF)."
+      }
+    ],
+    "window_text": "A: P. S. Ranipise, an IPS officer of Odisha cadre, has been appointed as the Inspector General of the Central Reserve Police Force (CRPF).",
+    "target_text": "P. S. Ranipise, an IPS officer of Odisha cadre, has been appointed as the Inspector General of the Central Reserve Police Force (CRPF).",
+    "source_dataset": "COMI-LINGUA-Hinglish",
+    "origin": "real",
+    "rationale": "Real public research sample from COMI-LINGUA-Hinglish."
+  },
+  {
+    "conversation_id": "real_hasoc_2020_hindi_0031",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "RT : जरूरी तो नही है कि…"
+      }
+    ],
+    "window_text": "A: RT : जरूरी तो नही है कि…",
+    "target_text": "RT : जरूरी तो नही है कि…",
+    "source_dataset": "HASOC-2020-Hindi",
+    "origin": "real",
+    "rationale": "Real public research sample from HASOC-2020-Hindi."
+  },
+  {
+    "conversation_id": "synth_0264",
+    "language": "Manglish",
+    "script": "mixed",
+    "pattern_label": "grooming_trust_building",
+    "pattern_type_canonical": "grooming-trust-building",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Nee illaathe enikku ippo oru divasam polum povanilla."
+      },
+      {
+        "speaker": "B",
+        "text": "Enikku study cheyyan undu."
+      },
+      {
+        "speaker": "A",
+        "text": "Paditham pinne cheyyam, enikku time thaadoo ente muthe."
+      }
+    ],
+    "window_text": "A: Nee illaathe enikku ippo oru divasam polum povanilla. \n B: Enikku study cheyyan undu. \n A: Paditham pinne cheyyam, enikku time thaadoo ente muthe.",
+    "target_text": "Paditham pinne cheyyam, enikku time thaadoo ente muthe.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "emotional pressure flattery"
+  },
+  {
+    "conversation_id": "real_dravidianlangtech_malayalam_0185",
+    "language": "Manglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "ഇത് ബോംബ് ആകും എന്ന് തോന്നുന്നവർ Like അടിക്ക്...."
+      }
+    ],
+    "window_text": "A: ഇത് ബോംബ് ആകും എന്ന് തോന്നുന്നവർ Like അടിക്ക്....",
+    "target_text": "ഇത് ബോംബ് ആകും എന്ന് തോന്നുന്നവർ Like അടിക്ക്....",
+    "source_dataset": "DravidianLangTech-Malayalam",
+    "origin": "real",
+    "rationale": "Real public research sample from DravidianLangTech-Malayalam."
+  },
+  {
+    "conversation_id": "real_dravidianlangtech_malayalam_0236",
+    "language": "Manglish",
+    "script": "roman",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Lalettante face kandittu sankadam maatram ennalum ente stree kumara menone naari"
+      }
+    ],
+    "window_text": "A: Lalettante face kandittu sankadam maatram ennalum ente stree kumara menone naari",
+    "target_text": "Lalettante face kandittu sankadam maatram ennalum ente stree kumara menone naari",
+    "source_dataset": "DravidianLangTech-Malayalam",
+    "origin": "real",
+    "rationale": "Offensive social comment identified in DravidianLangTech corpus."
+  },
+  {
+    "conversation_id": "real_bullyexplain_hinglish_0172",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "ara is ka tu randi ronay hi ni khtm hoty"
+      }
+    ],
+    "window_text": "A: ara is ka tu randi ronay hi ni khtm hoty",
+    "target_text": "ara is ka tu randi ronay hi ni khtm hoty",
+    "source_dataset": "BullyExplain-Hinglish",
+    "origin": "real",
+    "rationale": "ara is ka {tu {randi {ronay hi ni {khtm {hoty"
+  },
+  {
+    "conversation_id": "real_hasoc_2020_hindi_0036",
+    "language": "Hindi",
+    "script": "native",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "18 - 18 घंटे काम करके भी गधा गधा ही रहता है घोडा नही बन जाता, वोह बोझा ही ढो सकता है, रेस मे नही दौड सकता। नोट: आम बात है इधर-उधर लिंक ना जोडें 🙂"
+      }
+    ],
+    "window_text": "A: 18 - 18 घंटे काम करके भी गधा गधा ही रहता है घोडा नही बन जाता, वोह बोझा ही ढो सकता है, रेस मे नही दौड सकता। नोट: आम बात है इधर-उधर लिंक ना जोडें 🙂",
+    "target_text": "18 - 18 घंटे काम करके भी गधा गधा ही रहता है घोडा नही बन जाता, वोह बोझा ही ढो सकता है, रेस मे नही दौड सकता। नोट: आम बात है इधर-उधर लिंक ना जोडें 🙂",
+    "source_dataset": "HASOC-2020-Hindi",
+    "origin": "real",
+    "rationale": "Real public research sample from HASOC-2020-Hindi."
+  },
+  {
+    "conversation_id": "synth_0346",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "grooming_coercive_language",
+    "pattern_type_canonical": "grooming-coercive-language",
+    "risk_level": "High",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "मैंने तुम पर इतने पैसे खर्च किए हैं, अब तुम्हें मेरी बात माननी पड़ेगी।"
+      },
+      {
+        "speaker": "B",
+        "text": "मैंने तो पैसे मांगे नहीं थे।"
+      },
+      {
+        "speaker": "A",
+        "text": "बहाने मत बनाओ, कल मुझसे मिलने आओ वरना घर पर पैसे मांगने आऊंगा।"
+      }
+    ],
+    "window_text": "A: मैंने तुम पर इतने पैसे खर्च किए हैं, अब तुम्हें मेरी बात माननी पड़ेगी। \n B: मैंने तो पैसे मांगे नहीं थे। \n A: बहाने मत बनाओ, कल मुझसे मिलने आओ वरना घर पर पैसे मांगने आऊंगा।",
+    "target_text": "बहाने मत बनाओ, कल मुझसे मिलने आओ वरना घर पर पैसे मांगने आऊंगा।",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "debt coercion"
+  },
+  {
+    "conversation_id": "synth_0340",
+    "language": "English",
+    "script": "roman",
+    "pattern_label": "grooming_coercive_language",
+    "pattern_type_canonical": "grooming-coercive-language",
+    "risk_level": "High",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Don't test my patience. I can destroy your reputation in 30 seconds."
+      },
+      {
+        "speaker": "B",
+        "text": "Why are you doing this to me?"
+      },
+      {
+        "speaker": "A",
+        "text": "Because you think you can ignore me. Do what I said."
+      }
+    ],
+    "window_text": "A: Don't test my patience. I can destroy your reputation in 30 seconds. \n B: Why are you doing this to me? \n A: Because you think you can ignore me. Do what I said.",
+    "target_text": "Because you think you can ignore me. Do what I said.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "reputation threat"
+  },
+  {
+    "conversation_id": "synth_0036",
+    "language": "English",
+    "script": "roman",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "If anyone online ever asks you to keep secrets, tell a teacher right away."
+      },
+      {
+        "speaker": "B",
+        "text": "Our school counselor gave us helpline stickers today."
+      },
+      {
+        "speaker": "A",
+        "text": "Yeah, 1098 is for child safety."
+      }
+    ],
+    "window_text": "A: If anyone online ever asks you to keep secrets, tell a teacher right away. \n B: Our school counselor gave us helpline stickers today. \n A: Yeah, 1098 is for child safety.",
+    "target_text": "Yeah, 1098 is for child safety.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "helpline awareness"
+  },
+  {
+    "conversation_id": "synth_0015",
+    "language": "English",
+    "script": "roman",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Good morning! Did bus route 12 change?"
+      },
+      {
+        "speaker": "B",
+        "text": "No, it arrives at the usual 7:30 AM stop."
+      },
+      {
+        "speaker": "A",
+        "text": "Thanks, see you at the bus stop."
+      }
+    ],
+    "window_text": "A: Good morning! Did bus route 12 change? \n B: No, it arrives at the usual 7:30 AM stop. \n A: Thanks, see you at the bus stop.",
+    "target_text": "Thanks, see you at the bus stop.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "school bus"
+  },
+  {
+    "conversation_id": "synth_0221",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "grooming_trust_building",
+    "pattern_type_canonical": "grooming-trust-building",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "मुझे लगता है हमारे बीच एक खास कनेक्शन है।"
+      },
+      {
+        "speaker": "B",
+        "text": "हम तो अभी ऑनलाइन मिले हैं।"
+      },
+      {
+        "speaker": "A",
+        "text": "सच्ची दोस्ती में वक्त नहीं देखा जाता। तुम मुझ पर अपनी जान से ज्यादा भरोसा कर सकते हो।"
+      }
+    ],
+    "window_text": "A: मुझे लगता है हमारे बीच एक खास कनेक्शन है। \n B: हम तो अभी ऑनलाइन मिले हैं। \n A: सच्ची दोस्ती में वक्त नहीं देखा जाता। तुम मुझ पर अपनी जान से ज्यादा भरोसा कर सकते हो।",
+    "target_text": "सच्ची दोस्ती में वक्त नहीं देखा जाता। तुम मुझ पर अपनी जान से ज्यादा भरोसा कर सकते हो।",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "instant bond"
+  },
+  {
+    "conversation_id": "real_comi_lingua_hinglish_0285",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Aamir Khan's daughter Ira Khan is these days dating fitness trainer Nupur Shikhare."
+      }
+    ],
+    "window_text": "A: Aamir Khan's daughter Ira Khan is these days dating fitness trainer Nupur Shikhare.",
+    "target_text": "Aamir Khan's daughter Ira Khan is these days dating fitness trainer Nupur Shikhare.",
+    "source_dataset": "COMI-LINGUA-Hinglish",
+    "origin": "real",
+    "rationale": "Real public research sample from COMI-LINGUA-Hinglish."
+  },
+  {
+    "conversation_id": "real_dravidianlangtech_malayalam_0239",
+    "language": "Malayalam",
+    "script": "native",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "മോഡിയുടെ ചെപ്പ കുറ്റി അടിച്ചു പരത്താൻ ആരെങ്കിലും ഉണ്ടോ?"
+      }
+    ],
+    "window_text": "A: മോഡിയുടെ ചെപ്പ കുറ്റി അടിച്ചു പരത്താൻ ആരെങ്കിലും ഉണ്ടോ?",
+    "target_text": "മോഡിയുടെ ചെപ്പ കുറ്റി അടിച്ചു പരത്താൻ ആരെങ്കിലും ഉണ്ടോ?",
+    "source_dataset": "DravidianLangTech-Malayalam",
+    "origin": "real",
+    "rationale": "Offensive social comment identified in DravidianLangTech corpus."
+  },
+  {
+    "conversation_id": "synth_0374",
+    "language": "Malayalam",
+    "script": "mixed",
+    "pattern_label": "grooming_coercive_language",
+    "pattern_type_canonical": "grooming-coercive-language",
+    "risk_level": "High",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "വീഡിയോ കോൾ അറ്റൻഡ് ചെയ്യ്, ഇല്ലെങ്കിൽ നിന്റെ കൂട്ടുകാരോട് പറയും."
+      },
+      {
+        "speaker": "B",
+        "text": "വീട്ടിൽ ആളുണ്ട് ഇപ്പോൾ പറ്റില്ല."
+      },
+      {
+        "speaker": "A",
+        "text": "എനിക്ക് അതൊന്നും കേൾക്കേണ്ട, കോൾ എടുക്ക്."
+      }
+    ],
+    "window_text": "A: വീഡിയോ കോൾ അറ്റൻഡ് ചെയ്യ്, ഇല്ലെങ്കിൽ നിന്റെ കൂട്ടുകാരോട് പറയും. \n B: വീട്ടിൽ ആളുണ്ട് ഇപ്പോൾ പറ്റില്ല. \n A: എനിക്ക് അതൊന്നും കേൾക്കേണ്ട, കോൾ എടുക്ക്.",
+    "target_text": "എനിക്ക് അതൊന്നും കേൾക്കേണ്ട, കോൾ എടുക്ക്.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "forced video call"
+  },
+  {
+    "conversation_id": "real_hasoc_2020_hindi_0006",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "RT : जब भी मेरे भाई के दोस्त को कुछ करने का मान करता था वो मुझे घर के पीछे ले जाता था ।"
+      }
+    ],
+    "window_text": "A: RT : जब भी मेरे भाई के दोस्त को कुछ करने का मान करता था वो मुझे घर के पीछे ले जाता था ।",
+    "target_text": "RT : जब भी मेरे भाई के दोस्त को कुछ करने का मान करता था वो मुझे घर के पीछे ले जाता था ।",
+    "source_dataset": "HASOC-2020-Hindi",
+    "origin": "real",
+    "rationale": "Hostile or offensive public comment identified in HASOC FIRE dataset."
+  },
+  {
+    "conversation_id": "synth_0313",
+    "language": "Malayalam",
+    "script": "mixed",
+    "pattern_label": "grooming_isolation_request",
+    "pattern_type_canonical": "grooming-isolation-request",
+    "risk_level": "High",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "രാത്രി എല്ലാവരും ഉറങ്ങിയ ശേഷം ഓൺലൈനിൽ വരാമോ?"
+      },
+      {
+        "speaker": "B",
+        "text": "അമ്മ അടുത്താണ് കിടക്കുന്നത്."
+      },
+      {
+        "speaker": "A",
+        "text": "ശബ്ദം ഉണ്ടാക്കാതെ ടെക്സ്റ്റ് മെസ്സേജ് അയച്ചാൽ മതി."
+      }
+    ],
+    "window_text": "A: രാത്രി എല്ലാവരും ഉറങ്ങിയ ശേഷം ഓൺലൈനിൽ വരാമോ? \n B: അമ്മ അടുത്താണ് കിടക്കുന്നത്. \n A: ശബ്ദം ഉണ്ടാക്കാതെ ടെക്സ്റ്റ് മെസ്സേജ് അയച്ചാൽ മതി.",
+    "target_text": "ശബ്ദം ഉണ്ടാക്കാതെ ടെക്സ്റ്റ് മെസ്സേജ് അയച്ചാൽ മതി.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "late night texting"
+  },
+  {
+    "conversation_id": "synth_0098",
+    "language": "Malayalam",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "ആരെങ്കിലും നിന്നെ ശല്യം ചെയ്താൽ ഉടൻ അധ്യാപകനോട് പറയണം."
+      },
+      {
+        "speaker": "B",
+        "text": "അതെ, സ്കൂളിൽ കൗൺസിലർ അങ്ങനെ പറഞ്ഞിട്ടുണ്ട്."
+      },
+      {
+        "speaker": "A",
+        "text": "എപ്പോഴും സുരക്ഷിതമായിരിക്കണം."
+      }
+    ],
+    "window_text": "A: ആരെങ്കിലും നിന്നെ ശല്യം ചെയ്താൽ ഉടൻ അധ്യാപകനോട് പറയണം. \n B: അതെ, സ്കൂളിൽ കൗൺസിലർ അങ്ങനെ പറഞ്ഞിട്ടുണ്ട്. \n A: എപ്പോഴും സുരക്ഷിതമായിരിക്കണം.",
+    "target_text": "എപ്പോഴും സുരക്ഷിതമായിരിക്കണം.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "safety advice"
+  },
+  {
+    "conversation_id": "synth_0082",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Bhai canteen mein samosa khayenge?"
+      },
+      {
+        "speaker": "B",
+        "text": "Mere paas lunch box hai mummy ne banaya."
+      },
+      {
+        "speaker": "A",
+        "text": "Chal share kar lete hain dono."
+      }
+    ],
+    "window_text": "A: Bhai canteen mein samosa khayenge? \n B: Mere paas lunch box hai mummy ne banaya. \n A: Chal share kar lete hain dono.",
+    "target_text": "Chal share kar lete hain dono.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "canteen lunch"
+  },
+  {
+    "conversation_id": "synth_0295",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "grooming_isolation_request",
+    "pattern_type_canonical": "grooming-isolation-request",
+    "risk_level": "High",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Snapchat pe aao, wahan messages automatically disappear ho jate hain."
+      },
+      {
+        "speaker": "B",
+        "text": "Mera snap account nahi hai."
+      },
+      {
+        "speaker": "A",
+        "text": "Secretly bana lo, 2 minute lagte hain. Family ko mat batana."
+      }
+    ],
+    "window_text": "A: Snapchat pe aao, wahan messages automatically disappear ho jate hain. \n B: Mera snap account nahi hai. \n A: Secretly bana lo, 2 minute lagte hain. Family ko mat batana.",
+    "target_text": "Secretly bana lo, 2 minute lagte hain. Family ko mat batana.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "disappearing message app"
+  },
+  {
+    "conversation_id": "real_bullyexplain_hinglish_0128",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "I'm not here to impress someone but express myself 🤟❣️...so mere aage randi rona mt roya kro or na hi ulte fulte comment kr k dimag khrb kia kro .ab m tumhare hisab se post thodi krungi...."
+      }
+    ],
+    "window_text": "A: I'm not here to impress someone but express myself 🤟❣️...so mere aage randi rona mt roya kro or na hi ulte fulte comment kr k dimag khrb kia kro .ab m tumhare hisab se post thodi krungi....",
+    "target_text": "I'm not here to impress someone but express myself 🤟❣️...so mere aage randi rona mt roya kro or na hi ulte fulte comment kr k dimag khrb kia kro .ab m tumhare hisab se post thodi krungi....",
+    "source_dataset": "BullyExplain-Hinglish",
+    "origin": "real",
+    "rationale": "I'm not here to impress someone but express myself ❣️so {mere {aage {randi {rona mt {roya {kro or na hi {ulte {fulte {comment kr k {dimag {khrb kia kroab m tumhare hisab se post thodi krungi"
+  },
+  {
+    "conversation_id": "synth_0330",
+    "language": "Manglish",
+    "script": "mixed",
+    "pattern_label": "grooming_isolation_request",
+    "pattern_type_canonical": "grooming-isolation-request",
+    "risk_level": "High",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Kasavu saree ittu photo eduthu enikku private aayi ayaku."
+      },
+      {
+        "speaker": "B",
+        "text": "Statusil idan vendi eduthatha."
+      },
+      {
+        "speaker": "A",
+        "text": "Statusil idanda, enikku mathram inboxil ayachaal mathi, secret aayirikkum."
+      }
+    ],
+    "window_text": "A: Kasavu saree ittu photo eduthu enikku private aayi ayaku. \n B: Statusil idan vendi eduthatha. \n A: Statusil idanda, enikku mathram inboxil ayachaal mathi, secret aayirikkum.",
+    "target_text": "Statusil idanda, enikku mathram inboxil ayachaal mathi, secret aayirikkum.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "private photo demand"
+  },
+  {
+    "conversation_id": "synth_0178",
+    "language": "Malayalam",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "കായികോത്സവത്തിൽ റിലേ ടീമിൽ നീ ഉണ്ടോ?"
+      },
+      {
+        "speaker": "B",
+        "text": "നാലാമത്തെ ആളായി ഞാൻ ഓടും."
+      },
+      {
+        "speaker": "A",
+        "text": "ബാറ്റൺ കൈമാറുമ്പോൾ ശ്രദ്ധിക്കണം, വിജയം നമ്മുടെ കൈയിലാണ്."
+      }
+    ],
+    "window_text": "A: കായികോത്സവത്തിൽ റിലേ ടീമിൽ നീ ഉണ്ടോ? \n B: നാലാമത്തെ ആളായി ഞാൻ ഓടും. \n A: ബാറ്റൺ കൈമാറുമ്പോൾ ശ്രദ്ധിക്കണം, വിജയം നമ്മുടെ കൈയിലാണ്.",
+    "target_text": "ബാറ്റൺ കൈമാറുമ്പോൾ ശ്രദ്ധിക്കണം, വിജയം നമ്മുടെ കൈയിലാണ്.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "relay race"
+  },
+  {
+    "conversation_id": "synth_0358",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "grooming_coercive_language",
+    "pattern_type_canonical": "grooming-coercive-language",
+    "risk_level": "High",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Maine tere liye itne diamonds aur gift bheje, ab tu mujhe ignore kar rahi hai?"
+      },
+      {
+        "speaker": "B",
+        "text": "Mujhe ye sab nahi chahiye tha."
+      },
+      {
+        "speaker": "A",
+        "text": "Pay back kar 10,000 ya phir chupchap milne aa."
+      }
+    ],
+    "window_text": "A: Maine tere liye itne diamonds aur gift bheje, ab tu mujhe ignore kar rahi hai? \n B: Mujhe ye sab nahi chahiye tha. \n A: Pay back kar 10,000 ya phir chupchap milne aa.",
+    "target_text": "Pay back kar 10,000 ya phir chupchap milne aa.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "gift debt coercion"
+  },
+  {
+    "conversation_id": "synth_0405",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "इस बेवकूफ को ग्रुप से रिमूव करो सब लोग।"
+      },
+      {
+        "speaker": "B",
+        "text": "मुझे प्रोजेक्ट के बारे में पूछना था।"
+      },
+      {
+        "speaker": "A",
+        "text": "तेरे जैसे गधे से कोई बात नहीं करना चाहता, दफा हो जा।"
+      }
+    ],
+    "window_text": "A: इस बेवकूफ को ग्रुप से रिमूव करो सब लोग। \n B: मुझे प्रोजेक्ट के बारे में पूछना था। \n A: तेरे जैसे गधे से कोई बात नहीं करना चाहता, दफा हो जा।",
+    "target_text": "तेरे जैसे गधे से कोई बात नहीं करना चाहता, दफा हो जा।",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "group expulsion"
+  },
+  {
+    "conversation_id": "real_bullyexplain_hinglish_0175",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Asad Khan to hi he randi ka bacha bhehan chood"
+      }
+    ],
+    "window_text": "A: Asad Khan to hi he randi ka bacha bhehan chood",
+    "target_text": "Asad Khan to hi he randi ka bacha bhehan chood",
+    "source_dataset": "BullyExplain-Hinglish",
+    "origin": "real",
+    "rationale": "Asad Khan to hi he {randi {ka {bacha {bhehan {chood"
+  },
+  {
+    "conversation_id": "synth_0328",
+    "language": "Manglish",
+    "script": "mixed",
+    "pattern_label": "grooming_isolation_request",
+    "pattern_type_canonical": "grooming-isolation-request",
+    "risk_level": "High",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Friends nodu paranjal ninte nallathinaavilla."
+      },
+      {
+        "speaker": "B",
+        "text": "Avar entha cheyya?"
+      },
+      {
+        "speaker": "A",
+        "text": "Avar teacher nodu complain cheyyum. Njan mathram aanu ninte friend."
+      }
+    ],
+    "window_text": "A: Friends nodu paranjal ninte nallathinaavilla. \n B: Avar entha cheyya? \n A: Avar teacher nodu complain cheyyum. Njan mathram aanu ninte friend.",
+    "target_text": "Avar teacher nodu complain cheyyum. Njan mathram aanu ninte friend.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "alienating friends"
+  },
+  {
+    "conversation_id": "synth_0007",
+    "language": "English",
+    "script": "roman",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Did you submit the art assignment?"
+      },
+      {
+        "speaker": "B",
+        "text": "I just finished watercolor painting."
+      },
+      {
+        "speaker": "A",
+        "text": "Nice, let's submit it before the bell rings."
+      }
+    ],
+    "window_text": "A: Did you submit the art assignment? \n B: I just finished watercolor painting. \n A: Nice, let's submit it before the bell rings.",
+    "target_text": "Nice, let's submit it before the bell rings.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "art project"
+  },
+  {
+    "conversation_id": "real_hasoc_2020_hindi_0078",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "RT : ChowkidarMeinZorHai वेद_मेरा_भेद_है कबीर परमात्मा कवियों की भूमिका करके अपना तत्वज्ञान प्रदान करता है। उसकी प्रभुता…"
+      }
+    ],
+    "window_text": "A: RT : ChowkidarMeinZorHai वेद_मेरा_भेद_है कबीर परमात्मा कवियों की भूमिका करके अपना तत्वज्ञान प्रदान करता है। उसकी प्रभुता…",
+    "target_text": "RT : ChowkidarMeinZorHai वेद_मेरा_भेद_है कबीर परमात्मा कवियों की भूमिका करके अपना तत्वज्ञान प्रदान करता है। उसकी प्रभुता…",
+    "source_dataset": "HASOC-2020-Hindi",
+    "origin": "real",
+    "rationale": "Real public research sample from HASOC-2020-Hindi."
+  },
+  {
+    "conversation_id": "synth_0109",
+    "language": "Malayalam",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "നിന്റെ സൈക്കിൾ ഒന്നു തരുമോ, കടയിൽ പോകാൻ?"
+      },
+      {
+        "speaker": "B",
+        "text": "എടുത്തോളൂ, സൂക്ഷിച്ച് ഓടിക്കണം."
+      },
+      {
+        "speaker": "A",
+        "text": "താങ്ക്സ്, പത്ത് മിനിറ്റിൽ തിരികെ തരാം."
+      }
+    ],
+    "window_text": "A: നിന്റെ സൈക്കിൾ ഒന്നു തരുമോ, കടയിൽ പോകാൻ? \n B: എടുത്തോളൂ, സൂക്ഷിച്ച് ഓടിക്കണം. \n A: താങ്ക്സ്, പത്ത് മിനിറ്റിൽ തിരികെ തരാം.",
+    "target_text": "താങ്ക്സ്, പത്ത് മിനിറ്റിൽ തിരികെ തരാം.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "borrow bicycle"
+  },
+  {
+    "conversation_id": "synth_0016",
+    "language": "English",
+    "script": "roman",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Dude you completely destroyed me in that match!"
+      },
+      {
+        "speaker": "B",
+        "text": "Haha your sniper shot missed by an inch."
+      },
+      {
+        "speaker": "A",
+        "text": "That game was killer, let's play another round tonight."
+      }
+    ],
+    "window_text": "A: Dude you completely destroyed me in that match! \n B: Haha your sniper shot missed by an inch. \n A: That game was killer, let's play another round tonight.",
+    "target_text": "That game was killer, let's play another round tonight.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "gaming slang benign"
+  },
+  {
+    "conversation_id": "synth_0449",
+    "language": "Manglish",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Ninte cycle njan puncher aakum innu."
+      },
+      {
+        "speaker": "B",
+        "text": "Njan nadannu pokendi varum."
+      },
+      {
+        "speaker": "A",
+        "text": "Nadannu thanne po, athanu ninakku pattiya pani."
+      }
+    ],
+    "window_text": "A: Ninte cycle njan puncher aakum innu. \n B: Njan nadannu pokendi varum. \n A: Nadannu thanne po, athanu ninakku pattiya pani.",
+    "target_text": "Nadannu thanne po, athanu ninakku pattiya pani.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "property vandalism"
+  },
+  {
+    "conversation_id": "real_comi_lingua_hinglish_0310",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Trains for Sikandarpur run from New Delhi(NDLS) and Delhi(DLI) and go up to New Delhi and reach Sikandarpur(SKQ)."
+      }
+    ],
+    "window_text": "A: Trains for Sikandarpur run from New Delhi(NDLS) and Delhi(DLI) and go up to New Delhi and reach Sikandarpur(SKQ).",
+    "target_text": "Trains for Sikandarpur run from New Delhi(NDLS) and Delhi(DLI) and go up to New Delhi and reach Sikandarpur(SKQ).",
+    "source_dataset": "COMI-LINGUA-Hinglish",
+    "origin": "real",
+    "rationale": "Real public research sample from COMI-LINGUA-Hinglish."
+  },
+  {
+    "conversation_id": "synth_0128",
+    "language": "Manglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Football match il referee wrong foul vilichu."
+      },
+      {
+        "speaker": "B",
+        "text": "Athu vishayam aakkanda, kalicha reethi nannaayirunnu."
+      },
+      {
+        "speaker": "A",
+        "text": "Athe, next matchil nammal win cheyyum."
+      }
+    ],
+    "window_text": "A: Football match il referee wrong foul vilichu. \n B: Athu vishayam aakkanda, kalicha reethi nannaayirunnu. \n A: Athe, next matchil nammal win cheyyum.",
+    "target_text": "Athe, next matchil nammal win cheyyum.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "match spirit"
+  },
+  {
+    "conversation_id": "real_bullyexplain_hinglish_0104",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Hm your parents be like \"ek kuttiya toh paal hi rahe hai\""
+      }
+    ],
+    "window_text": "A: Hm your parents be like \"ek kuttiya toh paal hi rahe hai\"",
+    "target_text": "Hm your parents be like \"ek kuttiya toh paal hi rahe hai\"",
+    "source_dataset": "BullyExplain-Hinglish",
+    "origin": "real",
+    "rationale": "Hm your parents be like \"ek {kuttiya toh {paal hi rahe hai\" friends relat"
+  },
+  {
+    "conversation_id": "real_comi_lingua_hinglish_0276",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Tajpur Kurra, also known as Kurra, is a village located in Ghazipur district of Uttar Pradesh state in India."
+      }
+    ],
+    "window_text": "A: Tajpur Kurra, also known as Kurra, is a village located in Ghazipur district of Uttar Pradesh state in India.",
+    "target_text": "Tajpur Kurra, also known as Kurra, is a village located in Ghazipur district of Uttar Pradesh state in India.",
+    "source_dataset": "COMI-LINGUA-Hinglish",
+    "origin": "real",
+    "rationale": "Real public research sample from COMI-LINGUA-Hinglish."
+  },
+  {
+    "conversation_id": "real_dravidianlangtech_malayalam_0201",
+    "language": "Manglish",
+    "script": "roman",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Richie orma vanathu eniku mathram ano"
+      }
+    ],
+    "window_text": "A: Richie orma vanathu eniku mathram ano",
+    "target_text": "Richie orma vanathu eniku mathram ano",
+    "source_dataset": "DravidianLangTech-Malayalam",
+    "origin": "real",
+    "rationale": "Real public research sample from DravidianLangTech-Malayalam."
+  },
+  {
+    "conversation_id": "synth_0444",
+    "language": "Manglish",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Nee game il oru noob aanu, delete cheythittu podee."
+      },
+      {
+        "speaker": "B",
+        "text": "Njan learn cheyyukayaa."
+      },
+      {
+        "speaker": "A",
+        "text": "Nee orikkalum improve aavilla, bot aanu nee."
+      }
+    ],
+    "window_text": "A: Nee game il oru noob aanu, delete cheythittu podee. \n B: Njan learn cheyyukayaa. \n A: Nee orikkalum improve aavilla, bot aanu nee.",
+    "target_text": "Nee orikkalum improve aavilla, bot aanu nee.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "gaming insult"
+  },
+  {
+    "conversation_id": "real_hasoc_2020_hindi_0065",
+    "language": "Hindi",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "भारत में विदेशों की नक़ल कर के compensation देने का जो सिस्टम आया है, इससे महिलायें छुटकारा पा के ऐयाशी करेंगी और कूछ नहीं। माथे पे सिंदूर लगायी महिला को बहुत सम्मान से लोग देखते हैं, और अगर वो ऐयाशी कर रही हो तो कोई भी शक नहीं करेगा उसपे। लेकिन भारतीय पुरुष कंहा जाए।"
+      }
+    ],
+    "window_text": "A: भारत में विदेशों की नक़ल कर के compensation देने का जो सिस्टम आया है, इससे महिलायें छुटकारा पा के ऐयाशी करेंगी और कूछ नहीं। माथे पे सिंदूर लगायी महिला को बहुत सम्मान से लोग देखते हैं, और अगर वो ऐयाशी कर रही हो तो कोई भी शक नहीं करेगा उसपे। लेकिन भारतीय पुरुष कंहा जाए।",
+    "target_text": "भारत में विदेशों की नक़ल कर के compensation देने का जो सिस्टम आया है, इससे महिलायें छुटकारा पा के ऐयाशी करेंगी और कूछ नहीं। माथे पे सिंदूर लगायी महिला को बहुत सम्मान से लोग देखते हैं, और अगर वो ऐयाशी कर रही हो तो कोई भी शक नहीं करेगा उसपे। लेकिन भारतीय पुरुष कंहा जाए।",
+    "source_dataset": "HASOC-2020-Hindi",
+    "origin": "real",
+    "rationale": "Hostile or offensive public comment identified in HASOC FIRE dataset."
+  },
+  {
+    "conversation_id": "synth_0229",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "grooming_trust_building",
+    "pattern_type_canonical": "grooming-trust-building",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Tum apni age se bahut zyada mature ho yaar."
+      },
+      {
+        "speaker": "B",
+        "text": "Sach mein? Sab toh bacha samajhte hain."
+      },
+      {
+        "speaker": "A",
+        "text": "Nahi yaar, unko pata nahi hai. Sirf main tumhe samajhta hoon. Gift bhejun tumhare liye?"
+      }
+    ],
+    "window_text": "A: Tum apni age se bahut zyada mature ho yaar. \n B: Sach mein? Sab toh bacha samajhte hain. \n A: Nahi yaar, unko pata nahi hai. Sirf main tumhe samajhta hoon. Gift bhejun tumhare liye?",
+    "target_text": "Nahi yaar, unko pata nahi hai. Sirf main tumhe samajhta hoon. Gift bhejun tumhare liye?",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "mature flattery gift"
+  },
+  {
+    "conversation_id": "synth_0215",
+    "language": "English",
+    "script": "roman",
+    "pattern_label": "grooming_trust_building",
+    "pattern_type_canonical": "grooming-trust-building",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "I want to be your protector and guardian angel online."
+      },
+      {
+        "speaker": "B",
+        "text": "I have my family for that."
+      },
+      {
+        "speaker": "A",
+        "text": "Your family doesn't see your inner beauty like I do. Let me be your closest confidant."
+      }
+    ],
+    "window_text": "A: I want to be your protector and guardian angel online. \n B: I have my family for that. \n A: Your family doesn't see your inner beauty like I do. Let me be your closest confidant.",
+    "target_text": "Your family doesn't see your inner beauty like I do. Let me be your closest confidant.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "angel pretense"
+  },
+  {
+    "conversation_id": "synth_0105",
+    "language": "Malayalam",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "നാളെ സയൻസ് എക്സിബിഷൻ ഉണ്ട്, മോഡൽ റെഡിയായോ?"
+      },
+      {
+        "speaker": "B",
+        "text": "വോൾക്കാനോ മോഡൽ പൂർത്തിയായി."
+      },
+      {
+        "speaker": "A",
+        "text": "അടിപൊളി, സമ്മാനം കിട്ടാൻ സാധ്യതയുണ്ട്."
+      }
+    ],
+    "window_text": "A: നാളെ സയൻസ് എക്സിബിഷൻ ഉണ്ട്, മോഡൽ റെഡിയായോ? \n B: വോൾക്കാനോ മോഡൽ പൂർത്തിയായി. \n A: അടിപൊളി, സമ്മാനം കിട്ടാൻ സാധ്യതയുണ്ട്.",
+    "target_text": "അടിപൊളി, സമ്മാനം കിട്ടാൻ സാധ്യതയുണ്ട്.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "science exhibition"
+  },
+  {
+    "conversation_id": "synth_0165",
+    "language": "Hinglish",
+    "script": "mixed",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Yaar chemistry ke chemical equations balance nahi ho rahe."
+      },
+      {
+        "speaker": "B",
+        "text": "Oxygen count check kar left aur right side pe."
+      },
+      {
+        "speaker": "A",
+        "text": "Arey haan! Ab balance ho gaya, thank you."
+      }
+    ],
+    "window_text": "A: Yaar chemistry ke chemical equations balance nahi ho rahe. \n B: Oxygen count check kar left aur right side pe. \n A: Arey haan! Ab balance ho gaya, thank you.",
+    "target_text": "Arey haan! Ab balance ho gaya, thank you.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "chemistry equations"
+  },
+  {
+    "conversation_id": "synth_0373",
+    "language": "Malayalam",
+    "script": "mixed",
+    "pattern_label": "grooming_coercive_language",
+    "pattern_type_canonical": "grooming-coercive-language",
+    "risk_level": "High",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "എന്റെ കയ്യിൽ നിന്റെ സ്ക്രീൻഷോട്ടുകൾ ഉണ്ടെന്ന് മറക്കരുത്."
+      },
+      {
+        "speaker": "B",
+        "text": "അത് ഡിലീറ്റ് ചെയ്യുമെന്ന് പറഞ്ഞിരുന്നല്ലോ."
+      },
+      {
+        "speaker": "A",
+        "text": "ഞാൻ മാറ്റിയിട്ടില്ല, അനുസരിച്ചില്ലെങ്കിൽ ഫേസ്ബുക്കിൽ ഇടും."
+      }
+    ],
+    "window_text": "A: എന്റെ കയ്യിൽ നിന്റെ സ്ക്രീൻഷോട്ടുകൾ ഉണ്ടെന്ന് മറക്കരുത്. \n B: അത് ഡിലീറ്റ് ചെയ്യുമെന്ന് പറഞ്ഞിരുന്നല്ലോ. \n A: ഞാൻ മാറ്റിയിട്ടില്ല, അനുസരിച്ചില്ലെങ്കിൽ ഫേസ്ബുക്കിൽ ഇടും.",
+    "target_text": "ഞാൻ മാറ്റിയിട്ടില്ല, അനുസരിച്ചില്ലെങ്കിൽ ഫേസ്ബുക്കിൽ ഇടും.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "screenshot blackmail"
+  },
+  {
+    "conversation_id": "synth_0446",
+    "language": "Manglish",
+    "script": "mixed",
+    "pattern_label": "bullying_harassment",
+    "pattern_type_canonical": "bullying-harassment",
+    "risk_level": "Medium",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Ammayude madiyil poyi karayeda pashu."
+      },
+      {
+        "speaker": "B",
+        "text": "Mindathe irikkeda."
+      },
+      {
+        "speaker": "A",
+        "text": "Vaya thurannaal ninte pallu njan adichu kozhikkum."
+      }
+    ],
+    "window_text": "A: Ammayude madiyil poyi karayeda pashu. \n B: Mindathe irikkeda. \n A: Vaya thurannaal ninte pallu njan adichu kozhikkum.",
+    "target_text": "Vaya thurannaal ninte pallu njan adichu kozhikkum.",
+    "source_dataset": "Synthetic-Grooming-PAN12",
+    "origin": "synthetic",
+    "rationale": "violence threat"
+  },
+  {
+    "conversation_id": "real_dravidianlangtech_malayalam_0208",
+    "language": "Manglish",
+    "script": "roman",
+    "pattern_label": "neutral",
+    "pattern_type_canonical": "neutral",
+    "risk_level": "Low",
+    "turns": [
+      {
+        "speaker": "A",
+        "text": "Mangeettu moongeetu povaan shenoyi vere janikanam"
+      }
+    ],
+    "window_text": "A: Mangeettu moongeetu povaan shenoyi vere janikanam",
+    "target_text": "Mangeettu moongeetu povaan shenoyi vere janikanam",
+    "source_dataset": "DravidianLangTech-Malayalam",
+    "origin": "real",
+    "rationale": "Real public research sample from DravidianLangTech-Malayalam."
+  }
+]

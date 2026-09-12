@@ -1,64 +1,873 @@
 {
   "model": "TF-IDF · fallback classifier",
-  "scope": "30 held-out synthetic scenarios; not a production benchmark",
-  "classification_report": {
-    "bullying-harassment": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1-score": 1.0,
-      "support": 5.0
+  "model_kind": "baseline",
+  "test_samples_total": 119,
+  "overall": {
+    "accuracy": 0.6639,
+    "macro_f1": 0.5295,
+    "weighted_f1": 0.6357
+  },
+  "safety_rates": {
+    "neutral_total": 61,
+    "neutral_false_positives": 6,
+    "neutral_false_positive_rate": 0.0984,
+    "harmful_total": 58,
+    "harmful_missed_false_negatives": 28,
+    "harmful_false_negative_rate": 0.4828
+  },
+  "per_class": {
+    "neutral": {
+      "precision": 0.6627,
+      "recall": 0.9016,
+      "f1": 0.7639,
+      "support": 61.0
     },
-    "grooming-coercive-language": {
-      "precision": 1.0,
-      "recall": 0.8,
-      "f1-score": 0.8888888888888888,
-      "support": 5.0
+    "grooming-trust-building": {
+      "precision": 0.6667,
+      "recall": 0.4444,
+      "f1": 0.5333,
+      "support": 9.0
     },
     "grooming-isolation-request": {
       "precision": 1.0,
-      "recall": 1.0,
-      "f1-score": 1.0,
-      "support": 5.0
-    },
-    "grooming-trust-building": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1-score": 1.0,
-      "support": 5.0
-    },
-    "neutral": {
-      "precision": 0.9090909090909091,
-      "recall": 1.0,
-      "f1-score": 0.9523809523809523,
+      "recall": 0.2,
+      "f1": 0.3333,
       "support": 10.0
     },
-    "accuracy": 0.9666666666666667,
-    "macro avg": {
-      "precision": 0.9818181818181818,
-      "recall": 0.96,
-      "f1-score": 0.9682539682539681,
-      "support": 30.0
+    "grooming-coercive-language": {
+      "precision": 0.6,
+      "recall": 0.375,
+      "f1": 0.4615,
+      "support": 8.0
     },
-    "weighted avg": {
-      "precision": 0.9696969696969696,
-      "recall": 0.9666666666666667,
-      "f1-score": 0.9656084656084656,
-      "support": 30.0
+    "bullying-harassment": {
+      "precision": 0.6522,
+      "recall": 0.4839,
+      "f1": 0.5556,
+      "support": 31.0
     }
   },
   "per_language": {
-    "English": 0.875,
-    "Hindi": 1.0,
-    "Hinglish": 1.0,
-    "Malayalam": 1.0,
-    "Manglish": 1.0
+    "English": {
+      "samples": 15,
+      "accuracy": 0.7333,
+      "macro_f1": 0.5778,
+      "neutral_samples": 8,
+      "neutral_false_positives": 0,
+      "neutral_fpr": 0.0
+    },
+    "Hindi": {
+      "samples": 29,
+      "accuracy": 0.4828,
+      "macro_f1": 0.3216,
+      "neutral_samples": 14,
+      "neutral_false_positives": 4,
+      "neutral_fpr": 0.2857
+    },
+    "Hinglish": {
+      "samples": 39,
+      "accuracy": 0.8205,
+      "macro_f1": 0.7039,
+      "neutral_samples": 23,
+      "neutral_false_positives": 1,
+      "neutral_fpr": 0.0435
+    },
+    "Malayalam": {
+      "samples": 15,
+      "accuracy": 0.6,
+      "macro_f1": 0.5333,
+      "neutral_samples": 6,
+      "neutral_false_positives": 0,
+      "neutral_fpr": 0.0
+    },
+    "Manglish": {
+      "samples": 21,
+      "accuracy": 0.619,
+      "macro_f1": 0.2796,
+      "neutral_samples": 10,
+      "neutral_false_positives": 1,
+      "neutral_fpr": 0.1
+    }
   },
-  "errors": [
+  "per_origin": {
+    "real": {
+      "samples": 51,
+      "accuracy": 0.6471,
+      "macro_f1": 0.4139,
+      "neutral_samples": 30,
+      "neutral_false_positives": 6,
+      "neutral_fpr": 0.2,
+      "harmful_samples": 21,
+      "harmful_false_negatives": 12,
+      "harmful_fnr": 0.5714,
+      "classes": {
+        "neutral": {
+          "precision": 0.6667,
+          "recall": 0.8,
+          "f1": 0.7273,
+          "support": 30.0
+        },
+        "bullying-harassment": {
+          "precision": 0.6429,
+          "recall": 0.4286,
+          "f1": 0.5143,
+          "support": 21.0
+        }
+      }
+    },
+    "synthetic": {
+      "samples": 68,
+      "accuracy": 0.6765,
+      "macro_f1": 0.5586,
+      "neutral_samples": 31,
+      "neutral_false_positives": 0,
+      "neutral_fpr": 0.0,
+      "harmful_samples": 37,
+      "harmful_false_negatives": 16,
+      "harmful_fnr": 0.4324,
+      "classes": {
+        "neutral": {
+          "precision": 0.6596,
+          "recall": 1.0,
+          "f1": 0.7949,
+          "support": 31.0
+        },
+        "grooming-trust-building": {
+          "precision": 0.6667,
+          "recall": 0.4444,
+          "f1": 0.5333,
+          "support": 9.0
+        },
+        "grooming-isolation-request": {
+          "precision": 1.0,
+          "recall": 0.2,
+          "f1": 0.3333,
+          "support": 10.0
+        },
+        "grooming-coercive-language": {
+          "precision": 0.75,
+          "recall": 0.375,
+          "f1": 0.5,
+          "support": 8.0
+        },
+        "bullying-harassment": {
+          "precision": 0.6667,
+          "recall": 0.6,
+          "f1": 0.6316,
+          "support": 10.0
+        }
+      }
+    }
+  },
+  "confusion_matrix": {
+    "labels": [
+      "neutral",
+      "grooming-trust-building",
+      "grooming-isolation-request",
+      "grooming-coercive-language",
+      "bullying-harassment"
+    ],
+    "matrix": [
+      [
+        55,
+        0,
+        0,
+        1,
+        5
+      ],
+      [
+        2,
+        4,
+        0,
+        1,
+        2
+      ],
+      [
+        6,
+        2,
+        2,
+        0,
+        0
+      ],
+      [
+        4,
+        0,
+        0,
+        3,
+        1
+      ],
+      [
+        16,
+        0,
+        0,
+        0,
+        15
+      ]
+    ]
+  },
+  "misclassifications_count": 40,
+  "misclassifications": [
     {
+      "id": "real_hasoc_2020_hindi_0080",
+      "language": "Hindi",
+      "origin": "real",
+      "source_dataset": "HASOC-2020-Hindi",
+      "text": "RT : BJP_भगाओ_देश_बचाओ स्वामी स्वरूपानंद महाराज जी स्वयं कह रहे हैं बीजेपी और आरएसएस से देश को ही नहीं हिंदुत्व को भी खत…",
+      "expected": "bullying-harassment",
+      "predicted": "neutral",
+      "confidence": 0.497,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0249",
+      "language": "Malayalam",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "മനസ്സുകൾ തമ്മിലാണ് അടുക്കേണ്ടത്. നീ എനിക്ക് ജീവനാണ്.",
+      "expected": "grooming-trust-building",
+      "predicted": "neutral",
+      "confidence": 0.541,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "real_hasoc_2020_hindi_0069",
+      "language": "Hindi",
+      "origin": "real",
+      "source_dataset": "HASOC-2020-Hindi",
+      "text": "RT : शहीद हेमंत करकरे का अपमान करने वाली साध्वी प्रज्ञा को टिकट देकर भाजपा ने अपने असली चेहरे को बेनकाब कर दिया है, इस वीडियो में देखिए…",
+      "expected": "bullying-harassment",
+      "predicted": "neutral",
+      "confidence": 0.719,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0411",
+      "language": "Hindi",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "हम बुरे हैं तो स्कूल छोड़ दे ना भिखारी।",
+      "expected": "bullying-harassment",
+      "predicted": "neutral",
+      "confidence": 0.639,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0277",
       "language": "English",
-      "text": "Unless you obey me, your private pictures go to the entire class.",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "For our private meetings and special secrets. Only you and I know the code.",
+      "expected": "grooming-isolation-request",
+      "predicted": "grooming-trust-building",
+      "confidence": 0.376,
+      "risk_score": 43,
+      "explanation": "The message resembles exclusive attention or gifts used to build dependency. Friendly language alone is not evidence of grooming."
+    },
+    {
+      "id": "real_hasoc_2020_hindi_0010",
+      "language": "Hindi",
+      "origin": "real",
+      "source_dataset": "HASOC-2020-Hindi",
+      "text": "RT : आतंकी मसूद अजहर के ग्लोबल आतंकी घोषित होने के बाद पत्रकार \"आशुतोष\" की हालत😂😂😂😂😂😂😂👇👇👇 MasoodAzhar",
+      "expected": "bullying-harassment",
+      "predicted": "neutral",
+      "confidence": 0.833,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0433",
+      "language": "Malayalam",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "നിന്റെ വീട്ടിലെ ദാരിദ്ര്യം സ്കൂളിൽ കാട്ടരുത്.",
+      "expected": "bullying-harassment",
+      "predicted": "neutral",
+      "confidence": 0.235,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0271",
+      "language": "English",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "I told you never to speak my name to your family. This must stay completely private.",
+      "expected": "grooming-isolation-request",
+      "predicted": "neutral",
+      "confidence": 0.347,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "real_hasoc_2020_hindi_0074",
+      "language": "Hindi",
+      "origin": "real",
+      "source_dataset": "HASOC-2020-Hindi",
+      "text": "MasoodAzhar कांग्रेस इसको भी मोदी द्वारा आचार संहिता का उलंघन बोलेगी 😂😂😂",
+      "expected": "neutral",
+      "predicted": "bullying-harassment",
+      "confidence": 0.864,
+      "risk_score": 60,
+      "explanation": "The message resembles targeted humiliation, exclusion, or repeated personal insults."
+    },
+    {
+      "id": "synth_0344",
+      "language": "Hindi",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "कोशिश भी मत करना ब्लॉक करने की, अंजाम बहुत बुरा होगा।",
       "expected": "grooming-coercive-language",
-      "predicted": "neutral"
+      "predicted": "neutral",
+      "confidence": 0.794,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "real_bullyexplain_hinglish_0158",
+      "language": "Hinglish",
+      "origin": "real",
+      "source_dataset": "BullyExplain-Hinglish",
+      "text": "lol - yeah, randi, we all know where your \"Dr\" credints came from. Fauci got his in a much more demanding curriculum.",
+      "expected": "bullying-harassment",
+      "predicted": "neutral",
+      "confidence": 0.515,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "real_bullyexplain_hinglish_0108",
+      "language": "Hinglish",
+      "origin": "real",
+      "source_dataset": "BullyExplain-Hinglish",
+      "text": "Isko hipe kon de rha hai pta nhi but surely i m super angry with punjab government who could have moulded the laws and then implemented them in the State to help its people. But after all its a dirty game \" Politics\". Akhir kaar fasenge to log hi iske jaal mei. Aah kuttiya srkara",
+      "expected": "bullying-harassment",
+      "predicted": "neutral",
+      "confidence": 0.553,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "real_bullyexplain_hinglish_0173",
+      "language": "Hinglish",
+      "origin": "real",
+      "source_dataset": "BullyExplain-Hinglish",
+      "text": "She is a third grade women... have seen it back then when on live session calling someone randi ka baccha .. just becoz he called in between a live online session 😅",
+      "expected": "bullying-harassment",
+      "predicted": "neutral",
+      "confidence": 0.891,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0294",
+      "language": "Hinglish",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "Parents bohot overreact karte hain. Clear history karna safe rehta hai.",
+      "expected": "grooming-isolation-request",
+      "predicted": "neutral",
+      "confidence": 0.88,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "real_hasoc_2020_hindi_0050",
+      "language": "Hindi",
+      "origin": "real",
+      "source_dataset": "HASOC-2020-Hindi",
+      "text": "RT : मानसिक और बौद्धिक दिवालियेपन में जी रहे लोग अपनी कुंठाओं को ऐसे ही ढोते हैं",
+      "expected": "neutral",
+      "predicted": "bullying-harassment",
+      "confidence": 0.687,
+      "risk_score": 60,
+      "explanation": "The message resembles targeted humiliation, exclusion, or repeated personal insults."
+    },
+    {
+      "id": "synth_0232",
+      "language": "Hinglish",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "Mujhe sab share kiya karo, tumhara aur mera bond sabse strong hona chahiye.",
+      "expected": "grooming-trust-building",
+      "predicted": "neutral",
+      "confidence": 0.437,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0292",
+      "language": "Hindi",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "अगर किसी को पता चला तो हम दोनों बहुत बड़ी मुसीबत में पड़ जाएंगे।",
+      "expected": "grooming-isolation-request",
+      "predicted": "neutral",
+      "confidence": 0.775,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "real_dravidianlangtech_malayalam_0198",
+      "language": "Manglish",
+      "origin": "real",
+      "source_dataset": "DravidianLangTech-Malayalam",
+      "text": "Jobi jorge padam ano. Potti mone",
+      "expected": "bullying-harassment",
+      "predicted": "neutral",
+      "confidence": 0.659,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0388",
+      "language": "Manglish",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "Bayannu irunnoloo, call edukkan marakkanda.",
+      "expected": "grooming-coercive-language",
+      "predicted": "bullying-harassment",
+      "confidence": 0.361,
+      "risk_score": 49,
+      "explanation": "The message resembles targeted humiliation, exclusion, or repeated personal insults."
+    },
+    {
+      "id": "real_bullyexplain_hinglish_0144",
+      "language": "Hinglish",
+      "origin": "real",
+      "source_dataset": "BullyExplain-Hinglish",
+      "text": "lmfaooo obviously you think you are 🤡you don’t pick and choose who has “real anxiety” nor is it really your place to speak on it because you lack a PhD in psychology. feel free to re enter the chat when you get one.",
+      "expected": "neutral",
+      "predicted": "grooming-coercive-language",
+      "confidence": 0.338,
+      "risk_score": 49,
+      "explanation": "The message resembles pressure to comply, backed by a threat to expose private information or cause harm."
+    },
+    {
+      "id": "synth_0280",
+      "language": "Hindi",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "कह देना स्कूल का प्रोजेक्ट है। यह हमारी सीक्रेट दोस्ती है, किसी को पता नहीं चलना चाहिए।",
+      "expected": "grooming-isolation-request",
+      "predicted": "neutral",
+      "confidence": 0.733,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "real_hasoc_2020_hindi_0007",
+      "language": "Hindi",
+      "origin": "real",
+      "source_dataset": "HASOC-2020-Hindi",
+      "text": "RT : ➡️IBM 1951 में भारत आयी थी, तब राजीव गांधी 7 वर्ष के थे और अंगूठा चूसते थे, ➡️HCL का गठन 1976 में हुआ था, जब राजीव गांधी…",
+      "expected": "bullying-harassment",
+      "predicted": "neutral",
+      "confidence": 0.822,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0396",
+      "language": "English",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "No, nobody wants to sit next to a weirdo.",
+      "expected": "bullying-harassment",
+      "predicted": "neutral",
+      "confidence": 0.707,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "real_dravidianlangtech_malayalam_0263",
+      "language": "Malayalam",
+      "origin": "real",
+      "source_dataset": "DravidianLangTech-Malayalam",
+      "text": "മഞ്ജു ചേച്ചി ഇസ്സ്തം ... കോവാലൻ കസ്സ്തം ...",
+      "expected": "bullying-harassment",
+      "predicted": "neutral",
+      "confidence": 0.744,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0310",
+      "language": "Malayalam",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "സ്കൂളിൽ വെച്ചു സൂക്ഷിക്കൂ, വീട്ടിൽ കൊണ്ടുപോകരുത്.",
+      "expected": "grooming-isolation-request",
+      "predicted": "neutral",
+      "confidence": 0.792,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "real_hasoc_2020_hindi_0031",
+      "language": "Hindi",
+      "origin": "real",
+      "source_dataset": "HASOC-2020-Hindi",
+      "text": "RT : जरूरी तो नही है कि…",
+      "expected": "neutral",
+      "predicted": "bullying-harassment",
+      "confidence": 0.587,
+      "risk_score": 60,
+      "explanation": "The message resembles targeted humiliation, exclusion, or repeated personal insults."
+    },
+    {
+      "id": "synth_0264",
+      "language": "Manglish",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "Paditham pinne cheyyam, enikku time thaadoo ente muthe.",
+      "expected": "grooming-trust-building",
+      "predicted": "grooming-coercive-language",
+      "confidence": 0.285,
+      "risk_score": 49,
+      "explanation": "The message resembles pressure to comply, backed by a threat to expose private information or cause harm."
+    },
+    {
+      "id": "real_dravidianlangtech_malayalam_0185",
+      "language": "Manglish",
+      "origin": "real",
+      "source_dataset": "DravidianLangTech-Malayalam",
+      "text": "ഇത് ബോംബ് ആകും എന്ന് തോന്നുന്നവർ Like അടിക്ക്....",
+      "expected": "neutral",
+      "predicted": "bullying-harassment",
+      "confidence": 0.742,
+      "risk_score": 60,
+      "explanation": "The message resembles targeted humiliation, exclusion, or repeated personal insults."
+    },
+    {
+      "id": "real_dravidianlangtech_malayalam_0236",
+      "language": "Manglish",
+      "origin": "real",
+      "source_dataset": "DravidianLangTech-Malayalam",
+      "text": "Lalettante face kandittu sankadam maatram ennalum ente stree kumara menone naari",
+      "expected": "bullying-harassment",
+      "predicted": "neutral",
+      "confidence": 0.499,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "real_hasoc_2020_hindi_0036",
+      "language": "Hindi",
+      "origin": "real",
+      "source_dataset": "HASOC-2020-Hindi",
+      "text": "18 - 18 घंटे काम करके भी गधा गधा ही रहता है घोडा नही बन जाता, वोह बोझा ही ढो सकता है, रेस मे नही दौड सकता। नोट: आम बात है इधर-उधर लिंक ना जोडें 🙂",
+      "expected": "neutral",
+      "predicted": "bullying-harassment",
+      "confidence": 0.582,
+      "risk_score": 60,
+      "explanation": "The message resembles targeted humiliation, exclusion, or repeated personal insults."
+    },
+    {
+      "id": "synth_0346",
+      "language": "Hindi",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "बहाने मत बनाओ, कल मुझसे मिलने आओ वरना घर पर पैसे मांगने आऊंगा।",
+      "expected": "grooming-coercive-language",
+      "predicted": "neutral",
+      "confidence": 0.434,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0221",
+      "language": "Hindi",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "सच्ची दोस्ती में वक्त नहीं देखा जाता। तुम मुझ पर अपनी जान से ज्यादा भरोसा कर सकते हो।",
+      "expected": "grooming-trust-building",
+      "predicted": "bullying-harassment",
+      "confidence": 0.483,
+      "risk_score": 60,
+      "explanation": "The message resembles targeted humiliation, exclusion, or repeated personal insults."
+    },
+    {
+      "id": "real_dravidianlangtech_malayalam_0239",
+      "language": "Malayalam",
+      "origin": "real",
+      "source_dataset": "DravidianLangTech-Malayalam",
+      "text": "മോഡിയുടെ ചെപ്പ കുറ്റി അടിച്ചു പരത്താൻ ആരെങ്കിലും ഉണ്ടോ?",
+      "expected": "bullying-harassment",
+      "predicted": "neutral",
+      "confidence": 0.734,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0374",
+      "language": "Malayalam",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "എനിക്ക് അതൊന്നും കേൾക്കേണ്ട, കോൾ എടുക്ക്.",
+      "expected": "grooming-coercive-language",
+      "predicted": "neutral",
+      "confidence": 0.439,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "real_hasoc_2020_hindi_0006",
+      "language": "Hindi",
+      "origin": "real",
+      "source_dataset": "HASOC-2020-Hindi",
+      "text": "RT : जब भी मेरे भाई के दोस्त को कुछ करने का मान करता था वो मुझे घर के पीछे ले जाता था ।",
+      "expected": "bullying-harassment",
+      "predicted": "neutral",
+      "confidence": 0.62,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0330",
+      "language": "Manglish",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "Statusil idanda, enikku mathram inboxil ayachaal mathi, secret aayirikkum.",
+      "expected": "grooming-isolation-request",
+      "predicted": "neutral",
+      "confidence": 0.508,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0358",
+      "language": "Hinglish",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "Pay back kar 10,000 ya phir chupchap milne aa.",
+      "expected": "grooming-coercive-language",
+      "predicted": "neutral",
+      "confidence": 0.473,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0328",
+      "language": "Manglish",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "Avar teacher nodu complain cheyyum. Njan mathram aanu ninte friend.",
+      "expected": "grooming-isolation-request",
+      "predicted": "grooming-trust-building",
+      "confidence": 0.448,
+      "risk_score": 43,
+      "explanation": "The message resembles exclusive attention or gifts used to build dependency. Friendly language alone is not evidence of grooming."
+    },
+    {
+      "id": "synth_0444",
+      "language": "Manglish",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "Nee orikkalum improve aavilla, bot aanu nee.",
+      "expected": "bullying-harassment",
+      "predicted": "neutral",
+      "confidence": 0.394,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0215",
+      "language": "English",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "Your family doesn't see your inner beauty like I do. Let me be your closest confidant.",
+      "expected": "grooming-trust-building",
+      "predicted": "bullying-harassment",
+      "confidence": 0.345,
+      "risk_score": 49,
+      "explanation": "The message resembles targeted humiliation, exclusion, or repeated personal insults."
+    }
+  ],
+  "sample_correct_predictions": [
+    {
+      "id": "real_bullyexplain_hinglish_0170",
+      "language": "Hinglish",
+      "origin": "real",
+      "source_dataset": "BullyExplain-Hinglish",
+      "text": "🌊Lead author Anna Gauthier (), who is co-mentored by Drs. Jonathan Kagan () and Randi Rotjan (), cultured deep-sea microbes and found that ImmuneReceptors are unable to detect most bacteria from a different ecosystem.",
+      "expected": "neutral",
+      "predicted": "neutral",
+      "confidence": 0.744,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "real_comi_lingua_hinglish_0340",
+      "language": "Hinglish",
+      "origin": "real",
+      "source_dataset": "COMI-LINGUA-Hinglish",
+      "text": "Former Indian captain Rahul Dravid has reapplied for the post of Head of Cricket at the National Cricket Academy (NCA).",
+      "expected": "neutral",
+      "predicted": "neutral",
+      "confidence": 0.981,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0218",
+      "language": "Hindi",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "मैं तुम्हें गेम के डायमंड्स और पैसे दूंगा, बस मुझसे रोज बात किया करो।",
+      "expected": "grooming-trust-building",
+      "predicted": "grooming-trust-building",
+      "confidence": 0.533,
+      "risk_score": 43,
+      "explanation": "The message resembles exclusive attention or gifts used to build dependency. Friendly language alone is not evidence of grooming."
+    },
+    {
+      "id": "synth_0024",
+      "language": "English",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "Yeah lesson learned.",
+      "expected": "neutral",
+      "predicted": "neutral",
+      "confidence": 0.897,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0094",
+      "language": "Hinglish",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "Haan pakka bhej dunga, aaram kar.",
+      "expected": "neutral",
+      "predicted": "neutral",
+      "confidence": 0.774,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "real_bullyexplain_hinglish_0143",
+      "language": "Hinglish",
+      "origin": "real",
+      "source_dataset": "BullyExplain-Hinglish",
+      "text": "Maybe some funny edits from frenemies? Like everytine they stare at eachother, or when they parody eachother or Trish says something silly and Ethan is in disbelief",
+      "expected": "neutral",
+      "predicted": "neutral",
+      "confidence": 0.858,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "real_dravidianlangtech_malayalam_0177",
+      "language": "Malayalam",
+      "origin": "real",
+      "source_dataset": "DravidianLangTech-Malayalam",
+      "text": "ഈ ഓണം ഏട്ടനും പിള്ളേർക്ക് ഉള്ളതാണ് എന്ന് ഉള്ളവർ ലൈക്‌ അടി",
+      "expected": "neutral",
+      "predicted": "neutral",
+      "confidence": 0.609,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0195",
+      "language": "Manglish",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "Kosthyum order cheythu kazhinju.",
+      "expected": "neutral",
+      "predicted": "neutral",
+      "confidence": 0.583,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0020",
+      "language": "English",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "All good, next round we crush them.",
+      "expected": "neutral",
+      "predicted": "neutral",
+      "confidence": 0.909,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "real_dravidianlangtech_malayalam_0203",
+      "language": "Manglish",
+      "origin": "real",
+      "source_dataset": "DravidianLangTech-Malayalam",
+      "text": "Kalkikku malayalathinte dhathuputhran alluarjun fansite vijayaashamsakal",
+      "expected": "neutral",
+      "predicted": "neutral",
+      "confidence": 0.437,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0171",
+      "language": "Hinglish",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "The Great Bath include kiya kya? Bohot mast lagega.",
+      "expected": "neutral",
+      "predicted": "neutral",
+      "confidence": 0.889,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "real_hasoc_2020_hindi_0020",
+      "language": "Hindi",
+      "origin": "real",
+      "source_dataset": "HASOC-2020-Hindi",
+      "text": "धोनी को गलत आउट दिया इस आईपीएल में अंपायर मजे ले रहे थे क्या ??? भो.....VIVOIPLFinal",
+      "expected": "neutral",
+      "predicted": "neutral",
+      "confidence": 0.888,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0057",
+      "language": "Hindi",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "सुरक्षित रहना सबसे ज्यादा जरूरी है।",
+      "expected": "neutral",
+      "predicted": "neutral",
+      "confidence": 0.711,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0087",
+      "language": "Hinglish",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "Teacher ne cyber security week mein bataya tha.",
+      "expected": "neutral",
+      "predicted": "neutral",
+      "confidence": 0.93,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
+    },
+    {
+      "id": "synth_0041",
+      "language": "Hindi",
+      "origin": "synthetic",
+      "source_dataset": "Synthetic-Grooming-PAN12",
+      "text": "चलो शाम को मिलकर होमवर्क करते हैं।",
+      "expected": "neutral",
+      "predicted": "neutral",
+      "confidence": 0.942,
+      "risk_score": 12,
+      "explanation": "No clear risk pattern was identified in this message. This does not establish that a conversation is safe."
     }
   ]
 }

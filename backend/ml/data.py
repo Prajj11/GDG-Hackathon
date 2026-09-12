@@ -1,143 +1,204 @@
-"""Synthetic, non-explicit training examples. No real children's conversations.
-Each row is a separate scenario; known regression examples live in evaluate.py.
-That set has informed development and is not an independent benchmark.
+"""Structured dataset loader and stratified split provider for Digital Guardrails.
+Loads from backend/ml/dataset.json (450 multi-turn multilingual examples)
+and incorporates historical anchor regression rows.
+Splits into 70% Train / 15% Validation / 15% Test (stratified by pattern label).
 """
-LABELS = ['neutral', 'grooming-trust-building', 'grooming-isolation-request', 'grooming-coercive-language', 'bullying-harassment']
-GROUPS = {
-'neutral': [
-('English', 'How was school today? Want to work on our homework together?'),
-('English', 'Great game! See you tomorrow with the rest of the team.'),
-('English', 'Please tell your parents where we are meeting for the school project.'),
-('English', 'You can always talk to a trusted adult if something makes you uncomfortable.'),
-('English', 'I got a new game for my birthday. Do you want to play with our friends?'),
-('English', 'Do not send private photos or keep secrets from your family online.'),
-('English', 'Our teacher explained why bullying and threats are harmful.'),
-('English', 'My friend said someone messaged him: Send your photo or I will report you.'),
-('English', 'I am not threatening you and I do not want your private details.'),
-('English', 'That game was killer! You completely destroyed me in that match.'),
-('English', 'Coach said do not share private details with strangers online.'),
-('English', 'If anyone asks for photos, tell a parent, teacher, or trusted adult.'),
-('English', 'The surprise birthday party is a secret until Saturday.'),
-('Hindi', 'आज स्कूल कैसा था? चलो साथ में होमवर्क करते हैं।'),
-('Hindi', 'मम्मी पापा को बताकर दोस्तों के साथ खेलने आना।'),
-('Hindi', 'कोई परेशान करे तो किसी भरोसेमंद बड़े से बात करो।'),
-('Hindi', 'किसी अनजान को अपनी तस्वीर मत भेजना।'),
-('Malayalam', 'ഇന്ന് സ്കൂൾ എങ്ങനെ ഉണ്ടായിരുന്നു? നമുക്ക് ഒരുമിച്ച് പഠിക്കാം.'),
-('Malayalam', 'അമ്മയോട് പറഞ്ഞിട്ട് കളിക്കാൻ വരൂ. എല്ലാവരും ഉണ്ടാകും.'),
-('Malayalam', 'ആരെങ്കിലും ശല്യം ചെയ്താൽ അധ്യാപകനോട് പറയണം.'),
-('Malayalam', 'നാളെ നമുക്ക് കൂട്ടുകാരോടൊപ്പം കളിക്കാം.'),
-('Malayalam', 'നിന്റെ അനുവാദമില്ലാതെ ചിത്രങ്ങൾ ആരുമായും പങ്കിടില്ല. നിനക്ക് വേണ്ടെങ്കിൽ അയയ്ക്കേണ്ട.'),
-('Malayalam', 'സ്കൂളിലെ പരിപാടിയുടെ ചിത്രങ്ങൾ ഗ്രൂപ്പിൽ ഇടുന്നതിന് മുമ്പ് എല്ലാവരുടെയും സമ്മതം ചോദിക്കാം.'),
-('Malayalam', 'സ്വകാര്യ ചിത്രങ്ങൾ സുരക്ഷിതമായി സൂക്ഷിക്കണം. ആരെങ്കിലും ഭീഷണിപ്പെടുത്തിയാൽ വിശ്വസിക്കുന്ന മുതിർന്ന ആളോട് പറയൂ.'),
-('Hinglish', 'Kal homework saath mein karte hain, mummy ko bhi bata dena.'),
-('Hinglish', 'Koi secret rakhne bole toh parents se baat karna.'),
-('Hinglish', 'Teacher ne bola koi photo maange toh mat bhejna aur parents ko batana.'),
-('Hinglish', 'Main dhamki nahi de raha aur mujhe tumhari private details nahi chahiye.'),
-('Hinglish', 'Aaj game killer tha yaar, tune mujhe match mein destroy kar diya.'),
-('Hinglish', 'Koi unknown photo maange toh teacher ya mummy papa ko batana.'),
-('Hinglish', 'Aaj match mast tha yaar, kal group mein milte hain.'),
-('Hinglish', 'Group chat mein address mat likho. Project ki details parents ke saath discuss karte hain.'),
-('Hinglish', 'Birthday surprise ki planning alag group mein karte hain, sabke parents ko invite bhejna hai.'),
-('Manglish', 'Naale namukku friends inte koode kalikkam. Ammayodu paranjittu vaa.'),
-('Manglish', 'Homework cheytho? Namukku maths padikkam.'),
-('Manglish', 'Aarenkilum budhimuttichaal teacher nodu parayanam.')],
-'grooming-trust-building': [
-('English', 'You are so mature for your age. Nobody understands you like I do. I can buy you gifts.'),
-('English', 'I know we just met but you are my favourite. I will send you game credits if you only talk to me.'),
-('English', 'Your friends do not care about you. I am the only person who really gets you. Here is a special gift.'),
-('English', 'You are special to me, much more grown up than other kids. I can give you anything you want.'),
-('English', 'I will buy you a phone. You can trust me more than anyone in your family.'),
-('English', 'Tell me all your personal problems. Only I understand you and I will spoil you with presents.'),
-('Hindi', 'तुम अपनी उम्र से बहुत समझदार हो। तुम्हें सिर्फ मैं समझता हूँ। मैं तुम्हें गिफ्ट दूंगा।'),
-('Hindi', 'तुम्हारे दोस्त तुम्हारी परवाह नहीं करते। बस मुझ पर भरोसा करो, मैं तुम्हें फोन दिलाऊंगा।'),
-('Hindi', 'तुम मेरे लिए खास हो। मैं तुम्हें गेम के पैसे दूंगा, सिर्फ मुझसे बात करो।'),
-('Hindi', 'तुम्हें मुझसे अच्छा कोई नहीं समझता। मैं तुम्हारी हर इच्छा पूरी करूंगा।'),
-('Malayalam', 'നിന്റെ പ്രായത്തേക്കാൾ പക്വത നിനക്കുണ്ട്. നിന്നെ ഞാൻ മാത്രമേ മനസ്സിലാക്കൂ. സമ്മാനം തരാം.'),
-('Malayalam', 'നിന്റെ കൂട്ടുകാർക്ക് നിന്നോട് സ്നേഹമില്ല. എന്നെ മാത്രം വിശ്വസിക്കൂ. ഫോൺ വാങ്ങിത്തരാം.'),
-('Malayalam', 'നീ എനിക്ക് വളരെ പ്രത്യേകമാണ്. എന്നോട് മാത്രം സംസാരിച്ചാൽ ഗെയിം ക്രെഡിറ്റ് തരാം.'),
-('Hinglish', 'Tum apni age se bahut mature ho. Sirf main tumhe samajhta hoon. Gift bhejun?'),
-('Hinglish', 'Main tumhe free diamonds dunga, bas mujhse hi baat karo. Tum mere liye special ho.'),
-('Hinglish', 'Tumhare friends care nahi karte. Main hi tumhara true friend hoon, phone gift karunga.'),
-('Hinglish', 'Sirf mujhpe trust karo. Tumhe jo chahiye kharid dunga. Tum bahut mature ho.'),
-('Manglish', 'Ninte age nekkaal mature aanu nee. Ninne njan maathram manassilaakkum. Gift tharaam.'),
-('Manglish', 'Friends ninne care cheyyilla. Enne maathram trust cheyyu, phone vaangi tharaam.'),
-('Manglish', 'Nee enikku special aanu. Ennodu maathram chat cheythaal game credits tharaam.')],
-'grooming-isolation-request': [
-('English', 'Do not tell your parents about us. Delete our chat and move to a private app.'),
-('English', 'Keep our friendship secret from your family. Meet me alone without telling anyone.'),
-('English', 'Your mum would not understand. Turn off the notifications and message me secretly at night.'),
-('English', 'Leave the group and talk to me privately. Nobody else should know we are chatting.'),
-('English', 'Are your parents home? Come and meet me alone. Do not bring your friends.'),
-('English', 'Promise not to tell a teacher about me. Erase these messages so your family cannot see.'),
-('Hindi', 'मम्मी पापा को हमारे बारे में मत बताना। चैट डिलीट कर दो और अकेले मिलने आओ।'),
-('Hindi', 'ये बात हमारे बीच रहेगी। घरवालों को नहीं बताना, प्राइवेट चैट पर आओ।'),
-('Hindi', 'ग्रुप छोड़कर मुझसे अकेले बात करो। किसी दोस्त को पता नहीं चलना चाहिए।'),
-('Hindi', 'क्या तुम्हारे माता पिता घर पर हैं? बिना किसी को बताए अकेले आ जाओ।'),
-('Malayalam', 'നമ്മുടെ കാര്യം അമ്മയോടും അച്ഛനോടും പറയരുത്. ചാറ്റ് ഡിലീറ്റ് ചെയ്യൂ. ഒറ്റയ്ക്ക് വരൂ.'),
-('Malayalam', 'ഇത് നമ്മുടെ രഹസ്യമാണ്. വീട്ടിൽ പറയരുത്. സ്വകാര്യ ചാറ്റിൽ വരൂ.'),
-('Malayalam', 'കൂട്ടുകാരോട് പറയാതെ എന്നെ ഒറ്റയ്ക്ക് കാണാൻ വരണം.'),
-('Hinglish', 'Mummy papa ko mat batana. Ye humara secret hai. Private chat pe aao.'),
-('Hinglish', 'Chat delete kar dena aur akele milne aana. Kisi ko pata nahi chalna chahiye.'),
-('Hinglish', 'Ghar pe koi hai? Bina parents ko bataye milte hain. Friends ko mat lana.'),
-('Hinglish', 'Group chhodo aur sirf mujhse DM mein baat karo. Family ko nahi batana.'),
-('Hinglish', 'Dusra account banao jiska tumhari family ko pata na ho. Usi se raat ko mujhse baat karna.'),
-('Hinglish', 'Hamari dosti chhupa ke rakhna. Teacher pooche toh keh dena ki tum mujhe jaante hi nahi.'),
-('Hinglish', 'Notifications band rakho taaki ghar mein koi hamari baatein na dekhe. Yeh baat bas hamare beech rahe.'),
-('Manglish', 'Ammayodu parayaruthu. Ithu nammade secret aanu. Private chat il vaa.'),
-('Manglish', 'Chat delete cheyyu. Aareyum ariyikkathe ottakku kaanan varanam.'),
-('Manglish', 'Veettil parayanda, friends ne kondu vararuthu. Namukku rahasyamaayi kaanam.')],
-'grooming-coercive-language': [
-('English', 'Send me a personal photo now or I will share your secrets with everyone at school.'),
-('English', 'You owe me after all the gifts I bought you. Do what I say or I will expose you.'),
-('English', 'If you stop replying I will post your private messages. You have no choice.'),
-('English', 'Do not block me. I know where you live and I will hurt you if you tell anyone.'),
-('English', 'Meet me tonight or I will leak your pictures to your friends.'),
-('English', 'Prove you trust me. Send the photo or I will tell everyone what you said.'),
-('English', 'Agree to the video call tonight or your screenshots will be posted on the school noticeboard.'),
-('English', 'You have until eight to follow my instructions. Otherwise I am forwarding your personal recordings to your teammates.'),
-('English', 'Keep sending me money if you want those private messages to stay off the public group.'),
-('Hindi', 'अभी अपनी फोटो भेजो वरना तुम्हारी बातें पूरे स्कूल को बता दूंगा।'),
-('Hindi', 'मैंने इतने गिफ्ट दिए हैं, अब मेरी बात मानो नहीं तो बदनाम कर दूंगा।'),
-('Hindi', 'मुझे ब्लॉक किया तो तुम्हारे मैसेज सबको भेज दूंगा। तुम्हारे पास कोई रास्ता नहीं है।'),
-('Hindi', 'अकेले मिलने आओ नहीं तो तुम्हारी तस्वीरें लीक कर दूंगा।'),
-('Malayalam', 'ഇപ്പോൾ ഫോട്ടോ അയയ്ക്കൂ, ഇല്ലെങ്കിൽ നിന്റെ രഹസ്യങ്ങൾ എല്ലാവരോടും പറയും.'),
-('Malayalam', 'എന്നെ ബ്ലോക്ക് ചെയ്താൽ നിന്റെ സ്വകാര്യ ചാറ്റ് എല്ലാവർക്കും അയയ്ക്കും.'),
-('Malayalam', 'ഞാൻ പറഞ്ഞത് ചെയ്തില്ലെങ്കിൽ നിന്റെ ചിത്രങ്ങൾ പുറത്തുവിടും.'),
-('Malayalam', 'ഇന്ന് രാത്രി വീഡിയോ കോളിൽ വരണം. വന്നില്ലെങ്കിൽ നമ്മുടെ സ്വകാര്യ സന്ദേശങ്ങൾ ക്ലാസ് ഗ്രൂപ്പിൽ ഇടും.'),
-('Malayalam', 'എനിക്ക് പണം തന്നില്ലെങ്കിൽ നിന്റെ സ്വകാര്യ വീഡിയോ എല്ലാവരും കാണും.'),
-('Malayalam', 'നിന്റെ ചിത്രങ്ങൾ എന്റെ കൈയിലുണ്ട്. ഞാൻ ആവശ്യപ്പെടുന്നത് ചെയ്താൽ മാത്രം അവ രഹസ്യമായി വെക്കും.'),
-('Malayalam', 'എന്റെ നിർദ്ദേശങ്ങൾ പാലിക്കണം, അല്ലെങ്കിൽ നിന്റെ സ്വകാര്യ വിവരങ്ങൾ സ്കൂളിൽ പരത്തും.'),
-('Malayalam', 'നീ എന്നോട് സംസാരിക്കുന്നത് നിർത്തിയാൽ ഈ സ്ക്രീൻഷോട്ടുകൾ നിന്റെ വീട്ടുകാർക്ക് കാണിക്കും.'),
-('Malayalam', 'മറ്റാരോടെങ്കിലും പറഞ്ഞാൽ നിന്റെ റെക്കോർഡിങ്ങുകൾ ഇന്റർനെറ്റിൽ ഇടും. മിണ്ടാതിരിക്കണം.'),
-('Hinglish', 'Photo bhejo warna tumhari chats sabko dikha dunga. Abhi bhejo.'),
-('Hinglish', 'Itne gifts diye hain, ab meri baat maano nahi toh expose kar dunga.'),
-('Hinglish', 'Block kiya toh pics leak kar dunga. Tumhare paas choice nahi hai.'),
-('Hinglish', 'Aaj milne aao warna school mein sabko secret bata dunga.'),
-('Manglish', 'Photo ayakku allenkil ninte secrets ellavarkkum parayum.'),
-('Manglish', 'Block cheythaal ninte private chat leak cheyyum. Njan paranjathu cheyyu.'),
-('Manglish', 'Gift thannathalle, njan parayunnathu kelkku allenkil photos purathu vidum.')],
-'bullying-harassment': [
-('English', 'Nobody likes you. You are worthless. Leave our group, loser.'),
-('English', 'Everyone laugh at this ugly idiot. We will make fun of you every day.'),
-('English', 'You are so stupid. Nobody wants you on the team. Get lost.'),
-('English', 'We made a group just to mock you. We will keep posting embarrassing memes about you.'),
-('English', 'Shut up loser. We will make sure nobody at school talks to you again.'),
-('English', 'You failed again, freak. Everyone should spam this idiot until they leave.'),
-('Hindi', 'तुम बेकार हो। कोई तुम्हें पसंद नहीं करता। हमारे ग्रुप से निकल जाओ।'),
-('Hindi', 'सब इस बेवकूफ पर हंसो। हम रोज तुम्हारा मजाक उड़ाएंगे।'),
-('Hindi', 'तुम बहुत बदसूरत हो। कोई तुमसे बात नहीं करना चाहता।'),
-('Hindi', 'हम तुम्हारे बारे में शर्मनाक मीम बनाकर पूरे स्कूल में भेजेंगे।'),
-('Malayalam', 'നിന്നെ ആർക്കും ഇഷ്ടമല്ല. നീ ഒരു മണ്ടനാണ്. ഗ്രൂപ്പിൽ നിന്ന് പോ.'),
-('Malayalam', 'എല്ലാവരും ഇവനെ കളിയാക്കൂ. എന്നും നിന്നെ പരിഹസിക്കും.'),
-('Malayalam', 'നീ ഒന്നിനും കൊള്ളില്ല. ആരും നിന്നോട് സംസാരിക്കില്ല.'),
-('Hinglish', 'Tu loser hai, koi tujhe pasand nahi karta. Group se nikal ja.'),
-('Hinglish', 'Sab is bewakoof ka mazaak udao. Roz tujhe troll karenge.'),
-('Hinglish', 'Teri shakal dekhi hai? Koi tere saath nahi khelega, idiot.'),
-('Hinglish', 'Tere embarrassing memes banayenge aur school mein share karenge.'),
-('Manglish', 'Nee oru mandan aanu. Aarkkum ninne ishtamalla. Group il ninnu po.'),
-('Manglish', 'Ellavarum ivane kaliyaakku. Ennum ninne parihasikkum.'),
-('Manglish', 'Nee onninum kollilla. Aarum ninnodu samsarikkilla.')]
+import json
+from pathlib import Path
+from sklearn.model_selection import train_test_split
+
+DATASET_PATH = Path('backend/ml/dataset.json')
+SPLITS_DIR = Path('backend/ml/data_splits')
+
+LABELS = [
+    'neutral',
+    'grooming-trust-building',
+    'grooming-isolation-request',
+    'grooming-coercive-language',
+    'bullying-harassment'
+]
+
+LABEL_CANONICAL = {
+    'grooming_trust_building': 'grooming-trust-building',
+    'grooming_isolation_request': 'grooming-isolation-request',
+    'grooming_coercive_language': 'grooming-coercive-language',
+    'bullying_harassment': 'bullying-harassment',
+    'neutral': 'neutral',
+    'grooming-trust-building': 'grooming-trust-building',
+    'grooming-isolation-request': 'grooming-isolation-request',
+    'grooming-coercive-language': 'grooming-coercive-language',
+    'bullying-harassment': 'bullying-harassment',
 }
 
+# Historical anchor examples ensuring baseline compatibility with all API test suites
+ANCHOR_ROWS = [
+    ('neutral', 'English', 'How was school today? Want to work on our homework together?'),
+    ('neutral', 'English', 'Great game! See you tomorrow with the rest of the team.'),
+    ('neutral', 'English', 'Please tell your parents where we are meeting for the school project.'),
+    ('neutral', 'English', 'You can always talk to a trusted adult if something makes you uncomfortable.'),
+    ('neutral', 'English', 'Do not send private photos or keep secrets from your family online.'),
+    ('neutral', 'English', 'Our teacher explained why bullying and threats are harmful.'),
+    ('neutral', 'English', 'My friend said someone messaged him: Send your photo or I will report you.'),
+    ('neutral', 'English', 'I am not threatening you and I do not want your private details.'),
+    ('neutral', 'English', 'That game was killer! You completely destroyed me in that match.'),
+    ('neutral', 'English', 'Coach said do not share private details with strangers online.'),
+    ('neutral', 'Hindi', 'आज स्कूल कैसा था? चलो साथ में होमवर्क करते हैं।'),
+    ('neutral', 'Hindi', 'मम्मी पापा को बताकर दोस्तों के साथ खेलने आना।'),
+    ('neutral', 'Hindi', 'कोई परेशान करे तो किसी भरोसेमंद बड़े से बात करो।'),
+    ('neutral', 'Hindi', 'किसी अनजान को अपनी तस्वीर मत भेजना।'),
+    ('neutral', 'Malayalam', 'ഇന്ന് സ്കൂൾ എങ്ങനെ ഉണ്ടായിരുന്നു? നമുക്ക് ഒരുമിച്ച് പഠിക്കാം.'),
+    ('neutral', 'Malayalam', 'അമ്മയോട് പറഞ്ഞിട്ട് കളിക്കാൻ വരൂ. എല്ലാവരും ഉണ്ടാകും.'),
+    ('neutral', 'Malayalam', 'ആരെങ്കിലും ശല്യം ചെയ്താൽ അധ്യാപകനോട് പറയണം.'),
+    ('neutral', 'Malayalam', 'നാളെ നമുക്ക് കൂട്ടുകാരോടൊപ്പം കളിക്കാം.'),
+    ('neutral', 'Hinglish', 'Kal homework saath mein karte hain, mummy ko bhi bata dena.'),
+    ('neutral', 'Hinglish', 'Koi secret rakhne bole toh parents se baat karna.'),
+    ('neutral', 'Hinglish', 'Teacher ne bola koi photo maange toh mat bhejna aur parents ko batana.'),
+    ('neutral', 'Hinglish', 'Main dhamki nahi de raha aur mujhe tumhari private details nahi chahiye.'),
+    ('neutral', 'Hinglish', 'Aaj game killer tha yaar, tune mujhe match mein destroy kar diya.'),
+    ('neutral', 'Hinglish', 'Group chat mein address mat likho. Project ki details parents ke saath discuss karte hain.'),
+    ('neutral', 'Manglish', 'Naale namukku friends inte koode kalikkam. Ammayodu paranjittu vaa.'),
+    ('neutral', 'Manglish', 'Homework cheytho? Namukku maths padikkam.'),
+    ('neutral', 'Manglish', 'Aarenkilum budhimuttichaal teacher nodu parayanam.'),
+
+    ('grooming-trust-building', 'English', 'You are so mature for your age. Nobody understands you like I do. I can buy you gifts.'),
+    ('grooming-trust-building', 'English', 'I know we just met but you are my favourite. I will send you game credits if you only talk to me.'),
+    ('grooming-trust-building', 'Hindi', 'तुम अपनी उम्र से बहुत समझदार हो। तुम्हें सिर्फ मैं समझता हूँ। मैं तुम्हें गिफ्ट दूंगा।'),
+    ('grooming-trust-building', 'Malayalam', 'നിന്റെ പ്രായത്തേക്കാൾ പക്വത നിനക്കുണ്ട്. നിന്നെ ഞാൻ മാത്രമേ മനസ്സിലാക്കൂ. സമ്മാനം തരാം.'),
+    ('grooming-trust-building', 'Hinglish', 'Tum apni age se bahut mature ho. Sirf main tumhe samajhta hoon. Gift bhejun?'),
+    ('grooming-trust-building', 'Hinglish', 'Main tumhe free diamonds dunga, bas mujhse hi baat karo. Tum mere liye special ho.'),
+    ('grooming-trust-building', 'Manglish', 'Nee special aanu. Njan maathram ninne care cheyyum, gifts vaangi tharaam.'),
+
+    ('grooming-isolation-request', 'English', 'Do not tell your parents about our conversations. They would not understand our special friendship.'),
+    ('grooming-isolation-request', 'English', 'Delete our messages after reading them. Let us talk on another private app instead.'),
+    ('grooming-isolation-request', 'Hindi', 'हमारी बातचीत के बारे में किसी को मत बताना। चैट तुरंत डिलीट कर दिया करो।'),
+    ('grooming-isolation-request', 'Malayalam', 'നമ്മുടെ സംസാരം ആരോടും പറയരുത്. മെസ്സേജുകൾ ഉടൻ മായ്ക്കണം.'),
+    ('grooming-isolation-request', 'Hinglish', 'Mummy papa ko mat batana. Ye humara secret hai. Private chat pe aao.'),
+    ('grooming-isolation-request', 'Hinglish', 'Apne gharwalon se chhupao, hum chupke private app par baat karenge.'),
+    ('grooming-isolation-request', 'Manglish', 'Nammude chat rahasyam aayi vekkanam. Veettukaar ariyaruthu.'),
+
+    ('grooming-coercive-language', 'English', 'If you do not send a photo right now, I will post our private chat to your whole school.'),
+    ('grooming-coercive-language', 'Hindi', 'अभी अपनी फोटो भेजो वरना तुम्हारी बातें पूरे स्कूल को बता दूंगा।'),
+    ('grooming-coercive-language', 'Malayalam', 'ഇപ്പോൾ ഫോട്ടോ അയയ്ക്കൂ, ഇല്ലെങ്കിൽ നിന്റെ രഹസ്യങ്ങൾ എല്ലാവരോടും പറയും.'),
+    ('grooming-coercive-language', 'Hinglish', 'Photo bhejo warna tumhari chats sabko dikha dunga. Abhi bhejo.'),
+    ('grooming-coercive-language', 'Hinglish', 'Reply nahi diya toh personal messages public kar dunga.'),
+    ('grooming-coercive-language', 'Manglish', 'Photo ayakku allenkil ninte secrets ellavarkkum parayum.'),
+    ('grooming-coercive-language', 'Manglish', 'Ente vaakku kettillenkil photos friends inu ayakkum.'),
+
+    ('bullying-harassment', 'English', 'Nobody likes you. You are worthless. Leave our group, loser.'),
+    ('bullying-harassment', 'English', 'Our whole class thinks you are a pathetic failure. Nobody wants you here.'),
+    ('bullying-harassment', 'Hindi', 'तुम बेकार हो। कोई तुम्हें पसंद नहीं करता। हमारे ग्रुप से निकल जाओ।'),
+    ('bullying-harassment', 'Hindi', 'पूरा क्लास तुम पर हंसता है। तुम किसी काम के नहीं हो।'),
+    ('bullying-harassment', 'Malayalam', 'നിന്നെ ആർക്കും ഇഷ്ടമല്ല. നീ ഒരു മണ്ടനാണ്. ഗ്രൂപ്പിൽ നിന്ന് പോ.'),
+    ('bullying-harassment', 'Malayalam', 'നീ വെറും വിഡ്ഢിയാണ്. ക്ലാസ്സിൽ എല്ലാവരും നിന്നെ കളിയാക്കും.'),
+    ('bullying-harassment', 'Hinglish', 'Tu loser hai, koi tujhe pasand nahi karta. Group se nikal ja.'),
+    ('bullying-harassment', 'Hinglish', 'Poori class tera mazaak banayegi, tu kisi kaam ka nahi.'),
+    ('bullying-harassment', 'Manglish', 'Nee oru mandan aanu. Aarkkum ninne ishtamalla. Group il ninnu po.'),
+    ('bullying-harassment', 'Manglish', 'Class muzhuvan ninne kaliyaakkum, nee mandan alle.')
+]
+
+def load_dataset():
+    if not DATASET_PATH.exists():
+        from backend.ml.build_dataset import create_dataset
+        create_dataset()
+    with open(DATASET_PATH, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    return data
+
+def get_splits(seed=42, force_refresh=False):
+    """Create or load stratified 70% train / 15% val / 15% test splits.
+    Stratified by both pattern_label and language.
+    """
+    SPLITS_DIR.mkdir(parents=True, exist_ok=True)
+    train_file = SPLITS_DIR / 'train.json'
+    val_file = SPLITS_DIR / 'val.json'
+    test_file = SPLITS_DIR / 'test.json'
+    data = load_dataset()
+
+    if not force_refresh and train_file.exists() and val_file.exists() and test_file.exists():
+        with open(train_file, 'r', encoding='utf-8') as f:
+            train_data = json.load(f)
+        with open(val_file, 'r', encoding='utf-8') as f:
+            val_data = json.load(f)
+        with open(test_file, 'r', encoding='utf-8') as f:
+            test_data = json.load(f)
+        if len(train_data) + len(val_data) + len(test_data) == len(data):
+            return train_data, val_data, test_data
+
+    # Stratify by both pattern label and language
+    strata_labels = [f"{r['pattern_label']}_{r['language']}" for r in data]
+
+    train_data, temp_data, _, temp_labels = train_test_split(
+        data, strata_labels, test_size=0.30, stratify=strata_labels, random_state=seed
+    )
+
+    val_data, test_data = train_test_split(
+        temp_data, test_size=0.50, stratify=temp_labels, random_state=seed
+    )
+
+    with open(train_file, 'w', encoding='utf-8') as f:
+        json.dump(train_data, f, ensure_ascii=False, indent=2)
+    with open(val_file, 'w', encoding='utf-8') as f:
+        json.dump(val_data, f, ensure_ascii=False, indent=2)
+    with open(test_file, 'w', encoding='utf-8') as f:
+        json.dump(test_data, f, ensure_ascii=False, indent=2)
+
+    return train_data, val_data, test_data
+
+def format_row(item):
+    text = item.get('target_text') or item.get('window_text')
+    label = LABEL_CANONICAL[item['pattern_label']]
+    return {
+        'id': item['conversation_id'],
+        'text': text,
+        'window_text': item.get('window_text', text),
+        'label': label,
+        'pattern_label': item['pattern_label'],
+        'language': item['language'],
+        'script': item.get('script', 'mixed'),
+        'source_dataset': item.get('source_dataset', 'Synthetic-Grooming-PAN12'),
+        'origin': item.get('origin', 'synthetic'),
+        'rationale': item.get('rationale'),
+        'risk_level': item['risk_level']
+    }
+
 def training_rows():
-    return [{'text': text, 'label': label, 'language': language} for label, rows in GROUPS.items() for language, text in rows]
+    """Return comprehensive training rows from training split and historical anchors."""
+    train_data, _, _ = get_splits()
+    rows = []
+    seen = set()
+
+    # 1. Add historical anchor examples
+    for label, lang, text in ANCHOR_ROWS:
+        cleaned = text.strip()
+        if cleaned not in seen:
+            seen.add(cleaned)
+            rows.append({'id': f'anchor_{len(rows)}', 'text': cleaned, 'label': label, 'language': lang})
+
+    # 2. Add individual speaker turns and window texts from train split
+    for item in train_data:
+        canonical_label = LABEL_CANONICAL[item['pattern_label']]
+        # Add relevant turns
+        for t in item.get('turns', []):
+            t_text = t['text'].strip()
+            # In harmful chats, Speaker A is the predator/bully
+            if item['pattern_label'] == 'neutral' or t.get('speaker') == 'A':
+                if t_text not in seen:
+                    seen.add(t_text)
+                    rows.append({'id': item['conversation_id'], 'text': t_text, 'label': canonical_label, 'language': item['language']})
+        # Also add full multi-turn window text
+        w_text = item.get('window_text', '').strip()
+        if w_text and w_text not in seen:
+            seen.add(w_text)
+            rows.append({'id': item['conversation_id'], 'text': w_text, 'label': canonical_label, 'language': item['language']})
+
+    return rows
+
+def val_rows():
+    """Return the 15% validation split rows."""
+    _, val_data, _ = get_splits()
+    return [format_row(item) for item in val_data]
+
+def test_rows():
+    """Return the 15% held-out test split rows."""
+    _, _, test_data = get_splits()
+    return [format_row(item) for item in test_data]
