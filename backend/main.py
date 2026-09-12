@@ -8,8 +8,8 @@ from uuid import uuid4
 from fastapi import FastAPI, Depends, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, field_validator
-from sqlalchemy import select, delete
-from backend.database import Base, engine, SessionLocal, User, Conversation, Alert, now
+from sqlalchemy import select, delete, func
+from backend.database import Base, engine, SessionLocal, User, Conversation, Alert, DatasetRecord, now
 from backend.ml.detector import analyze_message, get_detector, minimal_snippet, risk_level
 from backend.auth import router as auth_router, authorize as jwt_authorize, issue_token, PASSWORD_HASH
 from backend.support import router as support_router, cleanup_reports
@@ -189,3 +189,51 @@ def save_settings(payload: SettingsIn):
         db.commit()
         cleanup(db)
         return payload
+
+@app.get('/api/dataset/stats')
+def dataset_stats():
+    with SessionLocal() as db:
+        total = db.scalar(select(func.count(DatasetRecord.id))) or 0
+        origins = dict(db.execute(select(DatasetRecord.origin, func.count(DatasetRecord.id)).group_by(DatasetRecord.origin)).all())
+        languages = dict(db.execute(select(DatasetRecord.language, func.count(DatasetRecord.id)).group_by(DatasetRecord.language)).all())
+        patterns = dict(db.execute(select(DatasetRecord.pattern_label, func.count(DatasetRecord.id)).group_by(DatasetRecord.pattern_label)).all())
+        return {
+            'total_records': total,
+            'origins': origins,
+            'languages': languages,
+            'patterns': patterns,
+            'excel_path': 'backend/ml/dataset.xlsx'
+        }
+
+@app.get('/api/dataset/records')
+def dataset_records(language: str | None = None, pattern: str | None = None, origin: str | None = None, limit: int = 50, offset: int = 0):
+    with SessionLocal() as db:
+        stmt = select(DatasetRecord)
+        if language:
+            stmt = stmt.where(DatasetRecord.language == language)
+        if pattern:
+            stmt = stmt.where(DatasetRecord.pattern_label == pattern)
+        if origin:
+            stmt = stmt.where(DatasetRecord.origin == origin)
+        total = db.scalar(select(func.count()).select_from(stmt.subquery()))
+        stmt = stmt.offset(offset).limit(min(limit, 100))
+        records = db.scalars(stmt).all()
+        return {
+            'total': total,
+            'limit': limit,
+            'offset': offset,
+            'records': [{
+                'id': r.id,
+                'origin': r.origin,
+                'source_dataset': r.source_dataset,
+                'language': r.language,
+                'script': r.script,
+                'pattern_label': r.pattern_label,
+                'risk_level': r.risk_level,
+                'target_text': r.target_text,
+                'window_text': r.window_text,
+                'rationale': r.rationale,
+                'turns_count': len(r.turns or [])
+            } for r in records]
+        }
+

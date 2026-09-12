@@ -65,3 +65,19 @@ class AidRoute(Base):
     aid_channel_name: Mapped[str] = mapped_column(String(100))
     routed_at: Mapped[datetime] = mapped_column(default=now)
     status: Mapped[str] = mapped_column(String(30))
+
+class DatasetRecord(Base):
+    __tablename__ = 'dataset_records'
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    origin: Mapped[str] = mapped_column(String(20), index=True)  # 'real' | 'synthetic'
+    source_dataset: Mapped[str] = mapped_column(String(80), index=True)
+    language: Mapped[str] = mapped_column(String(30), index=True)
+    script: Mapped[str] = mapped_column(String(20))
+    pattern_label: Mapped[str] = mapped_column(String(60), index=True)
+    risk_level: Mapped[str] = mapped_column(String(20), index=True)
+    target_text: Mapped[str] = mapped_column(Text)
+    window_text: Mapped[str] = mapped_column(Text)
+    rationale: Mapped[str | None] = mapped_column(Text, nullable=True)
+    turns: Mapped[list] = mapped_column(JSON, default=list)
+    created_at: Mapped[datetime] = mapped_column(default=now)
+
