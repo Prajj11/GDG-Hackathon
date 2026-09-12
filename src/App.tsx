@@ -16,30 +16,44 @@ import {
 } from "react-router-dom";
 import {
   Activity,
+  AlertCircle,
   ArrowDownLeft,
   ArrowRight,
   ArrowUpRight,
   Bell,
   BookOpen,
+  Building2,
   Check,
   CheckCheck,
+  CheckCircle2,
   ChevronRight,
   CircleHelp,
   Clock3,
+  ExternalLink,
+  FileCheck,
+  Filter,
   FlaskConical,
   HeartHandshake,
   LayoutDashboard,
   LockKeyhole,
+  LogOut,
+  MapPin,
   Menu,
   MessageSquare,
+  MessageSquareQuote,
   Plus,
+  Radio,
   RefreshCw,
+  Send,
   Settings2,
   Shield,
+  ShieldAlert,
   ShieldCheck,
   SlidersHorizontal,
   Sparkles,
   TrendingUp,
+  UserCheck,
+  Users,
   X,
   type LucideIcon,
 } from "lucide-react";
@@ -59,6 +73,7 @@ import {
   type Alert,
   type Analysis,
   type Health,
+  type NgoReport,
   type Risk,
   type Summary,
 } from "./api";
@@ -1326,6 +1341,706 @@ function Resources() {
     </>
   );
 }
+function PhysicalLink({
+  summary,
+  alerts,
+}: {
+  summary: Summary | null;
+  alerts: Alert[];
+}) {
+  const userRole = sessionStorage.getItem("guardrails-role") || "guardian";
+  const userLocality = sessionStorage.getItem("guardrails-locality") || "South Delhi";
+  const [activeTab, setActiveTab] = useState<"inbox" | "simulator" | "partners">("inbox");
+  const [localityFilter, setLocalityFilter] = useState<string>(
+    userRole === "ngo" ? userLocality : "All Localities",
+  );
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [reports, setReports] = useState<NgoReport[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [workerInputs, setWorkerInputs] = useState<Record<string, string>>({});
+  const [notesInputs, setNotesInputs] = useState<Record<string, string>>({});
+  const [actionNotice, setActionNotice] = useState<string>("");
+
+  // Simulator state
+  const [activeStep, setActiveStep] = useState(2);
+  const [selectedAlertId, setSelectedAlertId] = useState<string>(
+    alerts.find((a) => a.risk_level === "High")?.id || (alerts[0]?.id ?? "demo-case-1"),
+  );
+  const [dispatchStatus, setDispatchStatus] = useState<
+    "idle" | "dispatching" | "dispatched"
+  >("idle");
+  const [dispatchLog, setDispatchLog] = useState<{
+    id: string;
+    agency: string;
+    time: string;
+  } | null>(null);
+
+  const highRiskCount = alerts.filter((a) => a.risk_level === "High").length;
+
+  const fetchReports = useCallback(async () => {
+    setLoading(true);
+    try {
+      const { data } = await api.get<NgoReport[]>("/ngo/reports", {
+        params: {
+          locality: localityFilter !== "All Localities" ? localityFilter : undefined,
+          status: statusFilter !== "all" ? statusFilter : undefined,
+        },
+      });
+      setReports(data);
+    } catch {
+      setReports([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [localityFilter, statusFilter]);
+
+  useEffect(() => {
+    fetchReports();
+    const interval = setInterval(fetchReports, 6000);
+    return () => clearInterval(interval);
+  }, [fetchReports]);
+
+  const updateStatus = async (reportId: string, newStatus: string) => {
+    try {
+      await api.patch(`/ngo/reports/${reportId}`, { status: newStatus });
+      setActionNotice(`Case #${reportId.slice(0, 8)} status updated to "${newStatus.replace(/_/g, " ")}".`);
+      setTimeout(() => setActionNotice(""), 4000);
+      fetchReports();
+    } catch (err) {
+      alert(errorText(err));
+    }
+  };
+
+  const assignWorker = async (reportId: string) => {
+    const workerName = workerInputs[reportId] || "Ms. S. Sharma (CPO)";
+    try {
+      await api.patch(`/ngo/reports/${reportId}`, { assigned_worker: workerName });
+      setActionNotice(`Caseworker ${workerName} assigned to Case #${reportId.slice(0, 8)}.`);
+      setTimeout(() => setActionNotice(""), 4000);
+      fetchReports();
+    } catch (err) {
+      alert(errorText(err));
+    }
+  };
+
+  const saveNotes = async (reportId: string) => {
+    const notes = notesInputs[reportId] || "";
+    try {
+      await api.patch(`/ngo/reports/${reportId}`, { caseworker_notes: notes });
+      setActionNotice(`Intervention notes saved for Case #${reportId.slice(0, 8)}.`);
+      setTimeout(() => setActionNotice(""), 4000);
+      fetchReports();
+    } catch (err) {
+      alert(errorText(err));
+    }
+  };
+
+  const handleSimulateDispatch = () => {
+    setDispatchStatus("dispatching");
+    setTimeout(() => {
+      setDispatchStatus("dispatched");
+      setActiveStep(4);
+      setDispatchLog({
+        id: `PDL-DL-${Math.floor(1000 + Math.random() * 9000)}`,
+        agency: "District Child Protection Unit (DCPU) - South Zone",
+        time: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+      });
+    }, 900);
+  };
+
+  const steps = [
+    {
+      num: 1,
+      title: "Digital Safety Signal Detected",
+      desc: "Multilingual AI pattern analysis flags a high-confidence threat without retaining private conversations.",
+      icon: Radio,
+    },
+    {
+      num: 2,
+      title: "Guardian / Safeguarding Review",
+      desc: "Human-in-the-loop validation: Guardian reviews minimal-context alert summary and authorizes escalation.",
+      icon: ShieldCheck,
+    },
+    {
+      num: 3,
+      title: "Jurisdictional Routing & Dossier Generation",
+      desc: "Zero-knowledge payload created with verified risk markers, mapped to the local District Child Protection Unit.",
+      icon: FileCheck,
+    },
+    {
+      num: 4,
+      title: "On-Ground Welfare Intervention",
+      desc: "Accredited child protection caseworker or juvenile officer assigned for direct welfare check & support.",
+      icon: Users,
+    },
+  ];
+
+  const partners = [
+    {
+      name: "National Commission for Protection of Child Rights (NCPCR)",
+      badge: "Apex Statutory Body",
+      role: "Central oversight & regulatory coordination",
+      link: "https://www.ncpcr.gov.in/",
+      details:
+        "Official e-BaalNidan digital complaint gateway for escalating severe rights violations and systemic abuse.",
+    },
+    {
+      name: "CHILDLINE 1098 / Emergency Response",
+      badge: "24/7 Rapid Handoff",
+      role: "Emergency welfare dispatch",
+      link: "https://www.childlineindia.org/",
+      details:
+        "Immediate on-ground response and transit care for children experiencing imminent online or offline peril.",
+    },
+    {
+      name: "District Child Protection Unit (DCPU) & CWC",
+      badge: "Ground Caseworkers",
+      role: "Local judicial & protection committee",
+      link: "https://www.cybercrime.gov.in/",
+      details:
+        "Empowered under the Juvenile Justice Act to conduct welfare inquiries, assign social workers, and order protective counseling.",
+    },
+    {
+      name: "Special Juvenile Police Unit (SJPU) & Cyber Cell",
+      badge: "Law Enforcement Liaison",
+      role: "Child-sensitized cyber unit",
+      link: "https://www.cybercrime.gov.in/",
+      details:
+        "Specialized juvenile police personnel handling serious cyberbullying, extortion, coercion, and syndicate grooming.",
+    },
+  ];
+
+  const localities = [
+    "All Localities",
+    "South Delhi",
+    "North Delhi",
+    "Mumbai Suburban",
+    "Bengaluru Urban",
+    "Kolkata Central",
+    "Other",
+  ];
+
+  return (
+    <>
+      <PageHeading
+        eyebrow="CHILD WELFARE & LOCAL AUTHORITIES INTERVENTION"
+        title="Physical-Digital Link"
+        description="Bridge the gap between digital alerts and ground-level intervention for child welfare organizations and local authorities."
+      >
+        <div className="flex items-center gap-2">
+          <span className="text-xs px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 border border-blue-100 font-semibold flex items-center gap-1.5">
+            <Building2 size={14} />
+            Caseworker Desk · {userLocality}
+          </span>
+        </div>
+      </PageHeading>
+
+      {actionNotice && (
+        <div className="mb-5 p-3.5 rounded-xl border border-blue-200 bg-blue-50 text-blue-800 text-xs font-medium flex items-center justify-between">
+          <span>{actionNotice}</span>
+          <button onClick={() => setActionNotice("")} className="underline text-blue-700">
+            Dismiss
+          </button>
+        </div>
+      )}
+
+      {/* Top Sub-Navigation Tabs */}
+      <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 pb-3 mb-6">
+        <button
+          onClick={() => setActiveTab("inbox")}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
+            activeTab === "inbox"
+              ? "bg-blue-600 text-white shadow-xs"
+              : "bg-white text-slate-600 hover:bg-slate-50 border border-slate-200"
+          }`}
+        >
+          <MessageSquareQuote size={15} />
+          Incoming Locality Casework Inbox
+          <span
+            className={`ml-1 px-1.5 py-0.2 rounded-full text-[10px] ${
+              activeTab === "inbox" ? "bg-blue-700 text-white" : "bg-slate-100 text-slate-700"
+            }`}
+          >
+            {reports.length}
+          </span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab("simulator")}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
+            activeTab === "simulator"
+              ? "bg-blue-600 text-white shadow-xs"
+              : "bg-white text-slate-600 hover:bg-slate-50 border border-slate-200"
+          }`}
+        >
+          <Radio size={15} />
+          Escalation Dispatch Simulator
+        </button>
+
+        <button
+          onClick={() => setActiveTab("partners")}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
+            activeTab === "partners"
+              ? "bg-blue-600 text-white shadow-xs"
+              : "bg-white text-slate-600 hover:bg-slate-50 border border-slate-200"
+          }`}
+        >
+          <Building2 size={15} />
+          Statutory Partner Directory
+        </button>
+      </div>
+
+      {activeTab === "inbox" && (
+        <section className="ngo-inbox-section">
+          {/* Locality & Status Filter Bar */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-slate-100 mb-6">
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="!text-lg">Locality Incident Reports Box</h2>
+                <span className="physical-link-badge">Real-time Handoff</span>
+              </div>
+              <p className="subtle mt-1 text-xs">
+                Messages submitted anonymously by youth in this district arriving for Child Welfare Committee & NGO review.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs">
+                <MapPin size={13} className="text-blue-600" />
+                <span className="text-slate-500 font-medium">Locality:</span>
+                <select
+                  value={localityFilter}
+                  onChange={(e) => setLocalityFilter(e.target.value)}
+                  className="bg-transparent font-semibold text-slate-700 outline-none !p-0 !border-0 text-xs cursor-pointer"
+                >
+                  {localities.map((loc) => (
+                    <option key={loc} value={loc}>
+                      {loc}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs">
+                <Filter size={13} className="text-slate-500" />
+                <span className="text-slate-500 font-medium">Status:</span>
+                <select
+                  value={statusFilter}
+                  onChange={(e) => setStatusFilter(e.target.value)}
+                  className="bg-transparent font-semibold text-slate-700 outline-none !p-0 !border-0 text-xs cursor-pointer"
+                >
+                  <option value="all">All Statuses</option>
+                  <option value="submitted">New / Submitted</option>
+                  <option value="under_review">Under Review</option>
+                  <option value="dispatched">Caseworker Dispatched</option>
+                  <option value="resolved">Welfare Verified</option>
+                </select>
+              </div>
+
+              <button
+                type="button"
+                onClick={fetchReports}
+                className="p-2 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600"
+                title="Refresh inbox"
+              >
+                <RefreshCw size={14} className={loading ? "animate-spin" : ""} />
+              </button>
+            </div>
+          </div>
+
+          {/* Reports List */}
+          {reports.length === 0 ? (
+            <div className="p-12 text-center border border-dashed border-slate-200 rounded-2xl">
+              <MessageSquareQuote size={36} className="mx-auto text-slate-300 mb-3" />
+              <h3 className="text-base font-semibold text-slate-700 mb-1">
+                No incoming reports for {localityFilter}
+              </h3>
+              <p className="text-xs text-slate-500 max-w-md mx-auto">
+                When a student submits an anonymous report choosing this locality in the Youth Support Portal (/help), it will arrive immediately in this inbox.
+              </p>
+              <Link to="/help" className="secondary mt-4 inline-flex text-xs">
+                Open Youth Support Portal to test submission
+              </Link>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {reports.map((r) => (
+                <article key={r.id} className="ngo-case-card">
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-3">
+                    <div className="flex items-center gap-2.5">
+                      <span className="flex items-center gap-1 text-xs font-semibold text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">
+                        <MapPin size={12} /> {r.locality}
+                      </span>
+                      <span
+                        className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
+                          r.urgency_level === "High"
+                            ? "bg-rose-100 text-rose-700"
+                            : r.urgency_level === "Medium"
+                              ? "bg-amber-100 text-amber-800"
+                              : "bg-slate-100 text-slate-600"
+                        }`}
+                      >
+                        Urgency: {r.urgency_level}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-2 text-xs">
+                      <span
+                        className={`font-semibold px-2.5 py-0.5 rounded-full ${
+                          r.status === "dispatched"
+                            ? "bg-emerald-100 text-emerald-800 border border-emerald-200"
+                            : r.status === "under_review"
+                              ? "bg-amber-100 text-amber-800 border border-amber-200"
+                              : r.status === "resolved"
+                                ? "bg-slate-100 text-slate-700 border border-slate-200"
+                                : "bg-indigo-50 text-indigo-700 border border-indigo-200"
+                        }`}
+                      >
+                        {r.status === "dispatched"
+                          ? "● Field Officer Dispatched"
+                          : r.status === "under_review"
+                            ? "● Under Review"
+                            : r.status === "resolved"
+                              ? "✓ Welfare Check Resolved"
+                              : "★ New Incoming Report"}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="mb-2">
+                    <span className="text-xs font-medium text-slate-500">
+                      Reported Concern:{" "}
+                      <strong className="text-slate-800 capitalize">
+                        {r.selected_context.replace(/-/g, " ")}
+                      </strong>
+                    </span>
+                  </div>
+
+                  {/* The actual message from youth */}
+                  <div className="ngo-message-box">
+                    <span className="text-[11px] uppercase tracking-wider font-bold text-slate-500 block mb-1.5 flex items-center gap-1.5">
+                      <MessageSquareQuote size={14} className="text-blue-600" />
+                      Anonymous Message from Youth:
+                    </span>
+                    <p className="text-sm font-medium text-slate-800 leading-relaxed whitespace-pre-wrap">
+                      {r.report_text && r.report_text.trim()
+                        ? r.report_text
+                        : "(No custom text message entered. Youth submitted safety signals and urgency level only)."}
+                    </p>
+                  </div>
+
+                  {/* AI Detection Context */}
+                  {r.detection_context && (
+                    <div className="p-3 rounded-lg bg-emerald-50/70 border border-emerald-100 mb-3 text-xs flex items-center justify-between">
+                      <span className="text-emerald-900 font-medium">
+                        Attached Safety Signal:{" "}
+                        <strong>
+                          {patternNames[r.detection_context.pattern_type || ""] ||
+                            r.detection_context.pattern_type}
+                        </strong>
+                      </span>
+                      <span className="text-emerald-700 font-semibold">
+                        Risk Level: {r.detection_context.risk_level}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Casework & Ground Action Bar */}
+                  <div className="mt-4 pt-3 border-t border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <div className="flex items-center gap-1.5">
+                        <UserCheck size={14} className="text-slate-400" />
+                        <span className="text-slate-500">Officer:</span>
+                        {r.assigned_worker ? (
+                          <strong className="text-slate-700 bg-slate-100 px-2 py-0.5 rounded">
+                            {r.assigned_worker}
+                          </strong>
+                        ) : (
+                          <div className="flex items-center gap-1">
+                            <input
+                              type="text"
+                              placeholder="e.g. Ms. S. Sharma"
+                              value={workerInputs[r.id] ?? ""}
+                              onChange={(e) =>
+                                setWorkerInputs((prev) => ({ ...prev, [r.id]: e.target.value }))
+                              }
+                              className="!py-1 !px-2 !text-xs !w-36 rounded border border-slate-200"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => assignWorker(r.id)}
+                              className="secondary !py-1 !px-2 !text-[11px]"
+                            >
+                              Assign
+                            </button>
+                          </div>
+                        )}
+                      </div>
+
+                      {r.caseworker_notes ? (
+                        <div className="text-slate-600 bg-slate-50 px-2.5 py-1 rounded border border-slate-200">
+                          <span className="font-semibold text-slate-700">Notes:</span>{" "}
+                          {r.caseworker_notes}
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-1">
+                          <input
+                            type="text"
+                            placeholder="Add action note..."
+                            value={notesInputs[r.id] ?? ""}
+                            onChange={(e) =>
+                              setNotesInputs((prev) => ({ ...prev, [r.id]: e.target.value }))
+                            }
+                            className="!py-1 !px-2 !text-xs !w-40 rounded border border-slate-200"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => saveNotes(r.id)}
+                            className="secondary !py-1 !px-2 !text-[11px]"
+                          >
+                            Save Note
+                          </button>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex items-center gap-1.5">
+                      {r.status !== "under_review" && (
+                        <button
+                          type="button"
+                          onClick={() => updateStatus(r.id, "under_review")}
+                          className="px-2.5 py-1 rounded bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 font-semibold cursor-pointer"
+                        >
+                          Review Case
+                        </button>
+                      )}
+                      {r.status !== "dispatched" && (
+                        <button
+                          type="button"
+                          onClick={() => updateStatus(r.id, "dispatched")}
+                          className="px-2.5 py-1 rounded bg-blue-600 hover:bg-blue-700 text-white font-semibold flex items-center gap-1 cursor-pointer"
+                        >
+                          <Send size={11} /> Dispatch Field Officer
+                        </button>
+                      )}
+                      {r.status !== "resolved" && (
+                        <button
+                          type="button"
+                          onClick={() => updateStatus(r.id, "resolved")}
+                          className="px-2.5 py-1 rounded bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-semibold cursor-pointer"
+                        >
+                          Mark Resolved
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
+
+      {activeTab === "simulator" && (
+        <section className="ground-simulator">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-slate-100">
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="!text-lg">Ground Intervention Dispatch Simulator</h2>
+                <span className="physical-link-badge">Interactive Flow</span>
+              </div>
+              <p className="subtle mt-1">
+                Demonstrate how a high-urgency digital signal safely transitions to verified caseworkers on the ground.
+              </p>
+            </div>
+            <div className="flex items-center gap-3 shrink-0">
+              {alerts.length > 0 && (
+                <select
+                  className="!py-2 !text-xs !w-auto"
+                  value={selectedAlertId}
+                  onChange={(e) => {
+                    setSelectedAlertId(e.target.value);
+                    setDispatchStatus("idle");
+                    setActiveStep(2);
+                  }}
+                >
+                  {alerts.map((a) => (
+                    <option key={a.id} value={a.id}>
+                      {a.child_label} · {patternNames[a.pattern_type] || a.pattern_type} ({a.risk_level})
+                    </option>
+                  ))}
+                </select>
+              )}
+              <button
+                className="primary !py-2.5 !px-4 text-xs font-semibold flex items-center gap-2"
+                disabled={dispatchStatus === "dispatching"}
+                onClick={handleSimulateDispatch}
+              >
+                {dispatchStatus === "dispatching" ? (
+                  <>
+                    <RefreshCw size={14} className="animate-spin" /> Dispatching…
+                  </>
+                ) : dispatchStatus === "dispatched" ? (
+                  <>
+                    <CheckCircle2 size={14} /> Escalation Active
+                  </>
+                ) : (
+                  <>
+                    <Send size={14} /> Simulate Ground Handoff
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {dispatchStatus === "dispatched" && dispatchLog && (
+            <div className="my-5 p-4 rounded-xl border border-emerald-200 bg-emerald-50/80 flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <span className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+                  <CheckCircle2 size={18} />
+                </span>
+                <div>
+                  <strong className="text-emerald-900 text-sm">
+                    Ground Case Dispatched · Reference ID #{dispatchLog.id}
+                  </strong>
+                  <p className="text-xs text-emerald-700 mt-0.5">
+                    Routed to {dispatchLog.agency} at {dispatchLog.time}. Caseworker assignment initiated.
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => {
+                  setDispatchStatus("idle");
+                  setActiveStep(2);
+                }}
+                className="text-xs text-emerald-800 underline hover:no-underline font-medium shrink-0"
+              >
+                Reset simulation
+              </button>
+            </div>
+          )}
+
+          <div className="ground-step-list">
+            {steps.map((s) => {
+              const isCompleted = activeStep > s.num || dispatchStatus === "dispatched";
+              const isActive = activeStep === s.num && dispatchStatus !== "dispatched";
+              return (
+                <div
+                  key={s.num}
+                  className={cx(
+                    "ground-step-item",
+                    isActive && "active",
+                    isCompleted && "completed",
+                  )}
+                >
+                  <div
+                    className={cx(
+                      "ground-step-badge",
+                      isCompleted
+                        ? "bg-emerald-100 text-emerald-700"
+                        : isActive
+                          ? "bg-blue-100 text-blue-700"
+                          : "bg-slate-100 text-slate-500",
+                    )}
+                  >
+                    {isCompleted ? <Check size={14} /> : s.num}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <strong className="text-sm text-[#1e3a5f]">{s.title}</strong>
+                      {isCompleted && (
+                        <span className="text-[11px] font-medium text-emerald-600">
+                          Verified
+                        </span>
+                      )}
+                      {isActive && (
+                        <span className="text-[11px] font-medium text-blue-600">
+                          Ready for handoff
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-[#5f738c] mt-1">{s.desc}</p>
+                  </div>
+                  <s.icon
+                    size={18}
+                    className={
+                      isCompleted
+                        ? "text-emerald-500"
+                        : isActive
+                          ? "text-blue-500"
+                          : "text-slate-400"
+                    }
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {activeTab === "partners" && (
+        <>
+          <div className="section-heading mb-4">
+            <div>
+              <h2>Accredited Partner Organizations & Direct Escalation</h2>
+              <p className="subtle mt-0.5">
+                Statutory authorities empowered to execute ground welfare checks and emergency child care orders.
+              </p>
+            </div>
+          </div>
+
+          <div className="ground-partner-grid">
+            {partners.map((p) => (
+              <div key={p.name} className="ground-partner-card">
+                <div>
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <span className="physical-link-badge">{p.badge}</span>
+                    <a
+                      href={p.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-xs text-blue-600 flex items-center gap-1 hover:underline"
+                    >
+                      Official Portal <ExternalLink size={12} />
+                    </a>
+                  </div>
+                  <h3 className="text-base font-semibold text-[#1e3a5f] mb-1">
+                    {p.name}
+                  </h3>
+                  <span className="text-xs font-medium text-[#4a6585] block mb-2">
+                    {p.role}
+                  </span>
+                  <p className="text-xs text-[#627792] leading-relaxed">
+                    {p.details}
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-[#768a9f]">
+                  <span className="flex items-center gap-1">
+                    <ShieldCheck size={14} className="text-teal-600" /> Statutory Mandate
+                  </span>
+                  <span className="font-mono text-[11px]">API Status: Active Bridge</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+
+      <div className="panel p-6 border-l-4 !border-l-blue-600 mb-8">
+        <h3 className="text-sm font-semibold text-[#1e3a5f] flex items-center gap-2 mb-2">
+          <LockKeyhole size={16} className="text-blue-600" /> Safeguarding & Legal Framework
+        </h3>
+        <p className="text-xs text-[#526b88] leading-relaxed">
+          The Physical-Digital Link operates under the provisions of the{" "}
+          <strong>Juvenile Justice (Care and Protection of Children) Act, 2015</strong> and <strong>POCSO Act guidelines</strong>. Digital platforms are legally encouraged to bridge severe online threats to statutory child welfare officers. All escalations adhere to strict data minimization — raw conversational logs are never retained or broadcast, protecting young people’s fundamental privacy while securing their immediate physical well-being.
+        </p>
+      </div>
+    </>
+  );
+}
 function GuardianApp() {
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [summary, setSummary] = useState<Summary | null>(null);
@@ -1334,6 +2049,21 @@ function GuardianApp() {
   const [error, setError] = useState("");
   const [mobile, setMobile] = useState(false);
   const location = useLocation();
+
+  const userRole = sessionStorage.getItem("guardrails-role") || "guardian";
+  const userLocality = sessionStorage.getItem("guardrails-locality") || "South Delhi";
+  const storedUser = sessionStorage.getItem("guardrails-user");
+  const displayName = storedUser || (userRole === "ngo" ? "CWC Casework Officer" : guardianDisplayName);
+
+  const handleSignOut = () => {
+    sessionStorage.removeItem("guardrails-token");
+    sessionStorage.removeItem("guardrails-role");
+    sessionStorage.removeItem("guardrails-locality");
+    sessionStorage.removeItem("guardrails-user");
+    setAlerts([]);
+    setSummary(null);
+  };
+
   const refresh = useCallback(async () => {
     setLoading(true);
     try {
@@ -1367,11 +2097,18 @@ function GuardianApp() {
     setMobile(false);
     window.scrollTo(0, 0);
   }, [location.pathname]);
-  const nav = [
-    { to: "/", label: "Overview", icon: LayoutDashboard },
-    { to: "/trends", label: "Trends & insights", icon: TrendingUp },
-    { to: "/demo", label: "Demo panel", icon: FlaskConical },
-  ];
+
+  const nav =
+    userRole === "ngo"
+      ? [
+          { to: "/physical-link", label: "Casework & Dispatch Box", icon: Radio },
+        ]
+      : [
+          { to: "/", label: "Overview", icon: LayoutDashboard },
+          { to: "/trends", label: "Trends & insights", icon: TrendingUp },
+          { to: "/demo", label: "Demo panel", icon: FlaskConical },
+        ];
+
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main">
@@ -1385,7 +2122,7 @@ function GuardianApp() {
         />
       )}
       <aside id="navigation" className={cx("sidebar", mobile && "mobile-open")}>
-        <Link to="/" className="brand">
+        <Link to={userRole === "ngo" ? "/physical-link" : "/"} className="brand">
           <span className="brand-mark">
             <ShieldCheck size={27} />
           </span>
@@ -1396,7 +2133,11 @@ function GuardianApp() {
             </span>
           </span>
         </Link>
-        <div className="workspace-label">FAMILY SAFETY SPACE</div>
+        <div className="workspace-label">
+          {userRole === "ngo"
+            ? `CHILD WELFARE & NGO SPACE · ${userLocality.toUpperCase()}`
+            : "FAMILY SAFETY SPACE"}
+        </div>
         <nav>
           {nav.map((n) => (
             <NavLink end={n.to === "/"} key={n.to} to={n.to}>
@@ -1408,35 +2149,54 @@ function GuardianApp() {
             </NavLink>
           ))}
           <div className="nav-divider" />
-          <NavLink to="/help">
-            <HeartHandshake size={19} /> Youth support portal
-          </NavLink>
-          <NavLink to="/resources">
-            <BookOpen size={19} /> Support resources
-          </NavLink>
-          <NavLink to="/settings">
-            <Settings2 size={19} /> Settings
-          </NavLink>
+          {userRole === "ngo" ? (
+            <>
+              <NavLink to="/settings">
+                <Settings2 size={19} /> Settings
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink to="/resources">
+                <BookOpen size={19} /> Support resources
+              </NavLink>
+              <NavLink to="/settings">
+                <Settings2 size={19} /> Settings
+              </NavLink>
+            </>
+          )}
         </nav>
         <div className="sidebar-bottom">
           <div className="privacy-mini">
             <span>
-              <LockKeyhole size={15} /> Private by design
+              <LockKeyhole size={15} />{" "}
+              {userRole === "ngo" ? "Statutory Safeguarding" : "Private by design"}
             </span>
             <p>
-              A safety net that respects
-              <br />
-              their growing independence.
+              {userRole === "ngo"
+                ? `Locality dispatch enabled for ${userLocality}. Zero message leakage to unauthorized parties.`
+                : "A safety net that respects their growing independence."}
             </p>
           </div>
           <div className="guardian">
-            <span className="avatar">DG</span>
+            <span className="avatar">{userRole === "ngo" ? "CW" : "DG"}</span>
             <div>
-              <strong>{guardianDisplayName}</strong>
-              <span>Prototype · guardian view</span>
+              <strong>{displayName}</strong>
+              <span>
+                {userRole === "ngo"
+                  ? `${userLocality} · Field Welfare Unit`
+                  : "Prototype · Guardian View"}
+              </span>
             </div>
             <ShieldCheck size={17} />
           </div>
+          <Link
+            to="/login"
+            onClick={handleSignOut}
+            className="flex items-center justify-center gap-2 py-2 px-3 mt-3 text-xs font-semibold text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700/60 rounded-lg transition-colors text-center"
+          >
+            <LogOut size={13} /> Sign Out
+          </Link>
         </div>
       </aside>
       <div className="main-shell">
@@ -1462,15 +2222,23 @@ function GuardianApp() {
                     ? "Trends & insights"
                     : location.pathname === "/resources"
                       ? "Support resources"
-                      : location.pathname.startsWith("/alerts/")
-                        ? "Alert details"
-                        : "Overview"}
+                      : location.pathname === "/physical-link"
+                        ? "Physical-Digital Link"
+                        : location.pathname.startsWith("/alerts/")
+                          ? "Alert details"
+                          : "Overview"}
             </strong>
           </div>
           <div className="topbar-right">
-            <span className="demo-badge">
-              <FlaskConical size={13} /> Demo workspace
-            </span>
+            {userRole === "ngo" ? (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-950/80 text-emerald-300 border border-emerald-500/40">
+                <Building2 size={13} /> Child Welfare Unit · {userLocality}
+              </span>
+            ) : (
+              <span className="demo-badge">
+                <FlaskConical size={13} /> Parent Mode · Demo Enabled
+              </span>
+            )}
             <Link
               to="/resources"
               className="icon-button"
@@ -1479,59 +2247,92 @@ function GuardianApp() {
               <CircleHelp size={19} />
             </Link>
             <span className="topbar-divider" />
-            <span className="small-avatar">DG</span>
+            <span className="small-avatar">{userRole === "ngo" ? "CW" : "DG"}</span>
           </div>
         </header>
         <main id="main" tabIndex={-1}>
-          {health?.guardian_login_enabled && (
-            <div className="privacy-banner">
-              <ShieldCheck size={19} />
-              <span>Guardian access uses a one-hour sign-in session.</span>
-              <Link className="text-link" to="/login">
-                Sign in
-              </Link>
-              <Link
-                className="text-link"
-                to="/login"
-                onClick={() => {
-                  sessionStorage.removeItem("guardrails-token");
-                  setAlerts([]);
-                  setSummary(null);
-                }}
-              >
-                Sign out
-              </Link>
-            </div>
-          )}
+          <div className="privacy-banner">
+            <ShieldCheck size={19} />
+            <span>
+              {userRole === "ngo"
+                ? `Child Welfare & NGO portal active (${userLocality} Unit). Real-time locality routing enabled.`
+                : "Parent & Guardian workspace active. Demo panel and local telemetry monitoring enabled."}
+            </span>
+            <Link className="text-link" to="/login" onClick={handleSignOut}>
+              Sign Out
+            </Link>
+          </div>
           <Routes>
             <Route
               path="/"
               element={
-                <Dashboard
-                  alerts={alerts}
-                  summary={summary}
-                  loading={loading}
-                  error={error}
-                  refresh={refresh}
-                />
+                userRole === "ngo" ? (
+                  <Navigate to="/physical-link" replace />
+                ) : (
+                  <Dashboard
+                    alerts={alerts}
+                    summary={summary}
+                    loading={loading}
+                    error={error}
+                    refresh={refresh}
+                  />
+                )
               }
             />
             <Route
               path="/demo"
-              element={<Demo health={health} onChange={refresh} />}
+              element={
+                userRole === "ngo" ? (
+                  <Navigate to="/physical-link" replace />
+                ) : (
+                  <Demo health={health} onChange={refresh} />
+                )
+              }
             />
-            <Route path="/alerts/:id" element={<Detail onChange={refresh} />} />
+            <Route
+              path="/alerts/:id"
+              element={
+                userRole === "ngo" ? (
+                  <Navigate to="/physical-link" replace />
+                ) : (
+                  <Detail onChange={refresh} />
+                )
+              }
+            />
             <Route
               path="/trends"
               element={
-                <Trends summary={summary} alerts={alerts} error={error} />
+                userRole === "ngo" ? (
+                  <Navigate to="/physical-link" replace />
+                ) : (
+                  <Trends summary={summary} alerts={alerts} error={error} />
+                )
               }
             />
             <Route
               path="/settings"
               element={<Settings health={health} onChange={refresh} />}
             />
-            <Route path="/resources" element={<Resources />} />
+            <Route
+              path="/resources"
+              element={
+                userRole === "ngo" ? (
+                  <Navigate to="/physical-link" replace />
+                ) : (
+                  <Resources />
+                )
+              }
+            />
+            <Route
+              path="/physical-link"
+              element={
+                userRole === "ngo" ? (
+                  <PhysicalLink summary={summary} alerts={alerts} />
+                ) : (
+                  <Navigate to="/" replace />
+                )
+              }
+            />
             <Route
               path="*"
               element={

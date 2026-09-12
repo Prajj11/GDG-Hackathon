@@ -295,6 +295,116 @@
     @apply ml-auto flex items-center gap-1.5 text-[10px] whitespace-nowrap;
     color: #6f8b7e;
   }
+  .physical-link-banner {
+    @apply flex items-center justify-between gap-4 border rounded-xl px-5 py-4 mb-6;
+    border-color: #d8e4f3;
+    background: linear-gradient(135deg, #f2f7fd 0%, #eaf2fc 100%);
+    box-shadow: 0 1px 3px rgba(38, 57, 86, 0.04);
+  }
+  .physical-link-banner-main {
+    @apply flex items-center gap-3.5;
+  }
+  .physical-link-banner-icon {
+    @apply flex items-center justify-center w-10 h-10 rounded-xl shrink-0;
+    background: #ffffff;
+    color: #2b6cb0;
+    border: 1px solid #d0e0f5;
+    box-shadow: 0 2px 4px rgba(43, 108, 176, 0.08);
+  }
+  .physical-link-badge-row {
+    @apply flex items-center gap-2;
+  }
+  .physical-link-badge-row strong {
+    @apply font-semibold text-[14px];
+    color: #1e3a5f;
+  }
+  .physical-link-badge {
+    @apply inline-flex items-center text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full;
+    background: #e1ecfa;
+    color: #1e4f8a;
+    border: 1px solid #c8ddf7;
+  }
+  .physical-link-banner p {
+    @apply text-xs mt-1 leading-relaxed;
+    color: #4b6685;
+  }
+  .ground-grid-3 {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-5 mb-8;
+  }
+  .ground-card {
+    @apply rounded-xl border bg-white p-5;
+    border-color: #e6eaf0;
+    box-shadow: 0 2px 3px #23365402;
+  }
+  .ground-card-top {
+    @apply flex justify-between items-center text-xs mb-3;
+    color: #6c7c90;
+  }
+  .ground-card-icon {
+    @apply w-8 h-8 rounded-lg flex items-center justify-center;
+    background: #f0f4f9;
+    color: #375981;
+  }
+  .ground-card h3 {
+    @apply text-[15px] font-semibold text-[#1e3a5f] mb-1;
+  }
+  .ground-card p {
+    @apply text-xs text-[#5f738c] leading-relaxed;
+  }
+  .ground-simulator {
+    @apply rounded-xl border bg-white p-6 mb-8;
+    border-color: #e2e8f0;
+    box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.04);
+  }
+  .ground-step-list {
+    @apply flex flex-col gap-3 mt-5;
+  }
+  .ground-step-item {
+    @apply flex items-start gap-4 p-4 rounded-xl border transition-all;
+    border-color: #e6eaf0;
+    background: #fbfcfd;
+  }
+  .ground-step-item.active {
+    border-color: #3182ce;
+    background: #f0f7ff;
+  }
+  .ground-step-item.completed {
+    border-color: #68d391;
+    background: #f0fff4;
+  }
+  .ground-step-badge {
+    @apply w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-xs font-bold;
+  }
+  .ground-partner-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-5 mb-8;
+  }
+  .ground-partner-card {
+    @apply rounded-xl border bg-white p-5 flex flex-col justify-between transition-shadow;
+    border-color: #e6eaf0;
+  }
+  .ground-partner-card:hover {
+    box-shadow: 0 4px 12px rgba(35, 54, 84, 0.06);
+  }
+  /* NGO Casework Inbox */
+  .ngo-inbox-section {
+    @apply rounded-xl border bg-white p-6 mb-8;
+    border-color: #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+  }
+  .ngo-case-card {
+    @apply rounded-xl border p-5 bg-white transition-all mb-4;
+    border-color: #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  }
+  .ngo-case-card:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.05);
+  }
+  .ngo-message-box {
+    @apply p-4 rounded-xl border my-3;
+    background: #f8fafc;
+    border-color: #e2e8f0;
+  }
   .stats-grid {
     @apply grid grid-cols-3 gap-5 mb-8;
   }

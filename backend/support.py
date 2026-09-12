@@ -45,8 +45,9 @@ class RouteOut(BaseModel):
 
 class ReceiptOut(BaseModel):
     id: str
-    status: Literal['submitted', 'routed']
+    status: str
     urgency_level: Literal['Low', 'Medium', 'High']
+    locality: str = 'South Delhi'
     created_at: str
     expires_at: str
     context_shared: bool
@@ -77,6 +78,7 @@ class ReportIn(BaseModel):
     selected_context: CONTEXTS = 'talk'
     report_text: str = Field(default='', max_length=1500)
     urgency_level: Literal['Low', 'Medium', 'High'] = 'Medium'
+    locality: str = Field(default='South Delhi', max_length=60)
     linked_alert_id: str | None = Field(default=None, max_length=36)
     context_token: str | None = Field(default=None, max_length=2048)
     share_detection_context: bool = False
@@ -105,6 +107,7 @@ def route_report(db, report):
 def receipt_out(db, report):
     route = db.scalar(select(database.AidRoute).where(database.AidRoute.report_id == report.id))
     return {'id': report.id, 'status': report.status, 'urgency_level': report.urgency_level,
+            'locality': getattr(report, 'locality', 'South Delhi') or 'South Delhi',
             'created_at': report.created_at.isoformat() + 'Z',
             'expires_at': (report.created_at + timedelta(days=7)).isoformat() + 'Z',
             'context_shared': report.detection_context is not None,
@@ -133,7 +136,8 @@ def submit_report(payload: ReportIn, response: Response):
         report = database.Report(id=str(uuid4()), anonymous_token=digest,
                         linked_alert_id=context['linked_alert_id'] if context else None,
                         selected_context=payload.selected_context, report_text=payload.report_text,
-                        urgency_level=payload.urgency_level, detection_context=(
+                        urgency_level=payload.urgency_level, locality=payload.locality,
+                        detection_context=(
                             {'pattern_type': context['pattern_type'], 'risk_level': context['risk_level']}
                             if context else None))
         db.add(report)

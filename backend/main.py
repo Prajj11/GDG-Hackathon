@@ -10,7 +10,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, field_validator
 from sqlalchemy import select, delete, func
-from backend.database import Base, engine, SessionLocal, User, Conversation, Alert, DatasetRecord, now
+from backend.database import Base, engine, SessionLocal, User, Conversation, Alert, Report, DatasetRecord, Account, ensure_schema, now
 from backend.ml.detector import analyze_message, get_detector, minimal_snippet, risk_level
 from backend.auth import router as auth_router, authorize as jwt_authorize, issue_token, PASSWORD_HASH
 from backend.support import router as support_router, cleanup_reports
@@ -38,6 +38,7 @@ async def lifespan(app):
     if os.getenv('DG_HOSTED') == 'true' and PASSWORD_HASH and len(os.getenv('JWT_SECRET', '')) < 32:
         raise RuntimeError('Hosted guardian login requires a JWT_SECRET of at least 32 characters.')
     Base.metadata.create_all(engine)
+    ensure_schema(engine)
     with SessionLocal() as db:
         user = db.get(User, 1)
         if not user:
@@ -45,6 +46,47 @@ async def lifespan(app):
             db.commit()
         elif not user.snippets_enabled:
             user.snippets_enabled = True
+            db.commit()
+        if db.scalar(select(func.count()).select_from(Report)) == 0:
+            import hashlib, secrets
+            seed_reports = [
+                Report(
+                    id='rep-dl-101',
+                    anonymous_token=hashlib.sha256(secrets.token_hex(32).encode()).hexdigest(),
+                    selected_context='bullying',
+                    report_text='Classmates in my tuition center created a fake account and are posting abusive messages and threatening to leak edited pictures.',
+                    urgency_level='High',
+                    locality='South Delhi',
+                    status='under_review',
+                    assigned_worker='Ms. S. Sharma (Child Protection Officer)',
+                    caseworker_notes='Initial risk assessment completed. School nodal authority contacted.',
+                    detection_context={'pattern_type': 'bullying-harassment', 'risk_level': 'High'}
+                ),
+                Report(
+                    id='rep-dl-102',
+                    anonymous_token=hashlib.sha256(secrets.token_hex(32).encode()).hexdigest(),
+                    selected_context='unfamiliar-person',
+                    report_text='A stranger in a gaming channel keeps asking for my home address and school timing, promising gaming credits.',
+                    urgency_level='Medium',
+                    locality='South Delhi',
+                    status='submitted',
+                    assigned_worker=None,
+                    detection_context={'pattern_type': 'grooming-isolation-request', 'risk_level': 'Medium'}
+                ),
+                Report(
+                    id='rep-mb-201',
+                    anonymous_token=hashlib.sha256(secrets.token_hex(32).encode()).hexdigest(),
+                    selected_context='secrets',
+                    report_text='Someone said they would share my private voice notes if I tell my parents.',
+                    urgency_level='High',
+                    locality='Mumbai Suburban',
+                    status='dispatched',
+                    assigned_worker='Inspector R. Kulkarni (SJPU)',
+                    caseworker_notes='Field visit scheduled with CWC counsellor.',
+                    detection_context={'pattern_type': 'grooming-isolation-request', 'risk_level': 'High'}
+                )
+            ]
+            db.add_all(seed_reports)
             db.commit()
         cleanup(db)
         cleanup_reports(db)
@@ -242,6 +284,66 @@ def dataset_records(language: str | None = None, pattern: str | None = None, ori
                 'turns_count': len(r.turns or [])
             } for r in records]
         }
+
+class NgoReportUpdate(BaseModel):
+    status: Literal['submitted', 'under_review', 'dispatched', 'resolved'] | None = None
+    assigned_worker: str | None = None
+    caseworker_notes: str | None = None
+
+@app.get('/api/ngo/reports', tags=['Child Welfare NGO Casework'])
+def get_ngo_reports(locality: str | None = None, status: str | None = None):
+    with SessionLocal() as db:
+        query = select(Report).order_by(Report.created_at.desc())
+        if locality and locality != 'All Localities':
+            query = query.where(Report.locality == locality)
+        if status and status != 'all':
+            query = query.where(Report.status == status)
+        reports = db.scalars(query).all()
+        return [{
+            'id': r.id,
+            'locality': r.locality or 'South Delhi',
+            'selected_context': r.selected_context,
+            'report_text': r.report_text,
+            'urgency_level': r.urgency_level,
+            'status': r.status,
+            'assigned_worker': r.assigned_worker,
+            'caseworker_notes': r.caseworker_notes,
+            'detection_context': r.detection_context,
+            'created_at': r.created_at.isoformat() + 'Z' if r.created_at else None
+        } for r in reports]
+
+@app.patch('/api/ngo/reports/{report_id}', tags=['Child Welfare NGO Casework'])
+def update_ngo_report(report_id: str, payload: NgoReportUpdate):
+    with LOCK, SessionLocal() as db:
+        report = db.get(Report, report_id)
+        if not report:
+            raise HTTPException(404, 'Report not found')
+        if payload.status:
+            report.status = payload.status
+        if payload.assigned_worker is not None:
+            report.assigned_worker = payload.assigned_worker
+        if payload.caseworker_notes is not None:
+            report.caseworker_notes = payload.caseworker_notes
+        db.commit()
+        return {
+            'id': report.id,
+            'status': report.status,
+            'assigned_worker': report.assigned_worker,
+            'caseworker_notes': report.caseworker_notes
+        }
+
+@app.get('/api/ngo/localities', tags=['Child Welfare NGO Casework'])
+def get_ngo_localities():
+    base = ['South Delhi', 'North Delhi', 'Mumbai Suburban', 'Bengaluru Urban', 'Kolkata Central']
+    with SessionLocal() as db:
+        registered = [
+            loc for (loc,) in db.query(Account.stationed_location).filter(
+                Account.stationed_location != None,
+                Account.stationed_location != ''
+            ).distinct().all()
+        ]
+        combined = list(dict.fromkeys(base + registered))
+        return ['All Localities'] + combined + ['Other']
 
 # Antideploy runs the project as one container. Serve the built SPA from the
 # same origin while keeping all /api routes registered above it.

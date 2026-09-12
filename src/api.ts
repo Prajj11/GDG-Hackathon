@@ -84,3 +84,16 @@ export const patternNames: Record<string, string> = {
   "bullying-harassment": "Bullying & harassment",
   neutral: "No clear risk pattern",
 };
+
+export interface NgoReport {
+  id: string;
+  locality: string;
+  selected_context: string;
+  report_text: string;
+  urgency_level: "High" | "Medium" | "Low";
+  status: string;
+  assigned_worker?: string | null;
+  caseworker_notes?: string | null;
+  detection_context?: { pattern_type?: string; risk_level?: string } | null;
+  created_at: string;
+}

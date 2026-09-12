@@ -47,6 +47,19 @@ class Alert(Base):
     reviewed: Mapped[bool] = mapped_column(default=False)
     created_at: Mapped[datetime] = mapped_column(default=now, index=True)
 
+class Account(Base):
+    __tablename__ = 'accounts'
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    role: Mapped[str] = mapped_column(String(20), index=True)  # 'guardian' | 'ngo'
+    username: Mapped[str] = mapped_column(String(80), unique=True, index=True)
+    email: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    password_hash: Mapped[str] = mapped_column(String(256))
+    full_name: Mapped[str] = mapped_column(String(100), default='')
+    organization_name: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    stationed_location: Mapped[str | None] = mapped_column(String(80), nullable=True, index=True)
+    child_name: Mapped[str | None] = mapped_column(String(80), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(default=now)
+
 class Report(Base):
     __tablename__ = 'reports'
     id: Mapped[str] = mapped_column(String(36), primary_key=True)
@@ -56,9 +69,71 @@ class Report(Base):
     selected_context: Mapped[str] = mapped_column(String(50))
     report_text: Mapped[str] = mapped_column(Text, default='')
     urgency_level: Mapped[str] = mapped_column(String(10))
+    locality: Mapped[str] = mapped_column(String(60), default='South Delhi', index=True)
+    assigned_worker: Mapped[str | None] = mapped_column(String(80), nullable=True)
+    caseworker_notes: Mapped[str | None] = mapped_column(Text, nullable=True)
     detection_context: Mapped[dict | None] = mapped_column(JSON, nullable=True)
     status: Mapped[str] = mapped_column(String(20), default='submitted')
     created_at: Mapped[datetime] = mapped_column(default=now, index=True)
+
+def ensure_schema(target_engine):
+    Base.metadata.create_all(target_engine, tables=[Account.__table__])
+    if str(target_engine.url).startswith('sqlite'):
+        with target_engine.connect() as conn:
+            cursor = conn.exec_driver_sql("PRAGMA table_info(reports)")
+            cols = [row[1] for row in cursor.fetchall()]
+            if cols:
+                if 'locality' not in cols:
+                    conn.exec_driver_sql("ALTER TABLE reports ADD COLUMN locality VARCHAR(60) DEFAULT 'South Delhi'")
+                if 'assigned_worker' not in cols:
+                    conn.exec_driver_sql("ALTER TABLE reports ADD COLUMN assigned_worker VARCHAR(80)")
+                if 'caseworker_notes' not in cols:
+                    conn.exec_driver_sql("ALTER TABLE reports ADD COLUMN caseworker_notes TEXT")
+                conn.commit()
+
+    with SessionLocal() as db:
+        if db.query(Account).count() == 0:
+            from passlib.context import CryptContext
+            pwd_ctx = CryptContext(schemes=['pbkdf2_sha256'], deprecated='auto')
+            demo_hash = pwd_ctx.hash('demo123')
+            db.add_all([
+                Account(
+                    role='guardian',
+                    username='guardian',
+                    email='guardian@family.org',
+                    password_hash=demo_hash,
+                    full_name='Priya Sharma',
+                    child_name="Aarav's Phone"
+                ),
+                Account(
+                    role='ngo',
+                    username='cwc_southdelhi',
+                    email='officer.delhi@cwc.gov.in',
+                    password_hash=demo_hash,
+                    full_name='Ms. S. Sharma (CPO)',
+                    organization_name='South Delhi Child Welfare Committee',
+                    stationed_location='South Delhi'
+                ),
+                Account(
+                    role='ngo',
+                    username='mumbai_cwc',
+                    email='support@mumbaicwc.org',
+                    password_hash=demo_hash,
+                    full_name='Rajesh Varma (Field Officer)',
+                    organization_name='Mumbai Suburban Child Protection Unit',
+                    stationed_location='Mumbai Suburban'
+                ),
+                Account(
+                    role='ngo',
+                    username='bengaluru_cwc',
+                    email='contact@bengalurucwc.org',
+                    password_hash=demo_hash,
+                    full_name='Dr. Anita Rao',
+                    organization_name='Bengaluru Urban Child Welfare Committee',
+                    stationed_location='Bengaluru Urban'
+                ),
+            ])
+            db.commit()
 
 class AidRoute(Base):
     __tablename__ = 'aid_routes'

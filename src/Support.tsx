@@ -13,6 +13,7 @@ import {
   Check,
   HeartHandshake,
   LockKeyhole,
+  MapPin,
   MessageCircle,
   Phone,
   ShieldCheck,
@@ -304,6 +305,16 @@ function ReportForm() {
   const [step, setStep] = useState(1);
   const [notes, setNotes] = useState("");
   const [urgency, setUrgency] = useState("Medium");
+  const [locality, setLocality] = useState("South Delhi");
+  const [customLocality, setCustomLocality] = useState("");
+  const [availableLocalities, setAvailableLocalities] = useState<string[]>([
+    "South Delhi",
+    "North Delhi",
+    "Mumbai Suburban",
+    "Bengaluru Urban",
+    "Kolkata Central",
+    "Other",
+  ]);
   const [shareContext, setShareContext] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -314,6 +325,15 @@ function ReportForm() {
   useEffect(() => {
     heading.current?.focus();
   }, [step]);
+  useEffect(() => {
+    supportApi
+      .get<string[]>("/ngo/localities")
+      .then(({ data }) => {
+        const list = data.filter((l) => l !== "All Localities");
+        if (list.length > 0) setAvailableLocalities(list);
+      })
+      .catch(() => {});
+  }, []);
   useEffect(() => {
     if (!contextToken) return;
     let current = true;
@@ -346,6 +366,10 @@ function ReportForm() {
     pending.current = true;
     setBusy(true);
     setError("");
+    const targetLocality =
+      locality === "Other"
+        ? (customLocality.trim() || "National Hub")
+        : locality;
     try {
       token.current ||= randomToken();
       const { data } = await supportApi.post<Receipt>("/support/reports", {
@@ -353,6 +377,7 @@ function ReportForm() {
         selected_context: selection,
         report_text: notes,
         urgency_level: urgency,
+        locality: targetLocality,
         share_detection_context: shareContext,
         ...(shareContext && context
           ? {
@@ -474,6 +499,37 @@ function ReportForm() {
                 />
               </label>
               <p className="youth-count">{notes.length} / 1500</p>
+              <div className="my-4 p-3.5 rounded-xl bg-blue-50/70 border border-blue-200/80">
+                <label className="font-semibold text-xs text-blue-950 flex items-center gap-1.5 mb-1">
+                  <MapPin size={14} className="text-blue-600" />
+                  Where are you located? (Your District or City)
+                </label>
+                <select
+                  value={locality}
+                  disabled={busy}
+                  onChange={(e) => setLocality(e.target.value)}
+                  className="mt-1 !py-2.5 !px-3 !text-xs !bg-white border border-slate-200 rounded-lg w-full font-medium"
+                >
+                  {availableLocalities.map((loc) => (
+                    <option key={loc} value={loc}>
+                      {loc}
+                    </option>
+                  ))}
+                </select>
+                {locality === "Other" && (
+                  <input
+                    type="text"
+                    placeholder="Type your district or city name..."
+                    value={customLocality}
+                    disabled={busy}
+                    onChange={(e) => setCustomLocality(e.target.value)}
+                    className="mt-2 !py-2 !px-3 !text-xs !bg-white border border-slate-200 rounded-lg w-full"
+                  />
+                )}
+                <small className="text-[11px] text-blue-800 mt-1.5 block leading-relaxed">
+                  📍 Your anonymous request will be sent directly to the accredited Child Welfare Committee (CWC) & NGO stationed in <strong>{locality === "Other" ? (customLocality || "your area") : locality}</strong>.
+                </small>
+              </div>
               <fieldset className="youth-urgency">
                 <legend>How soon would you like support?</legend>
                 {[
