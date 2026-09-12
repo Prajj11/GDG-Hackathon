@@ -23,6 +23,81 @@ EXPLANATIONS = {
     'bullying-harassment': 'The message resembles targeted humiliation, exclusion, or repeated personal insults.',
 }
 BASE_SCORES = {'neutral': 12, 'grooming-trust-building': 43, 'grooming-isolation-request': 66, 'grooming-coercive-language': 85, 'bullying-harassment': 60}
+BENIGN_EXPLANATIONS = {
+    'safety-advice': 'The message appears to be protective advice about telling trusted adults or avoiding unsafe sharing.',
+    'negation': 'The message explicitly negates threat or private-detail seeking language.',
+    'reported-speech': 'The message appears to report or quote a concerning message rather than directly pressure the child.',
+    'gaming-talk': 'The message appears to use ordinary gaming or match slang without targeted humiliation.',
+}
+
+
+def _plain(text):
+    return re.sub(r'\s+', ' ', text.casefold()).strip()
+
+
+def benign_context(text):
+    normalized = _plain(text)
+    trusted_adults = (
+        'parent', 'parents', 'teacher', 'trusted adult', 'mum', 'mummy',
+        'mumma', 'papa', 'guardian', 'coach',
+    )
+    protective_phrases = (
+        'do not send', "don't send", 'never send', 'mat bhejna', 'batana',
+        'tell a', 'tell your', 'ko batana', 'se baat karna',
+    )
+    private_terms = (
+        'photo', 'photos', 'private detail', 'private details', 'details',
+        'stranger', 'unknown', 'secret',
+    )
+    advice_markers = (
+        'teacher ne bola', 'coach said', 'teacher said', 'if anyone', 'koi ',
+        'someone asks', 'trusted adult', 'always talk', 'parents ko batana',
+    )
+    isolation_markers = (
+        'our secret', 'humara secret', 'delete', 'private chat', 'chupke',
+        'akele', 'alone', 'gharwalon se chhupao',
+    )
+    if (any(word in normalized for word in trusted_adults)
+            and any(phrase in normalized for phrase in protective_phrases)
+            and any(term in normalized for term in private_terms)
+            and any(marker in normalized for marker in advice_markers)
+            and not any(marker in normalized for marker in isolation_markers)):
+        return 'safety-advice'
+
+    negation_patterns = (
+        (
+            r"\b(not|never|no|don't|do not|nahi|nahin)\b.{0,80}"
+            r"\b(threaten|threatening|dhamki|private detail|private details|photo|details)\b"
+        ),
+        (
+            r"\b(do not|don't|not|nahi|nahin)\b.{0,40}"
+            r"\b(want|chahiye)\b.{0,40}\b(private|details|photo)\b"
+        ),
+    )
+    if any(re.search(pattern, normalized) for pattern in negation_patterns):
+        return 'negation'
+
+    reporting_phrases = (
+        'my friend said', 'friend said', 'someone messaged', 'someone told',
+        'a stranger told', 'told me', 'reported that',
+    )
+    coercive_terms = (
+        'send your photo', 'report you', 'threaten', 'threatening', 'leak',
+        'private picture', 'private photo',
+    )
+    if any(phrase in normalized for phrase in reporting_phrases) and any(term in normalized for term in coercive_terms):
+        return 'reported-speech'
+
+    gaming_terms = ('game', 'gaming', 'match', 'round', 'level')
+    slang_terms = ('killer', 'destroyed me', 'crushed me', 'beat me', 'destroy kar diya')
+    direct_insults = (
+        'ugly', 'idiot', 'loser', 'worthless', 'stupid', 'freak', 'bekaar',
+        'bewakoof',
+    )
+    if any(term in normalized for term in gaming_terms) and any(term in normalized for term in slang_terms) and not any(term in normalized for term in direct_insults):
+        return 'gaming-talk'
+
+    return None
 
 class Detector:
     def __init__(self, mode=None):
@@ -79,8 +154,16 @@ class Detector:
         # Low-confidence predictions stay visible, but do not imply certainty.
         if confidence < .38 and label != 'neutral':
             score = min(score, 49)
+        benign_reason = benign_context(text) if label != 'neutral' else None
+        if benign_reason:
+            label = 'neutral'
+            score = BASE_SCORES[label]
+            confidence = max(confidence, .55)
+            explanation = f'{EXPLANATIONS[label]} {BENIGN_EXPLANATIONS[benign_reason]}'
+        else:
+            explanation = EXPLANATIONS[label]
         return {'risk_score': score, 'risk_level': risk_level(score), 'pattern_type': label,
-                'confidence': round(confidence, 3), 'explanation': EXPLANATIONS[label],
+                'confidence': round(confidence, 3), 'explanation': explanation,
                 'model': self.name, 'model_kind': self.kind}
 
 @lru_cache(maxsize=1)

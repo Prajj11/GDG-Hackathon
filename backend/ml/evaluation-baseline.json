@@ -3,80 +3,62 @@
   "scope": "30 held-out synthetic scenarios; not a production benchmark",
   "classification_report": {
     "bullying-harassment": {
-      "precision": 0.8333333333333334,
-      "recall": 1.0,
-      "f1-score": 0.9090909090909091,
-      "support": 5.0
-    },
-    "grooming-coercive-language": {
       "precision": 1.0,
       "recall": 1.0,
       "f1-score": 1.0,
       "support": 5.0
     },
+    "grooming-coercive-language": {
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1-score": 0.8888888888888888,
+      "support": 5.0
+    },
     "grooming-isolation-request": {
-      "precision": 0.7142857142857143,
+      "precision": 1.0,
       "recall": 1.0,
-      "f1-score": 0.8333333333333334,
+      "f1-score": 1.0,
       "support": 5.0
     },
     "grooming-trust-building": {
-      "precision": 0.8333333333333334,
+      "precision": 1.0,
       "recall": 1.0,
-      "f1-score": 0.9090909090909091,
+      "f1-score": 1.0,
       "support": 5.0
     },
     "neutral": {
-      "precision": 1.0,
-      "recall": 0.6,
-      "f1-score": 0.75,
+      "precision": 0.9090909090909091,
+      "recall": 1.0,
+      "f1-score": 0.9523809523809523,
       "support": 10.0
     },
-    "accuracy": 0.8666666666666667,
+    "accuracy": 0.9666666666666667,
     "macro avg": {
-      "precision": 0.8761904761904763,
-      "recall": 0.9199999999999999,
-      "f1-score": 0.8803030303030305,
+      "precision": 0.9818181818181818,
+      "recall": 0.96,
+      "f1-score": 0.9682539682539681,
       "support": 30.0
     },
     "weighted avg": {
-      "precision": 0.8968253968253969,
-      "recall": 0.8666666666666667,
-      "f1-score": 0.8585858585858586,
+      "precision": 0.9696969696969696,
+      "recall": 0.9666666666666667,
+      "f1-score": 0.9656084656084656,
       "support": 30.0
     }
   },
   "per_language": {
     "English": 0.875,
-    "Hindi": 0.8333333333333334,
-    "Hinglish": 0.6666666666666666,
+    "Hindi": 1.0,
+    "Hinglish": 1.0,
     "Malayalam": 1.0,
     "Manglish": 1.0
   },
   "errors": [
     {
-      "language": "Hinglish",
-      "text": "Mummy se permission le lena, hum sab library mein padhenge.",
-      "expected": "neutral",
-      "predicted": "bullying-harassment"
-    },
-    {
       "language": "English",
-      "text": "A stranger told me to hide the chat. I told my mum and blocked them.",
-      "expected": "neutral",
-      "predicted": "grooming-isolation-request"
-    },
-    {
-      "language": "Hinglish",
-      "text": "Teacher ne bola koi photo maange toh mat bhejna aur parents ko batana.",
-      "expected": "neutral",
-      "predicted": "grooming-isolation-request"
-    },
-    {
-      "language": "Hindi",
-      "text": "मेरे दोस्त ने मुझे जन्मदिन पर गिफ्ट दिया।",
-      "expected": "neutral",
-      "predicted": "grooming-trust-building"
+      "text": "Unless you obey me, your private pictures go to the entire class.",
+      "expected": "grooming-coercive-language",
+      "predicted": "neutral"
     }
   ]
 }

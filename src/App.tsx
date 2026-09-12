@@ -8,6 +8,7 @@ import {
 import {
   Link,
   NavLink,
+  Navigate,
   Route,
   Routes,
   useLocation,
@@ -61,6 +62,8 @@ import {
   type Risk,
   type Summary,
 } from "./api";
+import Support from "./Support";
+import GuardianLogin from "./GuardianLogin";
 
 const cx = (...parts: (string | false | undefined)[]) =>
   parts.filter(Boolean).join(" ");
@@ -475,6 +478,7 @@ function Dashboard({
               className={cx("filter-button", showFilters && "selected")}
               onClick={() => setShowFilters(!showFilters)}
               aria-expanded={showFilters}
+              aria-label="Filters"
             >
               <SlidersHorizontal size={14} />
               <span>Filters</span>
@@ -892,6 +896,17 @@ function Demo({
                     retained.
                   </div>
                 )}
+                <Link
+                  className="secondary w-full justify-center mt-4"
+                  to="/help/report"
+                  state={{ supportContext: result.support_context_token }}
+                >
+                  <HeartHandshake size={17} /> Open youth support
+                </Link>
+                <p className="subtle mt-3">
+                  The young person can ask for help independently and choose
+                  whether to attach this safety signal.
+                </p>
               </>
             ) : (
               <div className="result-placeholder">
@@ -1295,17 +1310,25 @@ function Settings({
             </li>
           </ul>
           <p className="subtle">
-            This is a synthetic-data prototype. A production service needs
-            guardian authentication, consent, and independent safety evaluation.
+            Youth reports stay separate from this dashboard. Guardian login is
+            available when configured. This prototype still needs independent
+            safety evaluation.
           </p>
         </aside>
         <section className="panel">
           <h2>Demo service access</h2>
           <p className="subtle mb-5">
-            {health?.access_protected
-              ? "This service requires a shared demo access token."
-              : "The local demo is open on this machine. A hosted demo requires an access token."}
+            {health?.guardian_login_enabled
+              ? "Guardian sign-in is enabled. Use the sign-in page to start a one-hour session."
+              : health?.access_protected
+                ? "This service requires a shared demo access token."
+                : "The local demo is open on this machine. A hosted demo requires an access token."}
           </p>
+          {health?.guardian_login_enabled && (
+            <Link to="/login" className="text-link mb-5">
+              Open guardian sign in
+            </Link>
+          )}
           <label>
             Access token
             <input
@@ -1400,7 +1423,7 @@ function Resources() {
     </>
   );
 }
-export default function App() {
+function GuardianApp() {
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [summary, setSummary] = useState<Summary | null>(null);
   const [health, setHealth] = useState<Health | null>(null);
@@ -1421,6 +1444,8 @@ export default function App() {
       setHealth(h.data);
       setError("");
     } catch (e) {
+      setAlerts([]);
+      setSummary(null);
       setError(errorText(e));
       api
         .get("/health")
@@ -1480,6 +1505,9 @@ export default function App() {
             </NavLink>
           ))}
           <div className="nav-divider" />
+          <NavLink to="/help">
+            <HeartHandshake size={19} /> Youth support portal
+          </NavLink>
           <NavLink to="/resources">
             <BookOpen size={19} /> Support resources
           </NavLink>
@@ -1552,6 +1580,26 @@ export default function App() {
           </div>
         </header>
         <main id="main" tabIndex={-1}>
+          {health?.guardian_login_enabled && (
+            <div className="privacy-banner">
+              <ShieldCheck size={19} />
+              <span>Guardian access uses a one-hour sign-in session.</span>
+              <Link className="text-link" to="/login">
+                Sign in
+              </Link>
+              <Link
+                className="text-link"
+                to="/login"
+                onClick={() => {
+                  sessionStorage.removeItem("guardrails-token");
+                  setAlerts([]);
+                  setSummary(null);
+                }}
+              >
+                Sign out
+              </Link>
+            </div>
+          )}
           <Routes>
             <Route
               path="/"
@@ -1603,5 +1651,16 @@ export default function App() {
         </main>
       </div>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/help/*" element={<Support />} />
+      <Route path="/support/*" element={<Navigate to="/help" replace />} />
+      <Route path="/login" element={<GuardianLogin />} />
+      <Route path="/*" element={<GuardianApp />} />
+    </Routes>
   );
 }

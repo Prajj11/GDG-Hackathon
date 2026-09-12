@@ -3,63 +3,57 @@
   "scope": "30 held-out synthetic scenarios; not a production benchmark",
   "classification_report": {
     "bullying-harassment": {
-      "precision": 0.7142857142857143,
+      "precision": 0.8333333333333334,
       "recall": 1.0,
-      "f1-score": 0.8333333333333334,
+      "f1-score": 0.9090909090909091,
       "support": 5.0
     },
     "grooming-coercive-language": {
-      "precision": 0.8333333333333334,
-      "recall": 1.0,
-      "f1-score": 0.9090909090909091,
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1-score": 0.8888888888888888,
       "support": 5.0
     },
     "grooming-isolation-request": {
-      "precision": 0.5714285714285714,
+      "precision": 1.0,
       "recall": 0.8,
-      "f1-score": 0.6666666666666666,
+      "f1-score": 0.8888888888888888,
       "support": 5.0
     },
     "grooming-trust-building": {
-      "precision": 0.8333333333333334,
+      "precision": 1.0,
       "recall": 1.0,
-      "f1-score": 0.9090909090909091,
+      "f1-score": 1.0,
       "support": 5.0
     },
     "neutral": {
-      "precision": 1.0,
-      "recall": 0.4,
-      "f1-score": 0.5714285714285714,
+      "precision": 0.9090909090909091,
+      "recall": 1.0,
+      "f1-score": 0.9523809523809523,
       "support": 10.0
     },
-    "accuracy": 0.7666666666666667,
+    "accuracy": 0.9333333333333333,
     "macro avg": {
-      "precision": 0.7904761904761906,
-      "recall": 0.8400000000000001,
-      "f1-score": 0.7779220779220779,
+      "precision": 0.9484848484848485,
+      "recall": 0.9199999999999999,
+      "f1-score": 0.9278499278499279,
       "support": 30.0
     },
     "weighted avg": {
-      "precision": 0.8253968253968255,
-      "recall": 0.7666666666666667,
-      "f1-score": 0.7435064935064933,
+      "precision": 0.9419191919191919,
+      "recall": 0.9333333333333333,
+      "f1-score": 0.931938431938432,
       "support": 30.0
     }
   },
   "per_language": {
-    "English": 0.625,
-    "Hindi": 0.8333333333333334,
-    "Hinglish": 0.5,
-    "Malayalam": 1.0,
+    "English": 1.0,
+    "Hindi": 1.0,
+    "Hinglish": 0.8333333333333334,
+    "Malayalam": 0.8,
     "Manglish": 1.0
   },
   "errors": [
-    {
-      "language": "Hinglish",
-      "text": "Mummy se permission le lena, hum sab library mein padhenge.",
-      "expected": "neutral",
-      "predicted": "grooming-coercive-language"
-    },
     {
       "language": "Hinglish",
       "text": "Apne gharwalon se chhupao, hum chupke private app par baat karenge.",
@@ -67,34 +61,10 @@
       "predicted": "bullying-harassment"
     },
     {
-      "language": "English",
-      "text": "A stranger told me to hide the chat. I told my mum and blocked them.",
-      "expected": "neutral",
-      "predicted": "grooming-isolation-request"
-    },
-    {
-      "language": "English",
-      "text": "Never threaten someone or share private photos without their permission.",
-      "expected": "neutral",
-      "predicted": "grooming-isolation-request"
-    },
-    {
-      "language": "Hinglish",
-      "text": "Teacher ne bola koi photo maange toh mat bhejna aur parents ko batana.",
-      "expected": "neutral",
-      "predicted": "grooming-isolation-request"
-    },
-    {
-      "language": "English",
-      "text": "That game was killer. You destroyed me in that match!",
-      "expected": "neutral",
-      "predicted": "bullying-harassment"
-    },
-    {
-      "language": "Hindi",
-      "text": "मेरे दोस्त ने मुझे जन्मदिन पर गिफ्ट दिया।",
-      "expected": "neutral",
-      "predicted": "grooming-trust-building"
+      "language": "Malayalam",
+      "text": "അനുസരിച്ചില്ലെങ്കിൽ നിന്റെ ഫോട്ടോകൾ കൂട്ടുകാർക്ക് അയച്ചു കൊടുക്കും.",
+      "expected": "grooming-coercive-language",
+      "predicted": "neutral"
     }
   ]
 }

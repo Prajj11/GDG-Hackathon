@@ -1,11 +1,17 @@
-"""A small held-out synthetic smoke set, not a real-world safety benchmark."""
+"""A known synthetic regression set, not an independent safety benchmark.
+Cases have informed development and at least one also appears in training.
+Keep them for regression tracking; independently authored unseen data is required
+to estimate generalization.
+"""
 import argparse
 import sys
 sys.stdout.reconfigure(encoding='utf-8')
 import json
+import hashlib
 from pathlib import Path
 from sklearn.metrics import classification_report, confusion_matrix
 from backend.ml.detector import Detector
+from backend.ml.data import training_rows
 
 CASES = [
 ('English','Let us finish the science assignment with our classmates.','neutral'),
@@ -48,7 +54,13 @@ def main():
     detector = Detector(args.mode)
     actual = [x[2] for x in CASES]
     predicted = [detector.classify(x[1])['pattern_type'] for x in CASES]
-    report = {'model':detector.name, 'scope':'30 held-out synthetic scenarios; not a production benchmark', 'classification_report':classification_report(actual,predicted,output_dict=True,zero_division=0), 'per_language':{lang:sum(a==p for (l,_,a),p in zip(CASES,predicted) if l==lang)/sum(l==lang for l,_,_ in CASES) for lang in sorted({x[0] for x in CASES})}, 'errors':[{'language':l,'text':t,'expected':a,'predicted':p} for (l,t,a),p in zip(CASES,predicted) if a!=p]}
+    rows = training_rows()
+    training_texts = {row['text'].strip().casefold() for row in rows}
+    report = {'model':detector.name, 'scope':'30 known synthetic regression scenarios; development-exposed, not independent or a production benchmark',
+              'training_examples': len(rows),
+              'source_dataset_sha256': hashlib.sha256(json.dumps(rows, ensure_ascii=False).encode()).hexdigest(),
+              'exact_training_overlap_count': sum(text.strip().casefold() in training_texts for _, text, _ in CASES),
+              'classification_report':classification_report(actual,predicted,output_dict=True,zero_division=0), 'per_language':{lang:sum(a==p for (l,_,a),p in zip(CASES,predicted) if l==lang)/sum(l==lang for l,_,_ in CASES) for lang in sorted({x[0] for x in CASES})}, 'errors':[{'language':l,'text':t,'expected':a,'predicted':p} for (l,t,a),p in zip(CASES,predicted) if a!=p]}
     result = json.dumps(report, ensure_ascii=False, indent=2)
     if args.output:
         Path(args.output).write_text(result, encoding='utf8')

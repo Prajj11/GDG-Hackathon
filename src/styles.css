@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./support.css";
 @theme {
   --font-sans: "Inter", "Segoe UI", "Nirmala UI", sans-serif;
   --color-ink: #263956;
@@ -88,7 +89,7 @@
     @apply min-h-screen;
   }
   .sidebar {
-    @apply fixed left-0 top-0 bottom-0 z-40 flex flex-col border-r bg-white;
+    @apply fixed left-0 top-0 bottom-0 z-40 flex flex-col overflow-y-auto border-r bg-white;
     width: 238px;
     border-color: #e6eaf0;
   }
@@ -842,8 +843,13 @@
     @apply flex items-center gap-2;
   }
   .setting-row {
-    @apply flex items-center gap-5 justify-between border-b py-7;
+    @apply flex flex-wrap items-center gap-5 justify-between border-b py-7;
     border-color: #edf0f4;
+  }
+  .setting-row > div {
+    min-width: 0;
+    flex: 1 1 14rem;
+    overflow-wrap: anywhere;
   }
   .setting-row p {
     @apply text-xs mt-2 max-w-sm;
@@ -851,6 +857,7 @@
   }
   .setting-row select {
     width: 100px;
+    max-width: 100%;
     flex-shrink: 0;
   }
   .toggle {

@@ -1,0 +1,388 @@
+@layer components {
+  .youth-shell {
+    @apply min-h-screen;
+    background: #f7f8fb;
+    color: #293e48;
+    font-size: 16px;
+  }
+  .youth-header {
+    @apply flex items-center justify-between gap-5 max-w-6xl mx-auto px-6 py-6;
+  }
+  .youth-brand {
+    @apply flex gap-3 items-center font-semibold text-lg;
+    letter-spacing: -0.4px;
+  }
+  .youth-brand > span {
+    @apply rounded-2xl p-3;
+    background: #e1efec;
+    color: #31635f;
+  }
+  .youth-brand small {
+    @apply block text-sm font-normal mt-0.5;
+    color: #65757d;
+    letter-spacing: 0;
+  }
+  .youth-private {
+    @apply inline-flex items-center gap-2 text-sm;
+    color: #576c72;
+  }
+  .youth-crisis-wrap {
+    @apply max-w-6xl mx-auto px-6;
+  }
+  .youth-crisis-button {
+    @apply flex items-center justify-center gap-3 w-full rounded-xl border px-4 py-4 text-sm font-semibold;
+    background: #e9e7f3;
+    border-color: #ccc6e0;
+    color: #514574;
+    transition:
+      background 200ms,
+      transform 220ms ease-out;
+    transform: translate(var(--mx, 0px), var(--my, 0px));
+  }
+  .youth-crisis-button:hover {
+    background: #e0dcef;
+  }
+  .youth-crisis-button svg {
+    @apply shrink-0;
+  }
+  .youth-crisis-panel {
+    @apply border rounded-2xl p-6 mt-4 space-y-4;
+    background: #f1eef8;
+    border-color: #d6d0e7;
+    animation: fade-lift 400ms ease-out both;
+  }
+  .youth-crisis-panel[hidden] {
+    display: none;
+  }
+  .youth-crisis-panel h2 {
+    @apply text-xl;
+  }
+  .youth-crisis-panel > p {
+    @apply text-sm leading-6;
+    color: #515c6c;
+  }
+  .youth-phone-grid {
+    @apply grid sm:grid-cols-2 gap-4;
+  }
+  .youth-phone-grid a {
+    @apply grid grid-cols-[1fr_auto] items-center gap-1 rounded-xl border bg-white p-5;
+    border-color: #d9d4e8;
+  }
+  .youth-phone-grid strong {
+    @apply text-3xl;
+    color: #504775;
+  }
+  .youth-phone-grid span {
+    @apply col-start-1 text-sm;
+  }
+  .youth-phone-grid svg {
+    @apply row-start-1 row-span-2 col-start-2;
+  }
+  .youth-source-links {
+    @apply flex flex-wrap gap-5 text-sm underline underline-offset-4;
+  }
+  .youth-main {
+    @apply max-w-6xl mx-auto px-6 py-12;
+    outline: none;
+  }
+  .youth-welcome {
+    @apply grid lg:grid-cols-[1.15fr_1fr] items-center gap-12 py-5;
+  }
+  .youth-kicker {
+    @apply block text-xs font-semibold tracking-widest mb-5;
+    color: #527471;
+  }
+  .youth-welcome h1 {
+    @apply text-4xl sm:text-5xl leading-tight;
+    letter-spacing: -1.6px;
+  }
+  .youth-lead {
+    @apply text-lg leading-8 my-6 max-w-lg;
+    color: #586f77;
+  }
+  .youth-action {
+    @apply inline-flex items-center justify-center gap-3 rounded-xl px-5 py-4 font-semibold text-sm;
+    color: #fff;
+    background: #346c66;
+    transition:
+      background 200ms,
+      transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1.2);
+  }
+  .youth-action:hover {
+    background: #285b56;
+  }
+  .youth-text-link {
+    @apply inline-flex items-center gap-2 text-sm underline underline-offset-4;
+    color: #3c6764;
+  }
+  .youth-welcome > section > .youth-text-link {
+    @apply flex mt-6;
+  }
+  .youth-card {
+    @apply rounded-3xl border bg-white p-7 sm:p-9;
+    border-color: #e0e7e8;
+    box-shadow: 0 8px 32px #283e4805;
+  }
+  .youth-emblem {
+    @apply inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-5;
+    color: #427a70;
+    background: #e8f1ed;
+  }
+  .youth-promise h2 {
+    @apply text-xl;
+  }
+  .youth-promise ul {
+    @apply my-6 space-y-4;
+  }
+  .youth-promise li {
+    @apply flex gap-3 items-center text-sm;
+  }
+  .youth-promise li svg {
+    @apply shrink-0;
+    color: #477d71;
+  }
+  .youth-demo-note {
+    @apply rounded-xl p-5 mt-5 text-sm;
+    background: #f2f3f8;
+    color: #566171;
+  }
+  .youth-demo-note strong {
+    @apply block font-semibold mb-2;
+    color: #424f64;
+  }
+  .youth-demo-note p {
+    @apply leading-6;
+  }
+  .youth-form-layout {
+    @apply grid lg:grid-cols-[minmax(0,1fr)_260px] gap-10 items-start;
+  }
+  .youth-form-layout > * {
+    @apply min-w-0;
+  }
+  .youth-step-label {
+    @apply flex justify-between gap-4 text-xs font-medium tracking-wide;
+    color: #637d7b;
+  }
+  .youth-progress {
+    @apply flex gap-2 mt-4 mb-8;
+  }
+  .youth-progress span {
+    @apply h-1 rounded-full w-1/2;
+    background: #e5eaec;
+  }
+  .youth-progress span:first-child,
+  .youth-progress .complete {
+    background: #719e93;
+  }
+  .youth-form-card h1,
+  .youth-receipt h1 {
+    @apply text-3xl leading-tight;
+    letter-spacing: -0.7px;
+  }
+  .youth-intro {
+    @apply mt-4 mb-6 leading-7;
+    color: #607179;
+  }
+  .youth-options {
+    @apply space-y-3 mb-7;
+  }
+  .youth-option {
+    @apply flex flex-row gap-4 items-center rounded-xl border p-4 cursor-pointer;
+    border-color: #dde5e5;
+    transition:
+      border-color 200ms,
+      background 200ms,
+      transform 220ms ease-out;
+  }
+  .youth-option.selected {
+    border-color: #68988e;
+    background: #edf5f2;
+  }
+  .youth-option:active {
+    transform: scale(0.985);
+  }
+  .youth-shell input[type="radio"],
+  .youth-shell input[type="checkbox"] {
+    @apply w-5 h-5 shrink-0;
+    accent-color: #346c66;
+    box-shadow: none;
+  }
+  .youth-option strong {
+    @apply block text-sm font-semibold leading-6;
+  }
+  .youth-option small {
+    @apply block text-sm mt-1 font-normal leading-6;
+    color: #62767a;
+  }
+  .youth-context-note {
+    @apply p-4 rounded-xl text-sm leading-6 mb-5;
+    background: #f0edf7;
+    color: #615777;
+  }
+  .youth-reassurance {
+    @apply pt-8;
+    color: #607778;
+  }
+  .youth-reassurance h2 {
+    @apply text-xl mt-5 mb-4;
+    color: #395a5a;
+  }
+  .youth-reassurance > p {
+    @apply mb-5;
+  }
+  .youth-reassurance > div {
+    @apply border-t pt-6 mt-7;
+    border-color: #dce5e5;
+  }
+  .youth-reassurance > div p {
+    @apply text-sm mt-3 leading-6;
+  }
+  .youth-selected {
+    @apply flex items-center gap-3 rounded-xl p-4 mb-6 text-sm;
+    background: #edf5f2;
+  }
+  .youth-selected svg {
+    @apply shrink-0;
+  }
+  .youth-selected button {
+    @apply underline ml-auto shrink-0;
+  }
+  .youth-field {
+    @apply gap-2;
+  }
+  .youth-field > span {
+    @apply font-normal text-sm leading-6 mb-2;
+    color: #607179;
+  }
+  .youth-field textarea {
+    @apply text-base;
+  }
+  .youth-count {
+    @apply text-right text-xs mt-2 mb-6;
+    color: #657778;
+  }
+  .youth-urgency {
+    @apply space-y-3 mb-6;
+  }
+  .youth-urgency legend {
+    @apply text-sm font-medium mb-3;
+  }
+  .youth-urgency label {
+    @apply flex flex-row items-center gap-3 rounded-lg p-2 font-normal;
+  }
+  .youth-consent {
+    @apply flex flex-row gap-3 items-start rounded-xl border p-4 my-6;
+    border-color: #d6e3df;
+  }
+  .youth-consent small {
+    @apply block text-sm font-normal leading-6 mt-2;
+    color: #607179;
+  }
+  .youth-form-actions {
+    @apply flex flex-wrap justify-between gap-5 items-center mt-7;
+  }
+  .youth-error {
+    @apply rounded-xl p-4 my-5 text-sm;
+    background: #fbf0ed;
+    color: #8a4942;
+  }
+  .youth-receipt {
+    @apply max-w-2xl mx-auto;
+  }
+  .youth-route-status {
+    @apply flex gap-4 items-center rounded-xl p-5 my-6;
+    background: #eaf4ee;
+    color: #396b54;
+    transition: background 200ms;
+  }
+  .youth-route-status svg {
+    @apply shrink-0;
+  }
+  .youth-route-status p {
+    @apply text-sm mt-1;
+  }
+  .youth-receipt-details {
+    @apply my-6 text-sm;
+  }
+  .youth-receipt-details > div {
+    @apply py-3 border-b flex flex-wrap justify-between gap-2;
+    border-color: #e6ecec;
+  }
+  .youth-receipt-details dt {
+    color: #657779;
+  }
+  .youth-receipt-details dd {
+    @apply break-all;
+  }
+  .youth-recovery {
+    @apply border rounded-xl p-5 mt-6;
+    border-color: #dce5e5;
+  }
+  .youth-recovery label {
+    @apply mt-4;
+  }
+  .youth-recovery p {
+    @apply text-sm leading-6 my-4;
+    color: #607179;
+  }
+  .youth-restore {
+    @apply space-y-4 mt-6;
+  }
+  .youth-footer {
+    @apply flex flex-wrap sm:flex-nowrap items-start gap-3 max-w-6xl mx-auto px-6 py-7 border-t text-sm;
+    border-color: #e0e7e8;
+    color: #65767a;
+  }
+  .youth-footer svg {
+    @apply shrink-0 mt-1;
+  }
+  .youth-footer p {
+    @apply max-w-2xl;
+  }
+  .youth-footer a {
+    @apply sm:ml-auto underline shrink-0;
+  }
+}
+.youth-enter {
+  animation: fade-lift 420ms ease-out both;
+}
+@media (max-width: 640px) {
+  .youth-private {
+    display: none;
+  }
+  .youth-main {
+    padding: 28px 16px;
+  }
+  .youth-header,
+  .youth-crisis-wrap {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .youth-crisis-button {
+    text-align: left;
+    line-height: 1.6;
+  }
+  .youth-welcome {
+    gap: 28px;
+  }
+  .youth-card {
+    padding: 24px 20px;
+  }
+  .youth-welcome h1 {
+    font-size: 36px;
+  }
+  .youth-form-actions .youth-action {
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .youth-shell *,
+  .youth-shell *::before,
+  .youth-shell *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .youth-shell .magnetic {
+    transform: none !important;
+  }
+}

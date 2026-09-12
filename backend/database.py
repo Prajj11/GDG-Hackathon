@@ -44,3 +44,24 @@ class Alert(Base):
     confidence: Mapped[float]
     reviewed: Mapped[bool] = mapped_column(default=False)
     created_at: Mapped[datetime] = mapped_column(default=now, index=True)
+
+class Report(Base):
+    __tablename__ = 'reports'
+    id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    linked_alert_id: Mapped[str | None] = mapped_column(ForeignKey('alerts.id', ondelete='SET NULL'), nullable=True)
+    # Only a SHA-256 digest of a random receipt secret is retained.
+    anonymous_token: Mapped[str] = mapped_column(String(64), unique=True)
+    selected_context: Mapped[str] = mapped_column(String(50))
+    report_text: Mapped[str] = mapped_column(Text, default='')
+    urgency_level: Mapped[str] = mapped_column(String(10))
+    detection_context: Mapped[dict | None] = mapped_column(JSON, nullable=True)
+    status: Mapped[str] = mapped_column(String(20), default='submitted')
+    created_at: Mapped[datetime] = mapped_column(default=now, index=True)
+
+class AidRoute(Base):
+    __tablename__ = 'aid_routes'
+    id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    report_id: Mapped[str] = mapped_column(ForeignKey('reports.id', ondelete='CASCADE'), unique=True)
+    aid_channel_name: Mapped[str] = mapped_column(String(100))
+    routed_at: Mapped[datetime] = mapped_column(default=now)
+    status: Mapped[str] = mapped_column(String(30))

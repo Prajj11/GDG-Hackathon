@@ -48,6 +48,7 @@ export interface Health {
   model_kind: string;
   fallback_reason: string | null;
   access_protected: boolean;
+  guardian_login_enabled: boolean;
 }
 export interface Analysis {
   risk_score: number;
@@ -56,6 +57,7 @@ export interface Analysis {
   explanation: string;
   model: string;
   alert_id: string | null;
+  support_context_token: string | null;
   message_count: number;
   escalated: boolean;
   confidence: number;

@@ -11,11 +11,15 @@ from pydantic import BaseModel, Field, field_validator
 from sqlalchemy import select, delete
 from backend.database import Base, engine, SessionLocal, User, Conversation, Alert, now
 from backend.ml.detector import analyze_message, get_detector, minimal_snippet, risk_level
+from backend.auth import router as auth_router, authorize as jwt_authorize, issue_token, PASSWORD_HASH
+from backend.support import router as support_router, cleanup_reports
 
 LOCK = threading.RLock()
 TOKEN = os.getenv('DEMO_ACCESS_TOKEN', '')
 
 def authorize(authorization: str | None = Header(default=None)):
+    if PASSWORD_HASH:
+        return jwt_authorize(authorization)
     if TOKEN and not hmac.compare_digest(authorization or '', f'Bearer {TOKEN}'):
         raise HTTPException(401, 'Enter the demo access token in Settings.')
 
@@ -28,18 +32,23 @@ def cleanup(db):
 
 @asynccontextmanager
 async def lifespan(app):
-    if os.getenv('DG_HOSTED') == 'true' and len(TOKEN) < 24:
+    if os.getenv('DG_HOSTED') == 'true' and not PASSWORD_HASH and len(TOKEN) < 24:
         raise RuntimeError('Hosted demos require a DEMO_ACCESS_TOKEN of at least 24 characters.')
+    if os.getenv('DG_HOSTED') == 'true' and PASSWORD_HASH and len(os.getenv('JWT_SECRET', '')) < 32:
+        raise RuntimeError('Hosted guardian login requires a JWT_SECRET of at least 32 characters.')
     Base.metadata.create_all(engine)
     with SessionLocal() as db:
         if not db.get(User, 1):
             db.add(User(id=1))
             db.commit()
         cleanup(db)
+        cleanup_reports(db)
     get_detector()
     yield
 
-app = FastAPI(title='Digital Guardrails', version='1.0.0', lifespan=lifespan)
+app = FastAPI(title='Digital Guardrails + Support Ecosystems', version='2.0.0', lifespan=lifespan)
+app.include_router(auth_router)
+app.include_router(support_router)
 app.add_middleware(CORSMiddleware, allow_origins=os.getenv('CORS_ORIGINS', 'http://localhost:5173,http://127.0.0.1:5173').split(','), allow_methods=['GET', 'POST', 'PATCH'], allow_headers=['Content-Type', 'Authorization'])
 
 class MessageIn(BaseModel):
@@ -75,6 +84,7 @@ class AnalysisOut(BaseModel):
     conversation_id: str
     message_count: int
     escalated: bool
+    support_context_token: str | None = None
 
 def serialize(alert, conversation):
     return {key: getattr(alert, key) for key in ['id', 'conversation_id', 'risk_score', 'risk_level', 'pattern_type', 'flagged_snippet', 'explanation', 'model', 'confidence', 'reviewed']} | {'created_at': alert.created_at.isoformat()+'Z', 'child_label': conversation.child_label, 'source_platform': conversation.source_platform, 'language': conversation.language}
@@ -82,7 +92,7 @@ def serialize(alert, conversation):
 @app.get('/api/health')
 def health():
     detector = get_detector()
-    return {'status': 'ok', 'model': detector.name, 'model_kind': detector.kind, 'fallback_reason': detector.reason, 'synthetic_demo': True, 'access_protected': bool(TOKEN)}
+    return {'status': 'ok', 'model': detector.name, 'model_kind': detector.kind, 'fallback_reason': detector.reason, 'synthetic_demo': True, 'access_protected': bool(TOKEN or PASSWORD_HASH), 'guardian_login_enabled': bool(PASSWORD_HASH), 'aid_mode': 'simulated'}
 
 @app.post('/api/messages/ingest', response_model=AnalysisOut, dependencies=[Depends(authorize)])
 def ingest(payload: MessageIn):
@@ -122,7 +132,8 @@ def ingest(payload: MessageIn):
             user = db.get(User, 1)
             db.add(Alert(id=alert_id, conversation_id=conversation.id, risk_score=result['risk_score'], risk_level=result['risk_level'], pattern_type=pattern, flagged_snippet=minimal_snippet(snippet_text) if user.snippets_enabled else '', explanation=result['explanation'], model=result['model'], confidence=result['confidence']))
         db.commit()
-        return result | {'alert_id': alert_id, 'conversation_id': conversation.id, 'message_count': conversation.message_count, 'escalated': escalated}
+        return result | {'alert_id': alert_id, 'conversation_id': conversation.id, 'message_count': conversation.message_count, 'escalated': escalated,
+                         'support_context_token': issue_token(alert_id, 'youth-context', 30) if alert_id else None}
 
 @app.get('/api/alerts', dependencies=[Depends(authorize)])
 def alerts():
