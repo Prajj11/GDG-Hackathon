@@ -3,8 +3,23 @@
 @theme {
   --font-sans: "Inter", "Segoe UI", "Nirmala UI", sans-serif;
   --color-ink: #263956;
+  --color-blue-50: #edf2f8;
+  --color-blue-100: #dfe8f2;
+  --color-blue-600: #3d5d86;
+  --color-blue-700: #304b70;
+  --color-blue-800: #293f5e;
+  --color-blue-900: #263956;
+  --color-slate-50: #f7f8fa;
+  --color-slate-100: #eef2f6;
+  --color-slate-200: #dce3eb;
+  --color-slate-500: #64758c;
+  --color-slate-700: #384e6c;
 }
 @layer base {
+  :focus-visible {
+    outline: 3px solid #688bb7;
+    outline-offset: 3px;
+  }
   * {
     @apply box-border;
   }
@@ -390,6 +405,42 @@
     @apply rounded-xl border bg-white p-6 mb-8;
     border-color: #e2e8f0;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+  }
+  .ngo-filter-toolbar {
+    min-width: 0;
+  }
+  .ngo-filter-control {
+    min-height: 42px;
+    min-width: 220px;
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr);
+    align-items: center;
+    white-space: nowrap;
+  }
+  .ngo-filter-control.status {
+    min-width: 246px;
+  }
+  .ngo-filter-label {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .ngo-filter-select {
+    min-width: 0;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  @media (max-width: 760px) {
+    .ngo-filter-toolbar {
+      width: 100%;
+    }
+    .ngo-filter-control {
+      flex: 1 1 210px;
+      min-width: 0;
+    }
+    .ngo-filter-toolbar > button {
+      flex: 0 0 auto;
+    }
   }
   .ngo-case-card {
     @apply rounded-xl border p-5 bg-white transition-all mb-4;
@@ -1561,4 +1612,95 @@
 }
 .flow-steps {
   flex-wrap: wrap;
+}
+@layer components {
+  .auth-shell {
+    @apply min-h-screen flex items-center justify-center px-4 py-10;
+    background: #f7f8fa;
+  }
+  .auth-card {
+    @apply w-full max-w-lg p-6 sm:p-9 rounded-2xl;
+    border: 1px solid #dce3eb;
+    box-shadow: 0 12px 40px #2639560a;
+  }
+  .auth-card .text-xs,
+  .auth-card .text-\[11px\] {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .auth-card input,
+  .auth-card select {
+    font-size: 16px !important;
+    min-height: 44px;
+  }
+  .auth-card button {
+    min-height: 44px;
+  }
+  .auth-card form {
+    display: grid;
+    gap: 18px;
+  }
+  .ngo-case-card,
+  .ngo-inbox-section,
+  .ngo-message-box {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .ngo-case-card {
+    border: 1px solid #dce3eb;
+    border-radius: 16px;
+    background: white;
+    padding: 24px;
+    margin-top: 16px;
+  }
+  .ngo-message-box {
+    background: #f7f8fa;
+    border-radius: 12px;
+    padding: 16px;
+    margin-block: 16px;
+  }
+  .ngo-case-actions-main,
+  .ngo-case-actions-buttons,
+  .ngo-case-action-group,
+  .ngo-inline-action {
+    min-width: 0;
+  }
+  .ngo-inline-action input {
+    min-width: 0;
+  }
+  .ngo-inline-action button,
+  .ngo-case-actions-buttons button {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  @media (max-width: 760px) {
+    .ngo-case-card {
+      padding: 16px;
+    }
+    .ngo-case-actions-main,
+    .ngo-case-action-group,
+    .ngo-inline-action,
+    .ngo-case-actions-buttons {
+      width: 100%;
+    }
+    .ngo-case-action-group {
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .ngo-inline-action {
+      flex: 1 1 210px;
+    }
+    .ngo-inline-action input {
+      flex: 1 1 auto;
+      width: auto !important;
+    }
+    .ngo-case-actions-buttons {
+      align-items: stretch;
+      flex-wrap: wrap;
+    }
+    .ngo-case-actions-buttons button {
+      flex: 1 1 140px;
+      min-height: 36px;
+    }
+  }
 }

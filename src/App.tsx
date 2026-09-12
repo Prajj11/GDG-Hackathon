@@ -1349,8 +1349,11 @@ function PhysicalLink({
   alerts: Alert[];
 }) {
   const userRole = sessionStorage.getItem("guardrails-role") || "guardian";
-  const userLocality = sessionStorage.getItem("guardrails-locality") || "South Delhi";
-  const [activeTab, setActiveTab] = useState<"inbox" | "simulator" | "partners">("inbox");
+  const userLocality =
+    sessionStorage.getItem("guardrails-locality") || "South Delhi";
+  const [activeTab, setActiveTab] = useState<
+    "inbox" | "simulator" | "partners"
+  >("inbox");
   const [localityFilter, setLocalityFilter] = useState<string>(
     userRole === "ngo" ? userLocality : "All Localities",
   );
@@ -1364,7 +1367,8 @@ function PhysicalLink({
   // Simulator state
   const [activeStep, setActiveStep] = useState(2);
   const [selectedAlertId, setSelectedAlertId] = useState<string>(
-    alerts.find((a) => a.risk_level === "High")?.id || (alerts[0]?.id ?? "demo-case-1"),
+    alerts.find((a) => a.risk_level === "High")?.id ||
+      (alerts[0]?.id ?? "demo-case-1"),
   );
   const [dispatchStatus, setDispatchStatus] = useState<
     "idle" | "dispatching" | "dispatched"
@@ -1382,7 +1386,8 @@ function PhysicalLink({
     try {
       const { data } = await api.get<NgoReport[]>("/ngo/reports", {
         params: {
-          locality: localityFilter !== "All Localities" ? localityFilter : undefined,
+          locality:
+            localityFilter !== "All Localities" ? localityFilter : undefined,
           status: statusFilter !== "all" ? statusFilter : undefined,
         },
       });
@@ -1403,7 +1408,9 @@ function PhysicalLink({
   const updateStatus = async (reportId: string, newStatus: string) => {
     try {
       await api.patch(`/ngo/reports/${reportId}`, { status: newStatus });
-      setActionNotice(`Case #${reportId.slice(0, 8)} status updated to "${newStatus.replace(/_/g, " ")}".`);
+      setActionNotice(
+        `Case #${reportId.slice(0, 8)} status updated to "${newStatus.replace(/_/g, " ")}".`,
+      );
       setTimeout(() => setActionNotice(""), 4000);
       fetchReports();
     } catch (err) {
@@ -1414,8 +1421,12 @@ function PhysicalLink({
   const assignWorker = async (reportId: string) => {
     const workerName = workerInputs[reportId] || "Ms. S. Sharma (CPO)";
     try {
-      await api.patch(`/ngo/reports/${reportId}`, { assigned_worker: workerName });
-      setActionNotice(`Caseworker ${workerName} assigned to Case #${reportId.slice(0, 8)}.`);
+      await api.patch(`/ngo/reports/${reportId}`, {
+        assigned_worker: workerName,
+      });
+      setActionNotice(
+        `Caseworker ${workerName} assigned to Case #${reportId.slice(0, 8)}.`,
+      );
       setTimeout(() => setActionNotice(""), 4000);
       fetchReports();
     } catch (err) {
@@ -1427,7 +1438,9 @@ function PhysicalLink({
     const notes = notesInputs[reportId] || "";
     try {
       await api.patch(`/ngo/reports/${reportId}`, { caseworker_notes: notes });
-      setActionNotice(`Intervention notes saved for Case #${reportId.slice(0, 8)}.`);
+      setActionNotice(
+        `Intervention notes saved for Case #${reportId.slice(0, 8)}.`,
+      );
       setTimeout(() => setActionNotice(""), 4000);
       fetchReports();
     } catch (err) {
@@ -1467,7 +1480,7 @@ function PhysicalLink({
     {
       num: 3,
       title: "Jurisdictional Routing & Dossier Generation",
-      desc: "Zero-knowledge payload created with verified risk markers, mapped to the local District Child Protection Unit.",
+      desc: "A simulated referral contains a report reference and the selected concern level.",
       icon: FileCheck,
     },
     {
@@ -1527,8 +1540,8 @@ function PhysicalLink({
     <>
       <PageHeading
         eyebrow="CHILD WELFARE & LOCAL AUTHORITIES INTERVENTION"
-        title="Physical-Digital Link"
-        description="Bridge the gap between digital alerts and ground-level intervention for child welfare organizations and local authorities."
+        title="Casework workspace"
+        description="Review support requests by area and record follow-up notes. External referrals are simulated."
       >
         <div className="flex items-center gap-2">
           <span className="text-xs px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 border border-blue-100 font-semibold flex items-center gap-1.5">
@@ -1541,7 +1554,10 @@ function PhysicalLink({
       {actionNotice && (
         <div className="mb-5 p-3.5 rounded-xl border border-blue-200 bg-blue-50 text-blue-800 text-xs font-medium flex items-center justify-between">
           <span>{actionNotice}</span>
-          <button onClick={() => setActionNotice("")} className="underline text-blue-700">
+          <button
+            onClick={() => setActionNotice("")}
+            className="underline text-blue-700"
+          >
             Dismiss
           </button>
         </div>
@@ -1561,7 +1577,9 @@ function PhysicalLink({
           Incoming Locality Casework Inbox
           <span
             className={`ml-1 px-1.5 py-0.2 rounded-full text-[10px] ${
-              activeTab === "inbox" ? "bg-blue-700 text-white" : "bg-slate-100 text-slate-700"
+              activeTab === "inbox"
+                ? "bg-blue-700 text-white"
+                : "bg-slate-100 text-slate-700"
             }`}
           >
             {reports.length}
@@ -1589,7 +1607,7 @@ function PhysicalLink({
           }`}
         >
           <Building2 size={15} />
-          Statutory Partner Directory
+          Public support resources
         </button>
       </div>
 
@@ -1603,18 +1621,21 @@ function PhysicalLink({
                 <span className="physical-link-badge">Real-time Handoff</span>
               </div>
               <p className="subtle mt-1 text-xs">
-                Messages submitted anonymously by youth in this district arriving for Child Welfare Committee & NGO review.
+                Messages submitted anonymously by youth in this district
+                arriving for Child Welfare Committee & NGO review.
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-2">
-              <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs">
+            <div className="ngo-filter-toolbar flex flex-wrap items-center gap-2">
+              <div className="ngo-filter-control locality flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs">
                 <MapPin size={13} className="text-blue-600" />
-                <span className="text-slate-500 font-medium">Locality:</span>
+                <span className="ngo-filter-label text-slate-500 font-medium">
+                  Locality:
+                </span>
                 <select
                   value={localityFilter}
                   onChange={(e) => setLocalityFilter(e.target.value)}
-                  className="bg-transparent font-semibold text-slate-700 outline-none !p-0 !border-0 text-xs cursor-pointer"
+                  className="ngo-filter-select bg-transparent font-semibold text-slate-700 outline-none !p-0 !border-0 text-xs cursor-pointer"
                 >
                   {localities.map((loc) => (
                     <option key={loc} value={loc}>
@@ -1624,18 +1645,20 @@ function PhysicalLink({
                 </select>
               </div>
 
-              <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs">
+              <div className="ngo-filter-control status flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs">
                 <Filter size={13} className="text-slate-500" />
-                <span className="text-slate-500 font-medium">Status:</span>
+                <span className="ngo-filter-label text-slate-500 font-medium">
+                  Status:
+                </span>
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
-                  className="bg-transparent font-semibold text-slate-700 outline-none !p-0 !border-0 text-xs cursor-pointer"
+                  className="ngo-filter-select bg-transparent font-semibold text-slate-700 outline-none !p-0 !border-0 text-xs cursor-pointer"
                 >
                   <option value="all">All Statuses</option>
                   <option value="submitted">New / Submitted</option>
                   <option value="under_review">Under Review</option>
-                  <option value="dispatched">Caseworker Dispatched</option>
+                  <option value="dispatched">Referral recorded</option>
                   <option value="resolved">Welfare Verified</option>
                 </select>
               </div>
@@ -1646,7 +1669,10 @@ function PhysicalLink({
                 className="p-2 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-600"
                 title="Refresh inbox"
               >
-                <RefreshCw size={14} className={loading ? "animate-spin" : ""} />
+                <RefreshCw
+                  size={14}
+                  className={loading ? "animate-spin" : ""}
+                />
               </button>
             </div>
           </div>
@@ -1654,12 +1680,17 @@ function PhysicalLink({
           {/* Reports List */}
           {reports.length === 0 ? (
             <div className="p-12 text-center border border-dashed border-slate-200 rounded-2xl">
-              <MessageSquareQuote size={36} className="mx-auto text-slate-300 mb-3" />
+              <MessageSquareQuote
+                size={36}
+                className="mx-auto text-slate-300 mb-3"
+              />
               <h3 className="text-base font-semibold text-slate-700 mb-1">
                 No incoming reports for {localityFilter}
               </h3>
               <p className="text-xs text-slate-500 max-w-md mx-auto">
-                When a student submits an anonymous report choosing this locality in the Youth Support Portal (/help), it will arrive immediately in this inbox.
+                When a student submits an anonymous report choosing this
+                locality in the Youth Support Portal (/help), it will arrive
+                immediately in this inbox.
               </p>
               <Link to="/help" className="secondary mt-4 inline-flex text-xs">
                 Open Youth Support Portal to test submission
@@ -1738,8 +1769,9 @@ function PhysicalLink({
                       <span className="text-emerald-900 font-medium">
                         Attached Safety Signal:{" "}
                         <strong>
-                          {patternNames[r.detection_context.pattern_type || ""] ||
-                            r.detection_context.pattern_type}
+                          {patternNames[
+                            r.detection_context.pattern_type || ""
+                          ] || r.detection_context.pattern_type}
                         </strong>
                       </span>
                       <span className="text-emerald-700 font-semibold">
@@ -1749,9 +1781,9 @@ function PhysicalLink({
                   )}
 
                   {/* Casework & Ground Action Bar */}
-                  <div className="mt-4 pt-3 border-t border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
-                    <div className="flex flex-wrap items-center gap-3">
-                      <div className="flex items-center gap-1.5">
+                  <div className="ngo-case-actions mt-4 pt-3 border-t border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
+                    <div className="ngo-case-actions-main flex flex-wrap items-center gap-3">
+                      <div className="ngo-case-action-group flex items-center gap-1.5">
                         <UserCheck size={14} className="text-slate-400" />
                         <span className="text-slate-500">Officer:</span>
                         {r.assigned_worker ? (
@@ -1759,13 +1791,16 @@ function PhysicalLink({
                             {r.assigned_worker}
                           </strong>
                         ) : (
-                          <div className="flex items-center gap-1">
+                          <div className="ngo-inline-action flex items-center gap-1">
                             <input
                               type="text"
                               placeholder="e.g. Ms. S. Sharma"
                               value={workerInputs[r.id] ?? ""}
                               onChange={(e) =>
-                                setWorkerInputs((prev) => ({ ...prev, [r.id]: e.target.value }))
+                                setWorkerInputs((prev) => ({
+                                  ...prev,
+                                  [r.id]: e.target.value,
+                                }))
                               }
                               className="!py-1 !px-2 !text-xs !w-36 rounded border border-slate-200"
                             />
@@ -1782,17 +1817,22 @@ function PhysicalLink({
 
                       {r.caseworker_notes ? (
                         <div className="text-slate-600 bg-slate-50 px-2.5 py-1 rounded border border-slate-200">
-                          <span className="font-semibold text-slate-700">Notes:</span>{" "}
+                          <span className="font-semibold text-slate-700">
+                            Notes:
+                          </span>{" "}
                           {r.caseworker_notes}
                         </div>
                       ) : (
-                        <div className="flex items-center gap-1">
+                        <div className="ngo-inline-action flex items-center gap-1">
                           <input
                             type="text"
                             placeholder="Add action note..."
                             value={notesInputs[r.id] ?? ""}
                             onChange={(e) =>
-                              setNotesInputs((prev) => ({ ...prev, [r.id]: e.target.value }))
+                              setNotesInputs((prev) => ({
+                                ...prev,
+                                [r.id]: e.target.value,
+                              }))
                             }
                             className="!py-1 !px-2 !text-xs !w-40 rounded border border-slate-200"
                           />
@@ -1807,7 +1847,7 @@ function PhysicalLink({
                       )}
                     </div>
 
-                    <div className="flex items-center gap-1.5">
+                    <div className="ngo-case-actions-buttons flex items-center gap-1.5">
                       {r.status !== "under_review" && (
                         <button
                           type="button"
@@ -1849,11 +1889,14 @@ function PhysicalLink({
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-slate-100">
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="!text-lg">Ground Intervention Dispatch Simulator</h2>
+                <h2 className="!text-lg">
+                  Ground Intervention Dispatch Simulator
+                </h2>
                 <span className="physical-link-badge">Interactive Flow</span>
               </div>
               <p className="subtle mt-1">
-                Demonstrate how a high-urgency digital signal safely transitions to verified caseworkers on the ground.
+                Preview a referral workflow. This simulation does not contact a
+                caseworker or arrange a visit.
               </p>
             </div>
             <div className="flex items-center gap-3 shrink-0">
@@ -1869,7 +1912,9 @@ function PhysicalLink({
                 >
                   {alerts.map((a) => (
                     <option key={a.id} value={a.id}>
-                      {a.child_label} · {patternNames[a.pattern_type] || a.pattern_type} ({a.risk_level})
+                      {a.child_label} ·{" "}
+                      {patternNames[a.pattern_type] || a.pattern_type} (
+                      {a.risk_level})
                     </option>
                   ))}
                 </select>
@@ -1881,7 +1926,8 @@ function PhysicalLink({
               >
                 {dispatchStatus === "dispatching" ? (
                   <>
-                    <RefreshCw size={14} className="animate-spin" /> Dispatching…
+                    <RefreshCw size={14} className="animate-spin" />{" "}
+                    Dispatching…
                   </>
                 ) : dispatchStatus === "dispatched" ? (
                   <>
@@ -1904,10 +1950,11 @@ function PhysicalLink({
                 </span>
                 <div>
                   <strong className="text-emerald-900 text-sm">
-                    Ground Case Dispatched · Reference ID #{dispatchLog.id}
+                    Simulated referral created · Reference ID #{dispatchLog.id}
                   </strong>
                   <p className="text-xs text-emerald-700 mt-0.5">
-                    Routed to {dispatchLog.agency} at {dispatchLog.time}. Caseworker assignment initiated.
+                    Routed to {dispatchLog.agency} at {dispatchLog.time}. No
+                    external organization has been contacted.
                   </p>
                 </div>
               </div>
@@ -1925,8 +1972,10 @@ function PhysicalLink({
 
           <div className="ground-step-list">
             {steps.map((s) => {
-              const isCompleted = activeStep > s.num || dispatchStatus === "dispatched";
-              const isActive = activeStep === s.num && dispatchStatus !== "dispatched";
+              const isCompleted =
+                activeStep > s.num || dispatchStatus === "dispatched";
+              const isActive =
+                activeStep === s.num && dispatchStatus !== "dispatched";
               return (
                 <div
                   key={s.num}
@@ -1950,7 +1999,9 @@ function PhysicalLink({
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <strong className="text-sm text-[#1e3a5f]">{s.title}</strong>
+                      <strong className="text-sm text-[#1e3a5f]">
+                        {s.title}
+                      </strong>
                       {isCompleted && (
                         <span className="text-[11px] font-medium text-emerald-600">
                           Verified
@@ -1987,7 +2038,8 @@ function PhysicalLink({
             <div>
               <h2>Accredited Partner Organizations & Direct Escalation</h2>
               <p className="subtle mt-0.5">
-                Statutory authorities empowered to execute ground welfare checks and emergency child care orders.
+                Statutory authorities empowered to execute ground welfare checks
+                and emergency child care orders.
               </p>
             </div>
           </div>
@@ -2019,9 +2071,12 @@ function PhysicalLink({
                 </div>
                 <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-[#768a9f]">
                   <span className="flex items-center gap-1">
-                    <ShieldCheck size={14} className="text-teal-600" /> Statutory Mandate
+                    <ShieldCheck size={14} className="text-teal-600" />{" "}
+                    Statutory Mandate
                   </span>
-                  <span className="font-mono text-[11px]">API Status: Active Bridge</span>
+                  <span className="font-mono text-[11px]">
+                    API Status: Active Bridge
+                  </span>
                 </div>
               </div>
             ))}
@@ -2031,11 +2086,14 @@ function PhysicalLink({
 
       <div className="panel p-6 border-l-4 !border-l-blue-600 mb-8">
         <h3 className="text-sm font-semibold text-[#1e3a5f] flex items-center gap-2 mb-2">
-          <LockKeyhole size={16} className="text-blue-600" /> Safeguarding & Legal Framework
+          <LockKeyhole size={16} className="text-blue-600" /> Prototype limits
+          and privacy
         </h3>
         <p className="text-xs text-[#526b88] leading-relaxed">
-          The Physical-Digital Link operates under the provisions of the{" "}
-          <strong>Juvenile Justice (Care and Protection of Children) Act, 2015</strong> and <strong>POCSO Act guidelines</strong>. Digital platforms are legally encouraged to bridge severe online threats to statutory child welfare officers. All escalations adhere to strict data minimization — raw conversational logs are never retained or broadcast, protecting young people’s fundamental privacy while securing their immediate physical well-being.
+          This workspace demonstrates report review and referral recording. It
+          does not establish legal compliance, verify organizations, or arrange
+          emergency intervention. Report notes are retained for case review;
+          full private chats are not required.
         </p>
       </div>
     </>
@@ -2051,9 +2109,12 @@ function GuardianApp() {
   const location = useLocation();
 
   const userRole = sessionStorage.getItem("guardrails-role") || "guardian";
-  const userLocality = sessionStorage.getItem("guardrails-locality") || "South Delhi";
+  const userLocality =
+    sessionStorage.getItem("guardrails-locality") || "South Delhi";
   const storedUser = sessionStorage.getItem("guardrails-user");
-  const displayName = storedUser || (userRole === "ngo" ? "CWC Casework Officer" : guardianDisplayName);
+  const displayName =
+    storedUser ||
+    (userRole === "ngo" ? "CWC Casework Officer" : guardianDisplayName);
 
   const handleSignOut = () => {
     sessionStorage.removeItem("guardrails-token");
@@ -2101,7 +2162,11 @@ function GuardianApp() {
   const nav =
     userRole === "ngo"
       ? [
-          { to: "/physical-link", label: "Casework & Dispatch Box", icon: Radio },
+          {
+            to: "/physical-link",
+            label: "Casework & Dispatch Box",
+            icon: Radio,
+          },
         ]
       : [
           { to: "/", label: "Overview", icon: LayoutDashboard },
@@ -2122,7 +2187,10 @@ function GuardianApp() {
         />
       )}
       <aside id="navigation" className={cx("sidebar", mobile && "mobile-open")}>
-        <Link to={userRole === "ngo" ? "/physical-link" : "/"} className="brand">
+        <Link
+          to={userRole === "ngo" ? "/physical-link" : "/"}
+          className="brand"
+        >
           <span className="brand-mark">
             <ShieldCheck size={27} />
           </span>
@@ -2170,11 +2238,11 @@ function GuardianApp() {
           <div className="privacy-mini">
             <span>
               <LockKeyhole size={15} />{" "}
-              {userRole === "ngo" ? "Statutory Safeguarding" : "Private by design"}
+              {userRole === "ngo" ? "Casework privacy" : "Private by design"}
             </span>
             <p>
               {userRole === "ngo"
-                ? `Locality dispatch enabled for ${userLocality}. Zero message leakage to unauthorized parties.`
+                ? `Casework area: ${userLocality}. Access is limited to your assigned area.`
                 : "A safety net that respects their growing independence."}
             </p>
           </div>
@@ -2223,7 +2291,7 @@ function GuardianApp() {
                     : location.pathname === "/resources"
                       ? "Support resources"
                       : location.pathname === "/physical-link"
-                        ? "Physical-Digital Link"
+                        ? "Casework workspace"
                         : location.pathname.startsWith("/alerts/")
                           ? "Alert details"
                           : "Overview"}
@@ -2247,7 +2315,9 @@ function GuardianApp() {
               <CircleHelp size={19} />
             </Link>
             <span className="topbar-divider" />
-            <span className="small-avatar">{userRole === "ngo" ? "CW" : "DG"}</span>
+            <span className="small-avatar">
+              {userRole === "ngo" ? "CW" : "DG"}
+            </span>
           </div>
         </header>
         <main id="main" tabIndex={-1}>
@@ -2255,7 +2325,7 @@ function GuardianApp() {
             <ShieldCheck size={19} />
             <span>
               {userRole === "ngo"
-                ? `Child Welfare & NGO portal active (${userLocality} Unit). Real-time locality routing enabled.`
+                ? `Child Welfare & NGO portal active (${userLocality} Unit). Report routing is a prototype feature.`
                 : "Parent & Guardian workspace active. Demo panel and local telemetry monitoring enabled."}
             </span>
             <Link className="text-link" to="/login" onClick={handleSignOut}>

@@ -42,18 +42,30 @@ def authorize(authorization: str | None = Header(default=None)):
     token = (authorization or '').removeprefix('Bearer ')
     if not PASSWORD_HASH and DEMO_TOKEN and hmac.compare_digest(token, DEMO_TOKEN):
         return 1
-    claims = read_token(token, ['guardian', 'ngo'])
+    claims = read_token(token, 'guardian')
     return 1
+
+def authorize_ngo(authorization: str | None = Header(default=None)):
+    claims = read_token((authorization or '').removeprefix('Bearer '), 'ngo')
+    with SessionLocal() as db:
+        account = db.get(Account, int(claims['sub'])) if claims['sub'].isdigit() else None
+        if not account or account.role != 'ngo' or not account.stationed_location or account.stationed_location == 'All Localities':
+            raise HTTPException(403, 'A caseworker account with an assigned area is required.')
+        return account.stationed_location
 
 class RegisterIn(BaseModel):
     role: str = Field(default='guardian', max_length=20)
     username: str = Field(min_length=3, max_length=80)
-    password: str = Field(min_length=4, max_length=256)
+    password: str = Field(min_length=12, max_length=256)
     email: str | None = Field(default=None, max_length=120)
     full_name: str = Field(default='', max_length=100)
     organization_name: str | None = Field(default=None, max_length=120)
     stationed_location: str | None = Field(default='South Delhi', max_length=80)
     child_name: str | None = Field(default=None, max_length=80)
+
+@router.get('/options')
+def auth_options():
+    return {'registration_available': os.getenv('DG_HOSTED') != 'true'}
 
 class LoginIn(BaseModel):
     username: str = Field(min_length=1, max_length=80)
@@ -115,11 +127,13 @@ def login(payload: LoginIn, response: Response):
     response.headers['Cache-Control'] = 'no-store'
     clean_username = payload.username.strip().lower()
     role = payload.role if payload.role in ('guardian', 'ngo') else 'guardian'
+    if os.getenv('DG_HOSTED') == 'true' and role == 'guardian' and clean_username != USERNAME:
+        raise HTTPException(403, 'This hosted workspace is limited to its configured guardian account.')
 
     with SessionLocal() as db:
         account = db.query(Account).filter(Account.username == clean_username).first()
         if account:
-            if not PASSWORDS.verify(payload.password, account.password_hash) and payload.password != 'demo123':
+            if not PASSWORDS.verify(payload.password, account.password_hash):
                 raise HTTPException(401, 'Incorrect password. Please try again.')
             actual_role = account.role
             stationed_location = account.stationed_location or payload.locality or 'South Delhi'
@@ -128,12 +142,14 @@ def login(payload: LoginIn, response: Response):
             child_name = account.child_name or ''
             sub_id = str(account.id)
         else:
+            if role != 'guardian' or clean_username != USERNAME or not PASSWORD_HASH or not PASSWORDS.verify(payload.password, PASSWORD_HASH):
+                raise HTTPException(401, 'Username or password was not recognized.')
             actual_role = role
             stationed_location = payload.locality or 'South Delhi'
             full_name = 'Parent' if actual_role == 'guardian' else 'CWC Officer'
             org_name = 'District Child Welfare Unit' if actual_role == 'ngo' else ''
             child_name = ''
-            sub_id = 'demo-1'
+            sub_id = '1'
 
         token = issue_token(
             subject=sub_id,

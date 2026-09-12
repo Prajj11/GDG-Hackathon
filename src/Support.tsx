@@ -367,9 +367,7 @@ function ReportForm() {
     setBusy(true);
     setError("");
     const targetLocality =
-      locality === "Other"
-        ? (customLocality.trim() || "National Hub")
-        : locality;
+      locality === "Other" ? customLocality.trim() || "National Hub" : locality;
     try {
       token.current ||= randomToken();
       const { data } = await supportApi.post<Receipt>("/support/reports", {
@@ -527,7 +525,14 @@ function ReportForm() {
                   />
                 )}
                 <small className="text-[11px] text-blue-800 mt-1.5 block leading-relaxed">
-                  📍 Your anonymous request will be sent directly to the accredited Child Welfare Committee (CWC) & NGO stationed in <strong>{locality === "Other" ? (customLocality || "your area") : locality}</strong>.
+                  📍 Your anonymous request will be sent directly to the
+                  accredited Child Welfare Committee (CWC) & NGO stationed in{" "}
+                  <strong>
+                    {locality === "Other"
+                      ? customLocality || "your area"
+                      : locality}
+                  </strong>
+                  .
                 </small>
               </div>
               <fieldset className="youth-urgency">

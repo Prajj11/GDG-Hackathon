@@ -12,7 +12,7 @@ from pydantic import BaseModel, Field, field_validator
 from sqlalchemy import select, delete, func
 from backend.database import Base, engine, SessionLocal, User, Conversation, Alert, Report, DatasetRecord, Account, ensure_schema, now
 from backend.ml.detector import analyze_message, get_detector, minimal_snippet, risk_level
-from backend.auth import router as auth_router, authorize as jwt_authorize, issue_token, PASSWORD_HASH
+from backend.auth import router as auth_router, authorize as jwt_authorize, authorize_ngo, issue_token, PASSWORD_HASH
 from backend.support import router as support_router, cleanup_reports
 
 LOCK = threading.RLock()
@@ -44,10 +44,7 @@ async def lifespan(app):
         if not user:
             db.add(User(id=1, snippets_enabled=True))
             db.commit()
-        elif not user.snippets_enabled:
-            user.snippets_enabled = True
-            db.commit()
-        if db.scalar(select(func.count()).select_from(Report)) == 0:
+        if os.getenv('SEED_DEMO_REPORTS') == 'true' and os.getenv('DG_HOSTED') != 'true' and db.scalar(select(func.count()).select_from(Report)) == 0:
             import hashlib, secrets
             seed_reports = [
                 Report(
@@ -291,9 +288,9 @@ class NgoReportUpdate(BaseModel):
     caseworker_notes: str | None = None
 
 @app.get('/api/ngo/reports', tags=['Child Welfare NGO Casework'])
-def get_ngo_reports(locality: str | None = None, status: str | None = None):
+def get_ngo_reports(locality: str | None = None, status: str | None = None, assigned_area: str = Depends(authorize_ngo)):
     with SessionLocal() as db:
-        query = select(Report).order_by(Report.created_at.desc())
+        query = select(Report).where(Report.locality == assigned_area).order_by(Report.created_at.desc())
         if locality and locality != 'All Localities':
             query = query.where(Report.locality == locality)
         if status and status != 'all':
@@ -313,10 +310,10 @@ def get_ngo_reports(locality: str | None = None, status: str | None = None):
         } for r in reports]
 
 @app.patch('/api/ngo/reports/{report_id}', tags=['Child Welfare NGO Casework'])
-def update_ngo_report(report_id: str, payload: NgoReportUpdate):
+def update_ngo_report(report_id: str, payload: NgoReportUpdate, assigned_area: str = Depends(authorize_ngo)):
     with LOCK, SessionLocal() as db:
         report = db.get(Report, report_id)
-        if not report:
+        if not report or report.locality != assigned_area:
             raise HTTPException(404, 'Report not found')
         if payload.status:
             report.status = payload.status
