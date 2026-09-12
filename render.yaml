@@ -12,6 +12,14 @@ services:
         value: baseline
       - key: TRAIN_INDICBERT
         value: "false"
+      - key: DG_HOSTED
+        value: "true"
+      - key: GUARDIAN_USERNAME
+        value: guardian
+      - key: GUARDIAN_PASSWORD_HASH
+        value: "$pbkdf2-sha256$29000$f./9nxNCaO0do1QKQSiFcA$IktzC./SIoFpDIMaHc4eWZH7zHJaEtqA1H/SV0.r//U"
+      - key: JWT_SECRET
+        generateValue: true
       - key: DEMO_ACCESS_TOKEN
         generateValue: true
       - key: CORS_ORIGINS
