@@ -323,7 +323,7 @@ function AlertCard({ alert, index }: { alert: Alert; index: number }) {
         <p className="alert-preview">
           {alert.flagged_snippet
             ? `“${alert.flagged_snippet}”`
-            : "An excerpt is hidden by your privacy preference."}
+            : `“${alert.explanation}”`}
         </p>
         <div className="metadata">
           <span>{alert.child_label}</span>
@@ -585,98 +585,15 @@ function Dashboard({
     </>
   );
 }
-const samples: Record<string, { label: string; text: string }[]> = {
-  Hinglish: [
-    {
-      label: "Trust-building",
-      text: "Tum apni age se bahut mature ho. Sirf main tumhe samajhta hoon. Gift bhejun?",
-    },
-    {
-      label: "Secrecy request",
-      text: "Mummy papa ko mat batana. Ye humara secret hai. Private chat pe aao.",
-    },
-    {
-      label: "Harassment",
-      text: "Tu loser hai, koi tujhe pasand nahi karta. Group se nikal ja.",
-    },
-    {
-      label: "Everyday chat",
-      text: "Kal homework saath mein karte hain, mummy ko bhi bata dena.",
-    },
-  ],
-  English: [
-    {
-      label: "Trust-building",
-      text: "You are so mature for your age. Nobody understands you like I do. I can buy you gifts.",
-    },
-    {
-      label: "Secrecy request",
-      text: "Do not tell your parents about us. Delete our chat and move to a private app.",
-    },
-    {
-      label: "Harassment",
-      text: "Nobody likes you. You are worthless. Leave our group, loser.",
-    },
-    {
-      label: "Everyday chat",
-      text: "Great game! See you tomorrow with the rest of the team.",
-    },
-  ],
-  Hindi: [
-    {
-      label: "Trust-building",
-      text: "तुम अपनी उम्र से बहुत समझदार हो। तुम्हें सिर्फ मैं समझता हूँ। मैं तुम्हें गिफ्ट दूंगा।",
-    },
-    {
-      label: "Secrecy request",
-      text: "मम्मी पापा को हमारे बारे में मत बताना। चैट डिलीट कर दो और अकेले मिलने आओ।",
-    },
-    {
-      label: "Harassment",
-      text: "तुम बेकार हो। कोई तुम्हें पसंद नहीं करता। हमारे ग्रुप से निकल जाओ।",
-    },
-    {
-      label: "Everyday chat",
-      text: "आज स्कूल कैसा था? चलो साथ में होमवर्क करते हैं।",
-    },
-  ],
-  Malayalam: [
-    {
-      label: "Trust-building",
-      text: "നിന്റെ പ്രായത്തേക്കാൾ പക്വത നിനക്കുണ്ട്. നിന്നെ ഞാൻ മാത്രമേ മനസ്സിലാക്കൂ. സമ്മാനം തരാം.",
-    },
-    {
-      label: "Secrecy request",
-      text: "നമ്മുടെ കാര്യം അമ്മയോടും അച്ഛനോടും പറയരുത്. ചാറ്റ് ഡിലീറ്റ് ചെയ്യൂ. ഒറ്റയ്ക്ക് വരൂ.",
-    },
-    {
-      label: "Harassment",
-      text: "നിന്നെ ആർക്കും ഇഷ്ടമല്ല. നീ ഒരു മണ്ടനാണ്. ഗ്രൂപ്പിൽ നിന്ന് പോ.",
-    },
-    {
-      label: "Everyday chat",
-      text: "ഇന്ന് സ്കൂൾ എങ്ങനെ ഉണ്ടായിരുന്നു? നമുക്ക് ഒരുമിച്ച് പഠിക്കാം.",
-    },
-  ],
-  Manglish: [
-    {
-      label: "Trust-building",
-      text: "Ninte age nekkaal mature aanu nee. Ninne njan maathram manassilaakkum. Gift tharaam.",
-    },
-    {
-      label: "Secrecy request",
-      text: "Ammayodu parayaruthu. Ithu nammade secret aanu. Private chat il vaa.",
-    },
-    {
-      label: "Harassment",
-      text: "Nee oru mandan aanu. Aarkkum ninne ishtamalla. Group il ninnu po.",
-    },
-    {
-      label: "Everyday chat",
-      text: "Homework cheytho? Namukku maths padikkam.",
-    },
-  ],
-};
+const supportedLanguages = [
+  "Hinglish",
+  "English",
+  "Hindi",
+  "Malayalam",
+  "Manglish",
+];
+const guardianDisplayName =
+  import.meta.env.VITE_GUARDIAN_DISPLAY_NAME?.trim() || "Guardian workspace";
 function Demo({
   health,
   onChange,
@@ -738,8 +655,8 @@ function Demo({
             <span className="pill">Synthetic data only</span>
           </div>
           <p className="subtle mb-6">
-            Use a sample or write a fictional message. Please don’t paste a
-            child’s real conversation.
+            Write a fictional message to explore the detector. Please don’t
+            paste a child’s real conversation.
           </p>
           <div className="form-grid">
             <label>
@@ -785,29 +702,11 @@ function Demo({
                 setResult(null);
               }}
             >
-              {Object.keys(samples).map((v) => (
+              {supportedLanguages.map((v) => (
                 <option key={v}>{v}</option>
               ))}
             </select>
           </label>
-          <div className="sample-label">
-            Try a sample <span>Examples used in training</span>
-          </div>
-          <div className="sample-buttons">
-            {samples[language].map((s) => (
-              <button
-                disabled={busy}
-                key={s.label}
-                onClick={() => {
-                  setText(s.text);
-                  setResult(null);
-                }}
-              >
-                {s.label}
-                <Plus size={12} />
-              </button>
-            ))}
-          </div>
           <label htmlFor="message" className="mt-5">
             Message to analyze
           </label>
@@ -933,9 +832,9 @@ function Demo({
             <div>
               <h3>Try a developing pattern</h3>
               <p>
-                Analyze “Trust-building”, then “Secrecy request” in the same
-                conversation. Or submit two harassment messages to see repeated
-                behavior raise concern.
+                Submit successive fictional messages in the same conversation to
+                explore how detected patterns affect concern. Results depend on
+                the submitted text and the active model.
               </p>
             </div>
           </section>
@@ -1022,12 +921,12 @@ function Detail({ onChange }: { onChange: () => void }) {
               <p>{alert.explanation}</p>
               <div className="snippet-box">
                 <span>
-                  <LockKeyhole size={13} /> ONLY THE NECESSARY CONTEXT
+                  <LockKeyhole size={13} /> FLAGGED MESSAGE EXCERPT
                 </span>
                 <blockquote>
                   {alert.flagged_snippet
                     ? `“${alert.flagged_snippet}”`
-                    : "Excerpts are turned off in your privacy settings."}
+                    : `“${alert.explanation}”`}
                 </blockquote>
               </div>
               <p className="model-caption">
@@ -1529,8 +1428,8 @@ function GuardianApp() {
           <div className="guardian">
             <span className="avatar">DG</span>
             <div>
-              <strong>Demo guardian</strong>
-              <span>Synthetic family workspace</span>
+              <strong>{guardianDisplayName}</strong>
+              <span>Prototype · guardian view</span>
             </div>
             <ShieldCheck size={17} />
           </div>

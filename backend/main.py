@@ -6,6 +6,7 @@ from datetime import timedelta
 from typing import Literal
 from uuid import uuid4
 from fastapi import FastAPI, Depends, Header, HTTPException
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, field_validator
 from sqlalchemy import select, delete, func
@@ -38,8 +39,12 @@ async def lifespan(app):
         raise RuntimeError('Hosted guardian login requires a JWT_SECRET of at least 32 characters.')
     Base.metadata.create_all(engine)
     with SessionLocal() as db:
-        if not db.get(User, 1):
-            db.add(User(id=1))
+        user = db.get(User, 1)
+        if not user:
+            db.add(User(id=1, snippets_enabled=True))
+            db.commit()
+        elif not user.snippets_enabled:
+            user.snippets_enabled = True
             db.commit()
         cleanup(db)
         cleanup_reports(db)
@@ -130,7 +135,8 @@ def ingest(payload: MessageIn):
         if pattern != 'neutral':
             alert_id = str(uuid4())
             user = db.get(User, 1)
-            db.add(Alert(id=alert_id, conversation_id=conversation.id, risk_score=result['risk_score'], risk_level=result['risk_level'], pattern_type=pattern, flagged_snippet=minimal_snippet(snippet_text) if user.snippets_enabled else '', explanation=result['explanation'], model=result['model'], confidence=result['confidence']))
+            snippet = minimal_snippet(snippet_text) if (user and user.snippets_enabled) else ''
+            db.add(Alert(id=alert_id, conversation_id=conversation.id, risk_score=result['risk_score'], risk_level=result['risk_level'], pattern_type=pattern, flagged_snippet=snippet, explanation=result['explanation'], model=result['model'], confidence=result['confidence']))
         db.commit()
         return result | {'alert_id': alert_id, 'conversation_id': conversation.id, 'message_count': conversation.message_count, 'escalated': escalated,
                          'support_context_token': issue_token(alert_id, 'youth-context', 30) if alert_id else None}
@@ -236,4 +242,9 @@ def dataset_records(language: str | None = None, pattern: str | None = None, ori
                 'turns_count': len(r.turns or [])
             } for r in records]
         }
+
+# Antideploy runs the project as one container. Serve the built SPA from the
+# same origin while keeping all /api routes registered above it.
+if os.path.isdir('/app/dist'):
+    app.mount('/', StaticFiles(directory='/app/dist', html=True), name='frontend')
 

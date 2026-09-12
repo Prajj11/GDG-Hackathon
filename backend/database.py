@@ -18,7 +18,7 @@ class Base(DeclarativeBase):
 class User(Base):
     __tablename__ = 'users'
     id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column(String(80), default='Demo guardian')
+    name: Mapped[str] = mapped_column(String(80), default='Guardian')
     retention_days: Mapped[int] = mapped_column(default=7)
     snippets_enabled: Mapped[bool] = mapped_column(default=True)
 class Conversation(Base):
@@ -80,4 +80,3 @@ class DatasetRecord(Base):
     rationale: Mapped[str | None] = mapped_column(Text, nullable=True)
     turns: Mapped[list] = mapped_column(JSON, default=list)
     created_at: Mapped[datetime] = mapped_column(default=now)
-

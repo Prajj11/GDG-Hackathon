@@ -5,7 +5,7 @@ import { api, errorText } from "./api";
 
 export default function GuardianLogin() {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("guardian");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -30,7 +30,7 @@ export default function GuardianLogin() {
         <ShieldCheck size={32} className="mb-5" />
         <h1 className="!text-3xl">Guardian sign in</h1>
         <p className="subtle my-4">
-          Use the guardian account configured for this local workspace.
+          Use the guardian account configured for this workspace.
         </p>
         <form onSubmit={submit} className="space-y-5">
           <label>
@@ -92,7 +92,7 @@ export default function GuardianLogin() {
           Looking for support? No login needed.
         </Link>
         <Link to="/" className="text-link mt-4">
-          Return to local demo
+          Return to workspace
         </Link>
       </main>
     </div>

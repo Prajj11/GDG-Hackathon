@@ -4,17 +4,14 @@ services:
     runtime: docker
     dockerfilePath: ./Dockerfile
     healthCheckPath: /api/health
-    # IndicBERTv2 needs more memory than a free instance. Review hosting costs.
-    plan: pro
-    disk:
-      name: guardrails-data
-      mountPath: /var/data
-      sizeGB: 1
+    plan: free
     envVars:
       - key: DATABASE_URL
         value: sqlite:////var/data/digital_guardrails.db
       - key: DETECTOR
-        value: indicbert
+        value: baseline
+      - key: TRAIN_INDICBERT
+        value: "false"
       - key: DEMO_ACCESS_TOKEN
         generateValue: true
       - key: CORS_ORIGINS
