@@ -1215,7 +1215,7 @@ function Settings({
           </p>
         </aside>
         <section className="panel">
-          <h2>Demo service access</h2>
+          <h2>Guardian access</h2>
           <p className="subtle mb-5">
             {health?.guardian_login_enabled
               ? "Guardian sign-in is enabled. Use the sign-in page to start a one-hour session."
@@ -1228,33 +1228,37 @@ function Settings({
               Open guardian sign in
             </Link>
           )}
-          <label>
-            Access token
-            <input
-              type="password"
-              autoComplete="off"
-              value={token}
-              onChange={(e) => setToken(e.target.value)}
-              placeholder="Enter a token if your host requires one"
-            />
-          </label>
-          <button
-            className="secondary mt-4"
-            onClick={() => {
-              sessionStorage.setItem("guardrails-token", token);
-              setError("");
-              onChange();
-              api
-                .get("/settings")
-                .then(({ data }) => {
-                  setRetention(data.retention_days);
-                  setSnippets(data.snippets_enabled);
-                })
-                .catch((e) => setError(errorText(e)));
-            }}
-          >
-            Use token for this session
-          </button>
+          {!health?.guardian_login_enabled && (
+            <>
+              <label>
+                Access token
+                <input
+                  type="password"
+                  autoComplete="off"
+                  value={token}
+                  onChange={(e) => setToken(e.target.value)}
+                  placeholder="Enter a token if your host requires one"
+                />
+              </label>
+              <button
+                className="secondary mt-4"
+                onClick={() => {
+                  sessionStorage.setItem("guardrails-token", token);
+                  setError("");
+                  onChange();
+                  api
+                    .get("/settings")
+                    .then(({ data }) => {
+                      setRetention(data.retention_days);
+                      setSnippets(data.snippets_enabled);
+                    })
+                    .catch((e) => setError(errorText(e)));
+                }}
+              >
+                Use token for this session
+              </button>
+            </>
+          )}
         </section>
       </div>
     </>

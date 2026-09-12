@@ -246,5 +246,16 @@ def dataset_records(language: str | None = None, pattern: str | None = None, ori
 # Antideploy runs the project as one container. Serve the built SPA from the
 # same origin while keeping all /api routes registered above it.
 if os.path.isdir('/app/dist'):
-    app.mount('/', StaticFiles(directory='/app/dist', html=True), name='frontend')
+    from starlette.exceptions import HTTPException as StarletteHTTPException
+
+    class FrontendFiles(StaticFiles):
+        async def get_response(self, path, scope):
+            try:
+                return await super().get_response(path, scope)
+            except StarletteHTTPException as exc:
+                if exc.status_code == 404 and not path.startswith(('api/', 'assets/')) and '.' not in path.rsplit('/', 1)[-1]:
+                    return await super().get_response('index.html', scope)
+                raise
+
+    app.mount('/', FrontendFiles(directory='/app/dist', html=True), name='frontend')
 

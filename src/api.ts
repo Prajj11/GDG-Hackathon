@@ -8,6 +8,21 @@ api.interceptors.request.use((config) => {
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.response?.status === 401 && error.config?.url !== "/auth/login") {
+      const health = await axios
+        .get(`${api.defaults.baseURL}/health`)
+        .catch(() => null);
+      if (health?.data.guardian_login_enabled) {
+        sessionStorage.removeItem("guardrails-token");
+        window.location.replace(`${import.meta.env.BASE_URL}login`);
+      }
+    }
+    return Promise.reject(error);
+  },
+);
 export const errorText = (error: unknown) =>
   axios.isAxiosError(error)
     ? typeof error.response?.data?.detail === "string"

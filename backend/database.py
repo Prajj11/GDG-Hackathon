@@ -7,6 +7,8 @@ def now():
     return datetime.now(timezone.utc).replace(tzinfo=None)
 
 DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///./digital_guardrails.db')
+if DATABASE_URL.startswith(('postgres://', 'postgresql://')):
+    DATABASE_URL = 'postgresql+psycopg://' + DATABASE_URL.split('://', 1)[1]
 engine = create_engine(DATABASE_URL, connect_args={'check_same_thread': False} if DATABASE_URL.startswith('sqlite') else {}, pool_pre_ping=True)
 if DATABASE_URL.startswith('sqlite'):
     @event.listens_for(engine, 'connect')
