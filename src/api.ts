@@ -12,6 +12,11 @@ api.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (error.response?.status === 401 && error.config?.url !== "/auth/login") {
+      const currentRole = sessionStorage.getItem("guardrails-role");
+      const requestUrl = String(error.config?.url || "");
+      if (currentRole === "ngo" && !requestUrl.startsWith("/ngo")) {
+        return Promise.reject(error);
+      }
       const health = await axios
         .get(`${api.defaults.baseURL}/health`)
         .catch(() => null);

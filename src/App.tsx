@@ -2128,6 +2128,14 @@ function GuardianApp() {
   const refresh = useCallback(async () => {
     setLoading(true);
     try {
+      if (userRole === "ngo") {
+        const { data } = await api.get("/health");
+        setHealth(data);
+        setAlerts([]);
+        setSummary(null);
+        setError("");
+        return;
+      }
       const [a, s, h] = await Promise.all([
         api.get("/alerts"),
         api.get("/dashboard/summary"),
@@ -2148,7 +2156,7 @@ function GuardianApp() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [userRole]);
   useEffect(() => {
     refresh();
     const timer = window.setInterval(refresh, 15000);
