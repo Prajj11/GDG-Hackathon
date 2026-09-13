@@ -65,7 +65,7 @@ class RegisterIn(BaseModel):
 
 @router.get('/options')
 def auth_options():
-    return {'registration_available': os.getenv('DG_HOSTED') != 'true'}
+    return {'registration_available': True}
 
 class LoginIn(BaseModel):
     username: str = Field(min_length=1, max_length=80)
@@ -127,9 +127,6 @@ def login(payload: LoginIn, response: Response):
     response.headers['Cache-Control'] = 'no-store'
     clean_username = payload.username.strip().lower()
     role = payload.role if payload.role in ('guardian', 'ngo') else 'guardian'
-    if os.getenv('DG_HOSTED') == 'true' and role == 'guardian' and clean_username != USERNAME:
-        raise HTTPException(403, 'This hosted workspace is limited to its configured guardian account.')
-
     with SessionLocal() as db:
         account = db.query(Account).filter(Account.username == clean_username).first()
         if account:

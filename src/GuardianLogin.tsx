@@ -263,7 +263,7 @@ export default function GuardianLogin() {
             ? "Review submitted safety signals and manage your workspace."
             : mode === "signin"
               ? "Review support requests assigned to your area. No field officers are contacted by this prototype."
-              : "Local prototype accounts are for testing. Hosted registration requires administrator setup."}
+              : "Create a demo caseworker workspace for the locality your unit serves."}
         </p>
 
         {/* Form */}
