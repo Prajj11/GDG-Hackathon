@@ -2099,6 +2099,17 @@ function PhysicalLink({
     </>
   );
 }
+function WorkspaceGate() {
+  const location = useLocation();
+  const hasSession = Boolean(sessionStorage.getItem("guardrails-token"));
+
+  if (!hasSession) {
+    return <Navigate to="/login" replace state={{ from: location.pathname }} />;
+  }
+
+  return <GuardianApp />;
+}
+
 function GuardianApp() {
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [summary, setSummary] = useState<Summary | null>(null);
@@ -2442,7 +2453,7 @@ export default function App() {
       <Route path="/help/*" element={<Support />} />
       <Route path="/support/*" element={<Navigate to="/help" replace />} />
       <Route path="/login" element={<GuardianLogin />} />
-      <Route path="/*" element={<GuardianApp />} />
+      <Route path="/*" element={<WorkspaceGate />} />
     </Routes>
   );
 }
