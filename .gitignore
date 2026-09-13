@@ -34,3 +34,4 @@ scratch/
 backend/artifacts/
 .sites-runtime/
 *.tsbuildinfo
+tmp/
