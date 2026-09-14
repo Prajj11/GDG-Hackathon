@@ -1,13 +1,13 @@
 services:
   - type: web
-    name: digital-guardrails-api
+    name: digital-guardrails
     runtime: docker
     dockerfilePath: ./Dockerfile
     healthCheckPath: /api/health
     plan: free
     envVars:
       - key: DATABASE_URL
-        value: sqlite:////var/data/digital_guardrails.db
+        value: sqlite:///./digital_guardrails.db
       - key: DETECTOR
         value: baseline
       - key: TRAIN_INDICBERT
@@ -23,4 +23,6 @@ services:
       - key: DEMO_ACCESS_TOKEN
         generateValue: true
       - key: CORS_ORIGINS
-        sync: false
+        value: "*"
+      - key: SEED_DEMO_REPORTS
+        value: "true"

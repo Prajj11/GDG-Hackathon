@@ -94,4 +94,9 @@ def report_status_alias(anonymous_token: str):
 
         return ReportStatusResponse(status=report.status, aid_channel_name=aid_channel)
 
+# Ensure any StaticFiles/Mount is evaluated after all API routes
+for m in [r for r in app.routes if type(r).__name__ == 'Mount']:
+    app.routes.remove(m)
+    app.routes.append(m)
+
 __all__ = ['app', 'load_model', 'analyze_message']

@@ -133,6 +133,10 @@ class AnalysisOut(BaseModel):
 def serialize(alert, conversation):
     return {key: getattr(alert, key) for key in ['id', 'conversation_id', 'risk_score', 'risk_level', 'pattern_type', 'flagged_snippet', 'explanation', 'model', 'confidence', 'reviewed']} | {'created_at': alert.created_at.isoformat()+'Z', 'child_label': conversation.child_label, 'source_platform': conversation.source_platform, 'language': conversation.language}
 
+@app.get('/health', tags=['System'])
+def root_health():
+    return {'status': 'ok'}
+
 @app.get('/api/health')
 def health():
     detector = get_detector()
@@ -344,7 +348,8 @@ def get_ngo_localities():
 
 # Antideploy runs the project as one container. Serve the built SPA from the
 # same origin while keeping all /api routes registered above it.
-if os.path.isdir('/app/dist'):
+dist_dir = '/app/dist' if os.path.isdir('/app/dist') else os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'dist')
+if os.path.isdir(dist_dir):
     from starlette.exceptions import HTTPException as StarletteHTTPException
 
     class FrontendFiles(StaticFiles):
@@ -352,9 +357,9 @@ if os.path.isdir('/app/dist'):
             try:
                 return await super().get_response(path, scope)
             except StarletteHTTPException as exc:
-                if exc.status_code == 404 and not path.startswith(('api/', 'assets/')) and '.' not in path.rsplit('/', 1)[-1]:
+                if exc.status_code == 404 and not path.startswith(('api/', 'assets/', 'health', 'docs', 'openapi.json')) and '.' not in path.rsplit('/', 1)[-1]:
                     return await super().get_response('index.html', scope)
                 raise
 
-    app.mount('/', FrontendFiles(directory='/app/dist', html=True), name='frontend')
+    app.mount('/', FrontendFiles(directory=dist_dir, html=True), name='frontend')
 

@@ -15,6 +15,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 HF_HOME=/app/backend/artifacts/
 COPY backend/requirements.txt backend/requirements-ml.txt ./backend/
 RUN pip install --no-cache-dir -r backend/requirements.txt
 COPY backend ./backend
+COPY app ./app
+COPY digital_guardrails.db ./digital_guardrails.db
 COPY --from=frontend-build /frontend/dist ./dist
 ARG TRAIN_INDICBERT=false
 RUN if [ "$TRAIN_INDICBERT" = "true" ]; then pip install --no-cache-dir -r backend/requirements-ml.txt && python -m backend.ml.train; fi
