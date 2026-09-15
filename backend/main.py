@@ -348,8 +348,16 @@ def get_ngo_localities():
 
 # Antideploy runs the project as one container. Serve the built SPA from the
 # same origin while keeping all /api routes registered above it.
-dist_dir = '/app/dist' if os.path.isdir('/app/dist') else os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'dist')
-if os.path.isdir(dist_dir):
+def _find_dist():
+    for d in ['/app/dist', os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'dist'), os.path.join(os.getcwd(), 'dist'), 'dist', 'web_static']:
+        idx = os.path.join(d, 'index.html')
+        if os.path.isdir(d) and os.path.isfile(idx):
+            return d, idx
+    return None, None
+
+dist_dir, index_file = _find_dist()
+if dist_dir:
+    from fastapi.responses import FileResponse
     from starlette.exceptions import HTTPException as StarletteHTTPException
 
     class FrontendFiles(StaticFiles):
@@ -358,8 +366,12 @@ if os.path.isdir(dist_dir):
                 return await super().get_response(path, scope)
             except StarletteHTTPException as exc:
                 if exc.status_code == 404 and not path.startswith(('api/', 'assets/', 'health', 'docs', 'openapi.json')) and '.' not in path.rsplit('/', 1)[-1]:
-                    return await super().get_response('index.html', scope)
+                    return FileResponse(index_file)
                 raise
+
+    @app.get('/', include_in_schema=False)
+    def root_spa():
+        return FileResponse(index_file)
 
     app.mount('/', FrontendFiles(directory=dist_dir, html=True), name='frontend')
 

@@ -9,6 +9,14 @@ def now():
 DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///./digital_guardrails.db')
 if DATABASE_URL.startswith(('postgres://', 'postgresql://')):
     DATABASE_URL = 'postgresql+psycopg://' + DATABASE_URL.split('://', 1)[1]
+elif DATABASE_URL.startswith('sqlite:///'):
+    raw_path = DATABASE_URL.split('sqlite:///', 1)[1]
+    dir_name = os.path.dirname(raw_path)
+    if dir_name and not os.path.isdir(dir_name):
+        try:
+            os.makedirs(dir_name, exist_ok=True)
+        except Exception:
+            DATABASE_URL = 'sqlite:///./digital_guardrails.db'
 engine = create_engine(DATABASE_URL, connect_args={'check_same_thread': False} if DATABASE_URL.startswith('sqlite') else {}, pool_pre_ping=True)
 if DATABASE_URL.startswith('sqlite'):
     @event.listens_for(engine, 'connect')
