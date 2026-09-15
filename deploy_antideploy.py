@@ -34,14 +34,14 @@ with tarfile.open(archive, "w:gz") as tar:
         p = root / name
         if p.is_file():
             tar.add(p, arcname=name)
-    # Add dist files
-    dist_dir = root / "dist"
-    if dist_dir.exists():
-        for p in dist_dir.rglob("*"):
-            if p.is_file():
-                arcname = str(p.relative_to(root)).replace("\\", "/")
-                if arcname not in tar.getnames():
-                    tar.add(p, arcname=arcname)
+    # Add dist and static web files
+    for folder in [root / "dist", root / "backend" / "web_static"]:
+        if folder.exists():
+            for p in folder.rglob("*"):
+                if p.is_file():
+                    arcname = str(p.relative_to(root)).replace("\\", "/")
+                    if arcname not in tar.getnames():
+                        tar.add(p, arcname=arcname)
     # Add root config files
     for name in [".python-version", "requirements.txt", "Procfile", "main.py", ".antideploy.json", "digital_guardrails.db"]:
         p = root / name

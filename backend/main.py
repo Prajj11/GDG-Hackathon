@@ -349,7 +349,15 @@ def get_ngo_localities():
 # Antideploy runs the project as one container. Serve the built SPA from the
 # same origin while keeping all /api routes registered above it.
 def _find_dist():
-    for d in ['/app/dist', os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'dist'), os.path.join(os.getcwd(), 'dist'), 'dist', 'web_static']:
+    for d in [
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), 'web_static'),
+        os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'web_static'),
+        'web_static',
+        '/app/dist',
+        os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'dist'),
+        os.path.join(os.getcwd(), 'dist'),
+        'dist'
+    ]:
         idx = os.path.join(d, 'index.html')
         if os.path.isdir(d) and os.path.isfile(idx):
             return d, idx
