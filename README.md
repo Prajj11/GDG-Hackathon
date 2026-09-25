@@ -47,9 +47,10 @@ You can sign in using any of the pre-configured role-based accounts below to ins
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │                           THE CHALLENGE IN INDIA                             │
 │  • Rapid digital adoption among minors across vernacular & code-mixed text   │
-│  • Predatory grooming follows subtle behavioral arcs: Trust → Isolation → Coercion │
+│  • Predatory grooming follows subtle behavioral arcs: Trust → Isolation →    |
+│  Coercion │                                                                  |
 │  • Intrusive spyware surveillance destroys parent-child trust                │
-│  • Isolated children have no safe, stigma-free bridge to seek guidance        │
+│  • Isolated children have no safe, stigma-free bridge to seek guidance       │
 └──────────────────────────────────────────────────────────────────────────────┘
                                        │
                                        ▼
@@ -59,14 +60,14 @@ You can sign in using any of the pre-configured role-based accounts below to ins
 │  1. Privacy-First Detection (AI4Bharat IndicBERTv2)                          │
 │     • Multilingual detection (Hindi, Hinglish, Malayalam, Manglish, English) │
 │     • Evaluates message intent with 50.89% neutral class calibration         │
-│     • Temporal sequence escalation: flags subtle grooming progressions        │
+│     • Temporal sequence escalation: flags subtle grooming progressions       │
 │                                                                              │
 │  2. Minimal-Context Guardian Alerts                                          │
 │     • NEVER stores or displays full raw chat histories                       │
-│     • Displays only bounded snippets (≤140 chars) with regex PII redaction    │
+│     • Displays only bounded snippets (≤140 chars) with regex PII redaction   │
 │     • Actionable conversation starters & positive reinforcement tips         │
 │                                                                              │
-│  3. Anonymous Youth Support Ecosystem                                       │
+│  3. Anonymous Youth Support Ecosystem                                        │
 │     • Child-led, zero-login, self-selected urgency reporting                 │
 │     • Zero cross-contamination with guardian surveillance credentials        │
 │     • Cryptographic secret receipts & verified emergency helpline links      │
